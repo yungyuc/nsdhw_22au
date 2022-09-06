@@ -1,6 +1,6 @@
 This repository is for homework assignments for `Numerical Software Development
 (NYCU 2022 autumn)
-<https://yyc.solvcon.net/en/latest/nsd/schedule/nsd_22au_nycu.html>`__.
+<https://yyc.solvcon.net/en/latest/nsd/schedule/22au_nycu/schedule.html>`__.
 
 To turn in your submission, you need to clone this repository, and create a
 `pull request (PR) <https://github.com/yungyuc/nsdhw_22au/pulls>`__.  Your
