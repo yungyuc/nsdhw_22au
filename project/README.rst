@@ -19,12 +19,16 @@ The hierarchy should be like::
         - README.rst (<- the main proposal file)
         - ... other files for your proposal
 
+.. note::
+
+  Your PR should include an entry in "Porject List by Account Name" in this file.
+
 When submitting your proposal, name the PR as ``<username>-proposal**``, e.g.,
 ``yungyuc-proposal-submission``.  Don't forget to put the PR URL in the E3
-entry too.  You can request my review in the PR for discussions.
+entry too.  You can request my review in the PR.
 
-Presentation
-============
+.. Presentation
+.. ============
 
 .. The presentation schedule is set.  If you want to change time slots, ask for
    the owner of the other time slot and file a PR tagging him or her and the
@@ -32,30 +36,30 @@ Presentation
    respond to agree the exchange in the PR. The PR subject line should start
    with ``[presentation]``.
 
-Each presentation can use at most 15 minutes.  Presenters may decide how to use
-their time.  A possible arrangement is to use 12 minutes in the presentation
-itself and 3 minutes for questions and discussions.  Presenters are expected to
-prepare their own computer for presentation.
+.. Each presentation can use at most 15 minutes.  Presenters may decide how to
+   use their time.  A possible arrangement is to use 12 minutes in the
+   presentation itself and 3 minutes for questions and discussions.  Presenters
+   are expected to prepare their own computer for presentation.
 
-The time for setting up the computer is included in the allotted presentation
-time.  If presenters have difficulty in preparing a computer themselves, they
-may seek help from the instructor, and resolve the issue one week before their
-presentation.
+.. The time for setting up the computer is included in the allotted
+   presentation time.  If presenters have difficulty in preparing a computer
+   themselves, they may seek help from the instructor, and resolve the issue
+   one week before their presentation.
 
-Time Table
-++++++++++
+.. Time Table
+.. ++++++++++
 
-.. list-table:: 12/26 7:00-??:00
-  :header-rows: 1
+.. .. list-table:: 12/26 7:00-??:00
+..   :header-rows: 1
 
-  * - ID
-    - Time
-    - Presenter
-    - Project
-  * - 1
-    - 07:00 - 07:15
-    -
-    -
+..   * - ID
+..     - Time
+..     - Presenter
+..     - Project
+..   * - 1
+..     - 07:00 - 07:15
+..     -
+..     -
 
 Project List by Account Name
 ++++++++++++++++++++++++++++
