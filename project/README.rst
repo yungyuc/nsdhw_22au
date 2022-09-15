@@ -19,9 +19,8 @@ The hierarchy should be like::
         - README.rst (<- the main proposal file)
         - ... other files for your proposal
 
-.. note::
-
-  Your PR should include an entry in "Porject List by Account Name" in this file.
+**ATTENTION**: Your PR should include an entry in "Porject List by Account
+Name" in this file.
 
 When submitting your proposal, name the PR as ``<username>-proposal**``, e.g.,
 ``yungyuc-proposal-submission``.  Don't forget to put the PR URL in the E3
