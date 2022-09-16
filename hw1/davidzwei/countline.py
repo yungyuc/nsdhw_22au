@@ -3,7 +3,7 @@
 import sys
 import os.path
 
-# check python0
+# check python version
 if os.environ['PYTHON_BIN'] != 'python2' and os.environ['PYTHON_BIN'] != 'python3':
     sys.stdout.write('exec: {}: not found'.format(os.environ['PYTHON_BIN']))
     sys.exit(1)
