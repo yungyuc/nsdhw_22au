@@ -3,10 +3,10 @@
 #Test for countline.py
 #
 
-if [ $# -lt 2 ]
+if [ $# -lt 1 ]
 then
 	echo missing the file
-elif [ $# -gt 2 ]
+elif [ $# -gt 1 ]
 then
 	echo only one argument is allow
 else 
