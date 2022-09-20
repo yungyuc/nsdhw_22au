@@ -10,11 +10,9 @@ elif [ $# -gt 1 ]
 then
 	echo only one argument is allow
 else 
-	filename = "$1"
 	if [ -f $1 ]
 	then
-		count = $(wc -1 $1 | tr -dc '0-9')
-		echo "$count lines in $1"
+		echo "$(wc -l $1 | tr -dc '0-9') lines in $1"
 	else
 		echo "file not found"
 	fi
