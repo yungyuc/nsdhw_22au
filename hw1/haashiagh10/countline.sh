@@ -6,7 +6,7 @@
 if [ $# -lt 2 ]
 then
 	echo missing the file
-elif [ $# -gy 2 ]
+elif [ $# -gt 2 ]
 then
 	echo only one argument is allow
 else 
