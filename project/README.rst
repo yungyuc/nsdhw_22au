@@ -65,4 +65,4 @@ Project List by Account Name
 
 #. `github_username <https://github.com/github_username>`__ for
    `Project title <github_username/README.rst>`__: https://github.com/github_username/project_name
-#. `Hooje <https://github.com/Hooje>`__ for Simple Parallel Decision Tree in C++ : https://github.com/Hooje/nsdhw_22au/tree/project/project/Hooje
+#. `Hooje <https://github.com/Hooje>`__ for Parallel_Decision_Tree : https://github.com/Hooje/Parallel_Decision_Tree
