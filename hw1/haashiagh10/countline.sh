@@ -9,12 +9,11 @@ then
 elif [ $# -gt 1 ]
 then
 	echo only one argument is allow
-else 
-	if [ -f $1 ]
-	then
-		echo "$(wc -l $1 | tr -dc '0-9') lines in $1"
-	else
-		echo "$1 not found"
-	fi
+elif [ -f $1 ]
+then
+	echo "$(wc -l $1 | tr -dc '0-9') lines in $1"
+else
+	echo "$1 not found"
+	
 fi
 
