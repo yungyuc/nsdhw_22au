@@ -1,15 +1,5 @@
 #!/bin/bash
 
-# '''':
-#     if [[ $(echo $PYTHON_BIN | tr -dc '0-9') -eq 0 ]] ; then
-#         echo "exec: python0: not found"
-#         exit 1
-#     else
-#         $PYTHON_BIN $0 $@
-#         exit 0
-#     fi
-# '''
-
 import sys
 import os.path
 
