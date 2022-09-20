@@ -5,10 +5,10 @@
 
 if [ $# -lt 1 ]
 then
-	echo missing the file
+	echo "missing the file"
 elif [ $# -gt 1 ]
 then
-	echo only one argument is allow
+	echo "only one argument is allow"
 else 
 	filename ="$1"
 	if [ -f $1 ]then
