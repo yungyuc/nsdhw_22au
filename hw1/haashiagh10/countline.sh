@@ -14,7 +14,7 @@ else
 	then
 		echo "$(wc -l $1 | tr -dc '0-9') lines in $1"
 	else
-		echo "file not found"
+		echo "$1 not found"
 	fi
 fi
 
