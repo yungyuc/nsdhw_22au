@@ -11,9 +11,9 @@ then
 	echo only one argument is allow
 else 
 	filename = "$1"
-	if [ -f "$filename" ]
+	if [ -f $1 ]
 	then
-		count = $(wc -l $1)
+		count = $(wc -1 $1 | tr -dc '0-9')
 		echo "$count lines in $1"
 	else
 		echo "file not found"
