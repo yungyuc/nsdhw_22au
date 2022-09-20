@@ -9,7 +9,7 @@ cd $tmp_dir
 
 rm -rf *
 cp $solution_path/countline.py .
-result=$(python3 ./countline.py countline.py 2>&1) ; ret=$?
+result=$(./countline.py countline.py 2>&1) ; ret=$?
 if [ $ret -ne 0 ] ; then
   echo "\"./countline.py\" fails ; NO POINT"
 else
