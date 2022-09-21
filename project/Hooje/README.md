@@ -13,29 +13,29 @@ For each node, use the same method to decide the rule and create its child nodes
 # Problem to Solve
 Decision Tree is an effective model in many classification senerio. However, it takes so much time to run because it cannot be speedup by CUDA like Neural Network, especially when there are a lot of features in that Dataset.
 
-Thus, I want to implement a simple version of Decision Tree in C++ (can be used from Python) from scratch to reduce the execution time. Besides, I would like to modify some of its functions so that it can be executed parallelly.
+
+Thus, I want to implement a simple version of Decision Tree in C++ (can be used from Python) from scratch to reduce the execution time. 
+Besides, I will compare the results between with and without SIMD.
+After that, I will try to finish multi-thread version and compare it with them.
 
 # Prospective Users
 Those people who use traditional ML models can benefit from my Decision Tree. 
 They can spent less time waiting for the model to finish.
 
 # System Architecture
-My Decision Tree will be a class in C++.
+There will be a Dataset class, which will include features and its value.
+And a Node class, which represents each node in the Tree and connects with its parent node and child node. 
+And a Decision Tree Class, which will be the whole structure of Decision Tree and provide functions of Deicsion Tree.
 Users can directly use it in C++ environment.
 They can also use the Class from Python to call C++.
 
-... 
 # API Description
 When users prepare their dataset (training set and testing set), they can use 'fit' function to train their model and use 'predict' to predict the results for new data (testing set).
 
 # Engineering Infrastructure
-I don't know yet.
-
-
-Automatic build system and how to build your program
-Version control (show how you will use it)
-Testing framework
-Documentation
+I will use Makefile to design an automatic build system to build my program.
+And I will use git to do the version control.
+After finishing this project, I will write a simple documentation to describe how to run my program.
 
 
 
