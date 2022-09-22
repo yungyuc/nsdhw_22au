@@ -29,15 +29,28 @@ And a Decision Tree Class, which will be the whole structure of Decision Tree an
 Users can directly use it in C++ environment.
 They can also use the Class from Python to call C++.
 
+![圖片](https://user-images.githubusercontent.com/48217854/191674196-1f18d71c-bfbc-4cde-80e3-50b8258263b7.png)
+
+
 # API Description
+1. fit() and predict()
 When users prepare their dataset (training set and testing set), they can use 'fit' function to train their model and use 'predict' to predict the results for new data (testing set).
+2. score() can be used to calculate your accuracy
+3. create_dataset() can be used to read your input_file and turn into my Dataset
+4. shuffle_dataset() can be used to shuffle the data 
+5. train_test_split() can be used to split the training data and testing data
+
+
 
 # Engineering Infrastructure
 I will use Makefile to design an automatic build system to build my program.
 And I will use git to do the version control.
 After finishing this project, I will write a simple documentation to describe how to run my program.
 
-
+There will be thee things in this documentation.
+1. The problem I will solve with this project.
+2. The advantage of using my library instead of original one.
+3. How to use my library (includig data type, data structure, function, and API)
 
 # Schedule
 Week 1 (10/31): Function for input dimension and structure.
