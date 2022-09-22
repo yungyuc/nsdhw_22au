@@ -1,10 +1,7 @@
-#!/bin/bash
-
-"exec" "$PYTHON_BIN" "$0" "$@"
+#!/usr/bin/env python3
 
 import sys
 import os.path
-import os
 
 
 if len(sys.argv) < 2:
