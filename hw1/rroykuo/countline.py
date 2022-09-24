@@ -4,9 +4,9 @@
     if ! [[ -x "$(command -v $PYTHON_BIN)" ]]; then
         echo "exec: python0: not found"
         exit 1
-    else
+    else 
         $PYTHON_BIN $0 $@
-        exit 0 
+        exit 0
     fi
 '''
 
@@ -24,4 +24,4 @@ else:
             lines = fobj.readlines()
         sys.stdout.write('{} lines in {}\n'.format(len(lines), fname))
     else:
-        sys.stdout.write('{} not found\n'.format(fname))
+        sys.stdout.write('{} not found\n'.format(fname)) 
