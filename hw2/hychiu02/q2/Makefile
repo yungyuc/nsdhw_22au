@@ -1,18 +1,18 @@
-PROGRAM_NAME = main
-
 CXX = g++
+CXX_FLAGS = -O3 -Wall -shared -std=c++11 -fPIC `python3 -m pybind11 --includes`
 
-all: main.o
-	$(CXX) main.o -o main
+# c++ -O3 -Wall -shared -std=c++11 -fPIC $(python3 -m pybind11 --includes) example.cpp -o example$(python3-config --extension-suffix)
 
-main.o: main.cpp
-	$(CXX) -c main.cpp -o main.o
+all: _vector.so
+	@echo make successfully
 
-run: all
-	./${PROGRAM_NAME}
+_vector.so: _vector.cpp
+	$(CXX) ${CXX_FLAGS} _vector.cpp -o _vector.so
+
+test: all
+	pytest test_angle.py
 
 .PHONY: clean
 
 clean:
-	rm -f *.o
-
+	rm -rf *.so __pycache__ .pytest_cache

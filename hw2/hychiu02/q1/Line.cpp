@@ -6,26 +6,26 @@ Line::Line()
 
 }
 
-Line::Line(Line const & l)
+Line::Line(Line const & line_)
 {
-    coordinate = l.coordinate;
+    coordinate = line_.coordinate;
 }
 
-Line::Line(Line      &&l)
+Line::Line(Line      &&line_)
 {
-    std::swap(coordinate, l.coordinate);
+    coordinate = line_.coordinate;
 }
 
-Line & Line::operator=(Line const & line)
+Line & Line::operator=(Line const & line_)
 {
-    *this = line;
+    *this = line_;
 
     return *this;
 }
 
-Line & Line::operator=(Line      &&line)
+Line & Line::operator=(Line      &&line_)
 {
-    std::swap(coordinate, line.coordinate);
+    coordinate, line_.coordinate;
 
     return *this;
 }
