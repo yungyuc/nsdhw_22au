@@ -13,7 +13,7 @@ Line::Line(Line const & l)
 
 Line::Line(Line      &&l)
 {
-    coordinate = l.coordinate;
+    std::swap(coordinate, l.coordinate);
 }
 
 Line & Line::operator=(Line const & line)
@@ -25,7 +25,9 @@ Line & Line::operator=(Line const & line)
 
 Line & Line::operator=(Line      &&line)
 {
-    return line;
+    std::swap(coordinate, line.coordinate);
+
+    return *this;
 }
 
 Line::Line(size_t size)
@@ -61,4 +63,11 @@ float const & Line::y(size_t it) const
 float & Line::y(size_t it)
 {
     return coordinate[it].second;
+}
+
+void Line:: check_range(size_t it) const
+{
+    if(it < this->size()){
+        throw std::out_of_range("Line index out of range");
+    }
 }
