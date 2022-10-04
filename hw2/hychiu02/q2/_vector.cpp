@@ -7,7 +7,8 @@
 
 float calculate_angle(std::pair<float, float> v0, std::pair<float, float> v1)
 {
-    /* a ∙ b = |a| * |b| * cos(α)
+    /* 
+        a ∙ b = |a| * |b| * cos(α)
         cos(α) = a ∙ b / (|a| * |b|)
         α = arccos[(a ∙ b) / (|a| * |b|)]
     */
@@ -29,17 +30,6 @@ float calculate_angle(std::pair<float, float> v0, std::pair<float, float> v1)
     else
         return acos(val);
 }
-/*
-int main()
-{
-    std::pair<float, float> v0 = std::make_pair(0.7027418321943354, 0.9206890990594353);
-    std::pair<float, float> v1 = std::make_pair(0.8805969890497817, 0.0048339040196602);
-
-    std::cout << calculate_angle(v0, v1) << std:: endl;
-
-    //std::cout << "Angle between (" << v0.first << ", " << v0.second << "), and (" << v1.first << ", " << v1.second << ") is " << calculate_angle(v0, v1) << "(degree: " << calculate_angle(v0,v1)*(180/PI) << "" << std::endl;
-}
-*/
 
 PYBIND11_MODULE(_vector, m) {
     m.doc() = "Calculate angle(radians) between two vectors";
