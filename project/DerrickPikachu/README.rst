@@ -96,10 +96,14 @@ Engineering Infrastructure
 ==========================
 
 To build the A* Search Engine in c++, I would like to use CMake to automatically build my project.
+
 Version Control: Git. Because this project will be written only by myself, I will use only one branch on development, and the master branch to be released branch.
+
 Test Framework: GTest for C++, pyUnit for Python
+
 The Documentation tool would be a rst file or markdown.
-I will wrap an environment into a docker container image, as the result, user can easily pull the image and enjoy the AStarEngine immediately.
+
+I will wrap a build environment (not the game enironment method above) into a docker container image, as the result, user can easily pull the image and enjoy the AStarEngine immediately.
 
 Schedule
 ========
