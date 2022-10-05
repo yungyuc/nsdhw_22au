@@ -1,11 +1,6 @@
 ========================
 A Star Search Engine
 ========================
-.. note::
-
-  You are strongly encouraged to use this plain-text `reStructuredText
-  <https://docutils.sourceforge.io/rst.html>`__ format, although not forced.
-  :download:`Download this file. <project_template.rst>`
 
 Basic Information
 =================
@@ -22,16 +17,6 @@ However, Breadth-First-Search waste too much time on searching in breadth.
 A* Search, which combine the feature of Dijkstra and Best-First-Search, can efficiently find the shortest path. 
 This project provide a C++ API for Python.
 User who want to utilize the A* Search can build the game (or environment) in Python script and call the A* Search Engine to help him/her finding path.
---
-Describe the problem or the set of problems you want to solve.  Include
-necessary background information without making it lengthy.
-
-Some points may help you organize the problem description:
-
-1. The field or industry of the problem.
-2. The physics and/or the mathematics behind the problem.
-3. The algorithm or numerical method that should be applied for solving the
-   problem.
 
 Prospective Users
 =================
@@ -39,10 +24,6 @@ Prospective Users
 The programmer who want to find a path on a graph or want to solve a Path Finding problem.
 They can build their graph environment in Python or C++, and export the graph to A* Search Engine.
 Then the engine will output the path for the user.
-
---
-Describe the users of your software and how they will use it.  It is OK to
-combine this section with the previous one (`Problem to solve`_).
 
 System Architecture
 ===================
@@ -55,12 +36,29 @@ The AStarEngine do the A* search with the specified enrionment and the initial s
 
 The A* search algorithm can be illustrate as following:
 
+.. image:: img/AStar_1.png
 
+In the image above, blue node means the node has been visited, orange node means the node can be visited, the other nodes are nodes which cannot be choosed to visited.
+Now we need to choose a best node to visit. In A* search, those node needs to be evaluated with g(n) and h(n).
+g(n) gives the path length from start node to node n.
+h(n) is the heuristic function which is given by the game(or environment) domain knowledge, estimate a path length from node n to goal node.
+f(n) is the final score for the node n, it can be calculated by simply adding g(n) and h(n) together.
 
-Analyze how your system takes input, produces results, provide interface, and
-performs any other operations.  Describe the system's work flow.  You may
-consider to use a flow chart but it is not required.  Specify the constraints
-assumed in your system.  Describe the modularization of the system.
+.. image:: img/AStar_2.png
+
+With the information about those orange nodes.
+Choose the node which has lowest f(n), and color this node as red.
+
+.. image:: img/AStar_3.png
+
+Then extend the red node, evaluate the node which can be reached by the red node and color the node as orange.
+After finishing this process, the red node has beed visited. Therefore, color this red node to be blue.
+
+Loop this process until find a path from start node to goal node.
+
+This system need the user to specify the game detail and the game heuristic.
+Users can define their game in Python or C++. 
+It would be easy to implement if the game details were defined in Python, but the search is expected to be a little bit slower.
 
 API Description
 ===============
@@ -94,11 +92,6 @@ Then execute the A* search:
 
   This method will start to execte A* search and find the path for user.
 
----
-Show how your system can be programmed.  You are supposed to implement the
-system using both C++ and Python.  Describe how a user writes a script in the
-system.
-
 Engineering Infrastructure
 ==========================
 
@@ -107,20 +100,6 @@ Version Control: Git. Because this project will be written only by myself, I wil
 Test Framework: GTest for C++, pyUnit for Python
 The Documentation tool would be a rst file or markdown.
 I will wrap an environment into a docker container image, as the result, user can easily pull the image and enjoy the AStarEngine immediately.
-
---
-Describe how you plan to put together the engineering system:
-
-1. Automatic build system and how to build your program
-2. Version control (show how you will use it)
-3. Testing framework
-4. Documentation
-
-Some of the above information should be included in the documentation in your
-software.
-
-You may use continuous integration, but it is not required.  If you use it,
-describe how it works in your code development.
 
 Schedule
 ========
@@ -138,4 +117,5 @@ Schedule
 References
 ==========
 
-List the external references for the information provided in the proposal.
+`https://www.geeksforgeeks.org/a-search-algorithm/`
+`https://zh.wikipedia.org/zh-tw/A*%E6%90%9C%E5%B0%8B%E6%BC%94%E7%AE%97%E6%B3%95`
