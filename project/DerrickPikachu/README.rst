@@ -11,12 +11,12 @@ Problem to Solve
 ================
 
 Path Finding problem is really famous in Computer Game AI. Maze, Sliding Puzzle, or Magic Cube are Path Finding games. Also in mordern video games, to find the
-path of the NPC is a Path Finding problem.
+path for the NPC is a Path Finding problem.
 To takle this problem, there are some algorithm we may come up with, like Dijkstra and Breadth-First-Search.
 However, Breadth-First-Search waste too much time on searching in breadth.
-A* Search, which combine the feature of Dijkstra and Best-First-Search, can efficiently find the shortest path. 
+A* Search, which combine the feature of Dijkstra and Best-First-Search, can efficiently find the path. 
 This project provide a C++ API for Python.
-User who want to utilize the A* Search can build the game (or environment) in Python script and call the A* Search Engine to help him/her finding path.
+User who want to utilize the A* Search can build the game (or environment) in Python or C++ and call the A* Search Engine to help him/her finding path.
 
 Prospective Users
 =================
