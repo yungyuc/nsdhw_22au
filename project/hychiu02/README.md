@@ -7,7 +7,7 @@
 Arrhythmia dectection using ECG signal
 
 ## Problem to solve
-Heart diseases are one of the significant reasons for death all over the planet. To perform arrhythmia detection, Electrocardiograms(ECGs) is used to monitor hte functioning of heart by capturing electrical activity. Because of needs of real-time inference, the model sizeand  parameters should be small. I want to develop a method to build, train and inference with C++. 
+Heart diseases are one of the significant reasons for death all over the planet. To perform arrhythmia detection, Electrocardiograms(ECGs) is used to monitor hte functioning of heart by capturing electrical activity. Because of needs of real-time inference, the model sizeand  parameters should be small, autoencoder seems to be a good choice. I want to develop a method to build, train and inference a MLP model with C++. 
 
 ## Prospective Users
 People who want to build Multilayer Perceptron model for particular case.
