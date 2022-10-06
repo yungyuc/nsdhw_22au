@@ -17,21 +17,30 @@ There are some algorithms can be implemented for solving this problem. Before we
 However, a light source doesn't only cast a single ray, but it radiates infinite rays. To solve the problem, a naive approach is to cast rays to every potential destination, but this is time consuming. We can use the following algorithms, provided by the [redblobgames](https://www.redblobgames.com/articles/visibility/), to improve the efficiency.
 
 * Ray casting: Cast the rays only at angles where the walls begin or end, and fills the triangles produced by these rays.
-* Wall Tracking: The above algorithm has a problem, it has to intersect with every single wall. Combining the ray casting and wall intersection into a single algorithm is a more efficient approach. This can be achieved by sweeping around 360° and keeping track of the walls that intersect the sweep line. Here is the pseudo code:
+* Wall Tracking: The above algorithm has a problem, it has to intersect with every single wall. Combining the ray casting and wall intersection into a single algorithm is a more efficient approach. This can be achieved by sweeping around 360° and keeping track of the walls that intersect the sweep line. Here is the pseudo code in `python`:
 
-    ```pseudo
-    var endpoints;   # list of endpoints, sorted by angle
-    var open = [];   # list of walls the sweep line intersects
+  ```python
+  walls = get_walls()
+  endpoints = get_endpoints() # list of endpoints, sorted by angle
+  open = []  # list of walls the sweep line intersects
 
-    loop over endpoints:
-        remember which wall is nearest
-        add any walls that BEGIN at this endpoint to 'walls'
-        remove any walls that END at this endpoint from 'walls'
+  for endpoint in endpoints:
+      nearest = nearest_wall(open, light_source) # remember which wall is nearest
 
-        figure out which wall is now nearest
-        if the nearest wall changed:
-            fill the current triangle and begin a new one
-    ```
+      for wall in walls:
+          # add any walls that BEGIN at this endpoint
+          if wall.begin == endpoint:
+              open.append(wall)
+          # remove any walls that END at this endpoint
+          if wall.end == endpoint:
+              open.remove(wall)
+      
+      cur_nearest = nearest_wall(open, light_source) # figure out which wall is now nearest
+
+      # if the nearest wall changed fill the current triangle and begin a new one
+      if nearest != cur_nearest:
+          fill_triangle(nearest, cur_nearest, light_source)
+  ```
 
 ## Prospective users
 
@@ -71,21 +80,21 @@ The system should provide a graphical user interface allow users to design a 2D 
 
 ## Schedule
 
-Planning phase (6 weeks from 9/19 to 10/31)
+Planning phase (6 weeks from 9/19 to 10/31): Setup the environment and get familiar with the algorithm
 
-Week 1 (10/31): setup the environment and get familiar with the algorithm
+Week 1 (10/31): Implement the algorithm with C++
 
-Week 2 (11/7): Implement the algorithm with C++
+Week 2 (11/7): Make python wrappers for C++ with `pybind`
 
-Week 3 (11/14): Finish C++ and bind to python
+Week 3 (11/14): Finish C++, and start creating the interactive map in python
 
-Week 4 (11/21): create the interactive map
+Week 4 (11/21): Implement features of the interactive map
 
-Week 5 (11/28): implement features of the interactive map
+Week 5 (11/28): Test all features with `pytest`
 
-Week 6 (12/5): component testing
+Week 6 (12/5): Finish up, debug, and write the documentation
 
-Week 7 (12/12): Finish up, debug, and write the documentation
+Week 7 (12/12): Buffer time for further testing and debugging
 
 Week 8 (12/19): Make slides and prepare for the presentation
 
