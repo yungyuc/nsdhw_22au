@@ -15,7 +15,7 @@ People who want to build Multilayer Perceptron model for particular case.
 ## System Architecture
 There will be a Node class for storing weight, a Layer class with Nodes for forward and backward weights calculation and a MLP class containing Layers  
 The flow will look like this
-![](SysArch.png)
+![](flow.png)
 
 
 ## API Description
