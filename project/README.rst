@@ -65,3 +65,5 @@ Project List by Account Name
 
 #. `github_username <https://github.com/github_username>`__ for
    `Project title <github_username/README.rst>`__: https://github.com/github_username/project_name
+#. `shih-chuan <https://github.com/shih-chuan>`__ for
+   `Raycast2D <shih-chuan/README.md>`__: https://github.com/shih-chuan/Raycast2D
