@@ -17,6 +17,7 @@ float len_of(const std::vector<float>& vec)
 
 float angle_between(const std::vector<float>& vec1, const std::vector<float>& vec2)
 {
+    if (len_of(vec1) == 0 || len_of(vec2) == 0) { return -1; }
     float dot_product = dot(vec1, vec2);
     float angle = std::acos(dot_product / (len_of(vec1) * len_of(vec2)));
     return angle * 180 / PI;

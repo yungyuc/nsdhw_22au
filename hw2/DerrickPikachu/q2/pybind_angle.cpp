@@ -7,7 +7,7 @@ PYBIND11_MAKE_OPAQUE(std::vector<float>);
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(angle, m) {
+PYBIND11_MODULE(_vector, m) {
     m.doc() = "pybind c++ angle";
 
     m.def("angle_between", &dimension2::angle_between, "A function to calculate angle within two vector");
