@@ -1,6 +1,6 @@
 
 CC = g++
-CFLAGS = -std=c++11 -Wc++11-extensions
+CFLAGS = -std=c++11 
 
 all: main.o Line.o
 	$(CC) $(CFLAGS) -o main main.o Line.o

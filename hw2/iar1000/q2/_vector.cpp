@@ -2,6 +2,8 @@
 #include <iostream>
 #include <pybind11/pybind11.h>
 
+namespace py = pybind11;
+
 // calculate angle of two vectors a and b given formula θ = cos-1 [ (a · b) / (|a| |b|) ].
 float calcAngle(const float x1, const float y1, const float x2, const float y2){
 	float dot = x1*x2 + y1*y2;
@@ -19,7 +21,7 @@ float calcAngle(const float x1, const float y1, const float x2, const float y2){
 	return acos(c);
 }
 
-PYBIND11_MODULE(angles, m) {
+PYBIND11_MODULE(_vector, m) {
     m.doc() = "calculates the angle between two vectors";
     m.def("calc_angle", &calcAngle, "A function that calculates the angle between two vectors");
 }
