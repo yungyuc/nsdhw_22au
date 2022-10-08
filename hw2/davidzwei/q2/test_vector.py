@@ -11,10 +11,11 @@ def test_zero_length():
         
 def test_zero_angle():
     v1 = [0.0, 1.0]
-    v2 = [0.0, -1.0]
+    v2 = [0.0, 2.0]
     angle = _vector.py_cal_angle(v1, v2)
     angle = angle*180/math.pi
-    assert math.isclose(angle, 180.0)
+    print(angle)
+    assert math.isclose(angle, 0.0)
 
 def test_right_angle():
     v1 = [0.0, 1.0]
