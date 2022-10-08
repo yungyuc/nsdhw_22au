@@ -5,7 +5,7 @@ PYBIND = `python3-config --extension-suffix`
 PY = -I/usr/include/python3.8
 
 all:
-	$(CXXFLAGS) $(INCLUDE) _vector.cpp -o _vector$(PYBIND)
+	$(CXXFLAGS) $(INCLUDE) _vector.cpp -o _vector$(PYBIND) $(PY)
 test:
 	python3 -m pytest
 
