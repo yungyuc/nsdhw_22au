@@ -5,7 +5,7 @@
 #include <cmath>
 
 
-float angle(std::vector<float> v1, std::vector<float>v2){
+float get_angle(std::vector<float> v1, std::vector<float>v2){
     // vector is zero
     if((v1[0] == 0.0 && v1[1] == 0.0) || (v2[0] == 0.0 && v2[1] == 0.0))
         throw std::domain_error("input vector length is zero!");
@@ -17,10 +17,10 @@ float angle(std::vector<float> v1, std::vector<float>v2){
     return angle;
 }
 
-PYBIND11_MODULE(angle, m) {
+PYBIND11_MODULE(_vector, m) {
     m.doc() = "get angle of two vectors";                          // module doc string
     m.def("get_angle",                                             // function name
-            &angle,                                                // function pointer
+            &get_angle,                                                // function pointer
             "A function which calculates the angle of two vectors" //function doc string
         );
 }
