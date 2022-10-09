@@ -9,4 +9,3 @@ test:
 clean:
 	rm -r build
 	rm *.so
-	ls
