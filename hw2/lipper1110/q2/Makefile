@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -O3 -Wall --shared -std=c++17 -fPIC `python3 -m pybind11 --includes`
+CXXFLAGS = -O3 -Wall --shared -std=c++17 -fPIC `python3 -m pybind11 --includes` -I/usr/includes/python3
 CXXLDFLAGS = `python3-config --ldflags`
 TARGET = _vector
 TEST_FILE = test_angle
@@ -7,7 +7,7 @@ TEST_FILE = test_angle
 all: %.so $(TEST_FILE).py
 
 %.so: $(TARGET).cpp
-	$(CXX) $(CXXFLAGS) $^ -o $(TARGET)`python3-config --extension-suffix` $(CXXLDFLAGS)
+	$(CXX) $(CXXFLAGS) $^ -o $(TARGET)`python3-config --extension-suffix`
 
 test: %.so $(TEST_FILE).py
 	python3 -m pytest -v
