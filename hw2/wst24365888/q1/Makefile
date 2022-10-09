@@ -1,20 +1,22 @@
-CC=g++
+CXX=g++
+CXXFLAGS=-Wall -Wextra -Werror -std=c++11 -O2
+TARGET=main
 
 .PHONY: all clean check run
 
-all: main
+all: $(TARGET)
 
-main: main.o line.o
-	@$(CC) -o main main.o line.o
+$(TARGET): main.o line.o
+	@$(CXX) -o $(TARGET) main.o line.o $(CXXFLAGS)
 
 %.o: %.cpp
-	@$(CC) -c $<
+	@$(CXX) -c $< $(CXXFLAGS)
 
 clean:
-	@rm -f *.o main
+	@rm -f *.o $(TARGET)
 
-check: main
-	@./main > result.txt
+check: $(TARGET)
+	@./$(TARGET) > result.txt
 
-run: main
-	@./main
+run: $(TARGET)
+	@./$(TARGET)
