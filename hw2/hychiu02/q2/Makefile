@@ -1,14 +1,15 @@
 CXX = g++
-CXX_FLAGS = -O3 -Wall -shared -std=c++11 -fPIC `python1 -m pybind11 --includes` -I/usr/include/python3.8
+CXX_FLAGS = -O3 -Wall -shared -std=c++11 -fPIC `python3 -m pybind11 --includes` -I/usr/include/python3.8
+SUFFIX = `python3-config --extension-suffix`
 
 all: _vector.so
 	@echo make successfully
 
 _vector.so: _vector.cpp
-	$(CXX) ${CXX_FLAGS} _vector.cpp -o _vector.so
+	$(CXX) ${CXX_FLAGS} _vector.cpp -o _vector${SUFFIX}
 
 test: all
-	pytest test_angle.py
+	python3 -m pytest test_angle.py
 
 .PHONY: clean
 
