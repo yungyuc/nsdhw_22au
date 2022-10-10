@@ -3,7 +3,6 @@ from _vector import calculateAngle
 import pytest
 from pytest import approx
 import math
-import pybind11
 
 def test_0_d():
     assert calculateAngle([1.0, 2.0], [3.0, 6.0]) == 0.0
