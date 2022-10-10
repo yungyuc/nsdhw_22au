@@ -1,5 +1,5 @@
 CXX = g++
-CXX_FLAGS = -O3 -Wall -shared -std=c++11 -fPIC `python1 -m pybind11 --includes` -Iextern/pybind11/include
+CXX_FLAGS = -O3 -Wall -shared -std=c++11 -fPIC `python1 -m pybind11 --includes` -I/usr/include/python3.8
 
 all: _vector.so
 	@echo make successfully
