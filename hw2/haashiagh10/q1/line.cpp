@@ -1,5 +1,10 @@
 #include "line.hpp"
+#include <cstdint>
+#include <stdexcept>
+#include <vector>
 #include <iostream>
+
+using namespace std;
 
 int main(int, char **)
 {
