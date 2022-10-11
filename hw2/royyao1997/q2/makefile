@@ -1,16 +1,15 @@
-CXX=g++
-CXXFLAGS=-std=c++11 -shared -O3 -Wall -Wextra -Werror -fPIC  
-PYINCLUDE:=`python3-config --includes`
-PYIEXTERN:=-Iextern/pybind11/include
-PYSUFFIX:=`python3-config --extension-suffix`
+CXX := g++
+CXXFLAGS := -O3 -Wall -shared -std=c++11 -fPIC
+TARGET = _vector.*.so
 
-.PHONY: test clean
+all: $(TARGET)
 
-_vector: _vector.cpp
-	$(CXX) $(CXXFLAGS) $(PYINCLUDE) $(PYIEXTERN) $< -o $@$(PYSUFFIX)
+$(TARGET): main.cpp
+	$(CXX) $(CXXFLAGS) `python3 -m pybind11 --includes` $< -o _vector`python3-config --extension-suffix` `python3-config --includes`
 
-test: _vector
-	python3 -m pytest -v
+test: vector_test.py
+	python3 -m pytest vector_test.py
 
+.PHONY: clean
 clean:
-	rm -r -f *.so __pycache__ .pytest*
+	rm -rf *.o main *.so __pycache__ .pytest_cache
