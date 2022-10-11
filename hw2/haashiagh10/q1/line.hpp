@@ -18,11 +18,11 @@ public:
 	Line & operator =(Line const & ) = default;
 	Line & operator =(Line &&) = default;
 	
-	Line(size_t size){
-		m_size(size);
-		x_size(size);
-		y_size(size);
-	}
+	Line(size_t size)
+		:m_size(size)
+		,x_size(size)
+		,y_size(size) {};
+	
 	
 	~Line() = default;
 	
