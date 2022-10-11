@@ -1,4 +1,4 @@
-#include "line1.hpp"
+#include "line.hpp"
 #include <iostream>
 
 int main(int, char **)
