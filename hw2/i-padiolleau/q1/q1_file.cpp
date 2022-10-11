@@ -1,3 +1,30 @@
+#include <iostream>
+#include <cstdint>
+#include <stdexcept>
+#include <vector>
+
+class Line{ 
+public:
+    Line(const int size){ //initializer
+        for(int i = 0; i<size; i++){
+          xl.push_back(0);
+          yl.push_back(0);
+        };
+    };
+    int size(){
+        return xl.size();
+    }
+    float & x(int it){
+        return xl.at(it);
+    }
+    float & y(int it){
+        return yl.at(it);
+    }
+private:
+    std::vector<float> xl;
+    std::vector<float> yl;
+};
+
 int main(int, char **)
 {
     Line line(3);
