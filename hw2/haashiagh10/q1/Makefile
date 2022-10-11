@@ -16,4 +16,4 @@ build: line.cpp
 	$(CC) line.cpp -o $(DES_DIR)/line.out
 
 clean:
-	rm -f main *.o result.txt
+	rm -rf $(DES_DIR) || true
