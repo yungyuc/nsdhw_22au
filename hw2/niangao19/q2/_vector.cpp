@@ -11,7 +11,8 @@ float calculates_angle( std::vector<float>  v1,  std::vector<float>  v2)  {
     // calculate vector len
     float v1len = sqrt(pow(abs(v1[0]), 2) + pow(abs(v1[1]), 2));
     float v2len = sqrt(pow(abs(v2[0]), 2) + pow(abs(v2[1]), 2));
-    
+    if ( v1len == 0.0 || v2len == 0.0 )
+        return 0.0;
     // v1xv2 = v1len*v2len*cos(angle)
     float exlen = v1[0]*v2[0] + v1[1]*v2[1];
     float cosa = v1len * v2len / exlen;
