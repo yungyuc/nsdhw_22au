@@ -18,9 +18,7 @@ The algorithm uses a __sweep line__ and a __beach line__ to create and grow new 
 
 ![](https://upload.wikimedia.org/wikipedia/commons/0/0c/Fortunes-algorithm-slowed.gif)
 
-## System Architecture
-
-### Workflow
+### Events
 
 The implementation itself is not literally sweeping the sweep line through the whole plane and adapting the beach line on it's way, but skipping to locations where important events take place. This is also called an event-based algorithm. The two major events that have impact on the diagram are the following:
 
@@ -29,9 +27,7 @@ The implementation itself is not literally sweeping the sweep line through the w
 
 #### Point Event
 
-The sweep line encounters target point $t_k$. The horizontal line $h_k$ going through $t_k$ is going to intersect with a parabola $p_k \in P$ to the left of the sweep line.
-
-A new parabola is introduced to the beach line at the intersection of $h_k$ and $p_k$. It is infitesimally small in the beginning and starts to grow as the sweep line progresses, tracking the equidistance level curve for the newly incorporated point $t_k$.
+The sweep line encounters target point $t_k$. The horizontal line $h_k$ going through $t_k$ is going to intersect with a parabola $p_k \in P$ to the left of the sweep line. A new parabola is introduced to the beach line at the intersection of $h_k$ and $p_k$. It is infitesimally small in the beginning and starts to grow as the sweep line progresses, tracking the equidistance level curve for the newly incorporated point $t_k$.
 
 As the sweep line progresses only in one direction, we know the order of the point events in advance. Sorting the target points in advance allows us an efficient lookup for the next point event.
 
@@ -57,10 +53,37 @@ while Q is not empty:
         check and add new Circle Events
 ```
 
-### Interfaces
+## System Architecture
 
-The software will have one central datastructure, namely the ``VoronoiDiagram``. The Voronoi diagram $V$ is implemented as a [Doubly Connected Edge List (DCEL)](https://en.wikipedia.org/wiki/Doubly_connected_edge_list), which stores the planar graph as a set of (half-)edges, vertices and cells. It is special in that each edge is represented as two half-edges, each associated to one of the cells forming the edge.
-As input the software takes a ``.csv`` or ``.json`` file with target points, from where it computes a valid Voronoi diagram. The output is written to a ``.json`` file describing all vertices and edges of the diagram. The bounding box used is defined by the min/max coordinates of all points.
+The algorithm is made accessible through the Python interpreter and uses C++ as backend.
+The main workflow is as follows:
+
+1) (Py ) Read in target points $T$ from `.csv` or `.json` file
+2) (Py ) Define bounding box (min/max coordinates + margin)
+3) (Py ) Initiate diagram computation
+4) (C++) Setup `EventQueue` with `PointEvents`
+5) (C++) Compute diagram
+6) (C++) Return diagram as list of vertices and edges
+7) (Py ) Visualize and save diagram
+
+### Datastructures
+
+The main components of Fortune's algorithm are:
+
+1. `VoronoiDiagram`
+2. `Beachline`
+3. `EventQueue`
+
+The main functionalities are:
+
+1. insert and delete `PointEvent` and `CircleEvent` to `EventQueue`
+2. add and delete arc to `BeachLine`
+3. Check for new `CircleEvenet`
+4. Add vertices and edges to `VoronoiDiagram`
+
+### Testing
+
+The testing environment will be setup in python to help modular development. This also means that the development of the C++ backend goes hand-in-hand with the developement of the `pybind` connector.
 
 ## API Description
 
@@ -75,17 +98,17 @@ Will follow when coding has started
 
 ## Schedule
 
-Week 1 (10/31): C++ reading input and writing output
+Week 1 (10/31): (Py ) read in points, setup testing environment
 
-Week 2 (11/7): C++ main algorithm
+Week 2 (11/7):  (C++) develop and implement `VoronoiDiagram`, `BeachLine` and `EventQueue` datastructures (w/o functionality)
 
-Week 3 (11/14): C++ main algorithm
+Week 3 (11/14): (C++) add functionality to `EventQueue` and `VoronoiDiagram`
 
-Week 4 (11/21): Python module of C++ algorithm
+Week 4 (11/21): (C++) add functionality to `BeachLine`
 
-Week 5 (11/28): Testing and debugging
+Week 5 (11/28): (Py ) finish C++ connector and implement module interface
 
-Week 6 (12/5): Testing and debugging
+Week 6 (12/5):  (Py ) testing and debugging
 
 Week 7 (12/12): Documentation
 
