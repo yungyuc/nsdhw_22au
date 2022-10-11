@@ -26,6 +26,20 @@ Line::~Line(){
     x_p.clear();
     y_p.clear();
 }
+Line & Line::operator=(Line const & line){
+    if(this == &line)
+        return *this;
+    x_p = line.x_p;
+    y_p = line.y_p;
+    len = line.len;
+    return *this;
+}
+Line & Line::operator=(Line && line){
+    x_p = move(line.x_p);
+    y_p = move(line.y_p);
+    len = move(line.len);
+    return *this;
+}
 size_t Line::size() const{
     return len;
 }
