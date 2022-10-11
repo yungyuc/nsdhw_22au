@@ -27,8 +27,12 @@ public:
 	~Line() = default;
 	
 	size_t size() const {return m_size;}
-	const float& x(size_t it) const {return x_size[it];}
-	const float& x(size_t it) const {return x_size[it];}
-	const float& y(size_t it) const {return y_size[it];}
+	float& x(size_t it);
+	float& y(size_t it);
+	float const& x(size_t it) const;
+	float const& y(size_t it) const;
+	float const& x(size_t it) const {return x_size[it];}
+	float& x(size_t it) const {return x_size[it];}
+	float const& y(size_t it) const {return y_size[it];}
 	float& y(size_t it) const {return y_size[it];}
 };
