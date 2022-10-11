@@ -10,7 +10,7 @@ Arrhythmia dectection using ECG signal
 Heart diseases are one of the significant reasons for death all over the planet. To perform arrhythmia detection, Electrocardiograms(ECGs) is used to monitor hte functioning of heart by capturing electrical activity. Because of needs of real-time inference, the model sizeand  parameters should be small, autoencoder seems to be a good choice. I want to develop a method to build, train and inference a MLP model with C++. 
 
 ## Prospective Users
-People who want to build Multilayer Perceptron model for particular case.
+people who want to do abnormal sound detection, cardiac diseases classification or other regression or classification problem can take advantage of my implementation
 
 ## System Architecture
 There will be a Node class for storing weight, a Layer class with Nodes for forward and backward weights calculation and a MLP class containing Layers  
