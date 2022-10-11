@@ -39,8 +39,7 @@ public:
 private:
     vector<float> _x, _y;
 
-    }
-}; 
+    };
 
 int main(int, char **) {
     Line line(3);
