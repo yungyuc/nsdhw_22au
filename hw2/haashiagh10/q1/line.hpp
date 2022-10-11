@@ -3,7 +3,7 @@
 #include <vector>
 #include <iostream>
 
-Class Line
+class Line
 {
 private:
 	size_t m_size;
