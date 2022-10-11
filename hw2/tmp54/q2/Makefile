@@ -1,5 +1,7 @@
 CXX = g++
-CFLAGS = -std=c++17 -O2 -Wall -Wextra -shared -fPIC $(shell /usr/bin/env python3 -m pybind11 --includes)
+CFLAGS = -std=c++17 -O2 -Wall -Wextra -shared -fPIC
+CFLAGS += $(shell /usr/bin/env python3 -m pybind11 --includes)
+CFLAGS += $(shell /usr/bin/env python3-config --includes)
 SUFFIX = $(shell /usr/bin/env python3-config --extension-suffix)
 SRC = _vector.cpp
 OBJ = _vector$(SUFFIX)
