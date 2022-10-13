@@ -69,3 +69,5 @@ Project List by Account Name
    `The Project <iar1000/README.rst>`__: https://github.com/iar1000/voronoiagram
 #. `shih-chuan <https://github.com/shih-chuan>`__ for
    `Raycast2D <shih-chuan/README.md>`__: https://github.com/shih-chuan/Raycast2D
+#. `DerrickPikachu <https://github.com/DerrickPikachu>`__ for
+   `AStarEngine <DerrickPikachu/README.rst>`__: https://github.com/DerrickPikachu/AStarEngine
