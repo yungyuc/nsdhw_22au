@@ -71,3 +71,5 @@ Project List by Account Name
    `Raycast2D <shih-chuan/README.md>`__: https://github.com/shih-chuan/Raycast2D
 #. `DerrickPikachu <https://github.com/DerrickPikachu>`__ for
    `AStarEngine <DerrickPikachu/README.rst>`__: https://github.com/DerrickPikachu/AStarEngine
+#. `ian-chiu <https://github.com/ian-chiu>`__ for
+   `celluar-automata-3d <ian-chiu/README.md>`__: https://github.com/ian-chiu/celluar-automata-3d
