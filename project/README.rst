@@ -63,5 +63,5 @@ entry too.  You can request my review in the PR.
 Project List by Account Name
 ++++++++++++++++++++++++++++
 
-#. `github_username <https://github.com/github_username>`__ for
-   `Project title <github_username/README.rst>`__: https://github.com/github_username/project_name
+#. `OuTingYun <https://github.com/OuTingYun>`__ for
+   `Image Filtering  <https://github.com/OuTingYun/nsdhw_22au/blob/OuTingYun-proposal-submission/project/OuTingYun/README.md>`__: https://github.com/OuTingYun/Image-Filtering
