@@ -76,4 +76,4 @@ Project List by Account Name
 #. `LanceWang12 <https://github.com/LanceWang12>`__ for
    `t-SNE-implementation <LanceWang12/readme.md>`__: https://github.com/LanceWang12/t-SNE-implementation
 #. `huang-me <https://github.com/huang-me>`__ for
-   `TSP with gene algorithm <huang-me/README.md>`__: https://github.com/huang-me/TSP_Multithread_gene_algo
+   `TSP with gene algorithm <huang-me/README.md>`__: https://github.com/huang-me/parallel_TSP_gene_algo
