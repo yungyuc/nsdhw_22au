@@ -65,3 +65,15 @@ Project List by Account Name
 
 #. `github_username <https://github.com/github_username>`__ for
    `Project title <github_username/README.rst>`__: https://github.com/github_username/project_name
+#. `ìar1000 <https://github.com/iar1000>`__ for
+   `The Project <iar1000/README.rst>`__: https://github.com/iar1000/voronoiagram
+#. `shih-chuan <https://github.com/shih-chuan>`__ for
+   `Raycast2D <shih-chuan/README.md>`__: https://github.com/shih-chuan/Raycast2D
+#. `DerrickPikachu <https://github.com/DerrickPikachu>`__ for
+   `AStarEngine <DerrickPikachu/README.rst>`__: https://github.com/DerrickPikachu/AStarEngine
+#. `ian-chiu <https://github.com/ian-chiu>`__ for
+   `celluar-automata-3d <ian-chiu/README.md>`__: https://github.com/ian-chiu/celluar-automata-3d
+#. `LanceWang12 <https://github.com/LanceWang12>`__ for
+   `t-SNE-implementation <LanceWang12/readme.md>`__: https://github.com/LanceWang12/t-SNE-implementation
+#. `HaHaFi <https://github.com/HaHaFi>`__ for
+   `Line-Segment-Detection <HaHaFi/README.md>`__: https://github.com/HaHaFi/Line-Segment-Detection
