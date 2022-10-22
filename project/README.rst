@@ -73,3 +73,5 @@ Project List by Account Name
    `AStarEngine <DerrickPikachu/README.rst>`__: https://github.com/DerrickPikachu/AStarEngine
 #. `ian-chiu <https://github.com/ian-chiu>`__ for
    `celluar-automata-3d <ian-chiu/README.md>`__: https://github.com/ian-chiu/celluar-automata-3d
+#. `LanceWang12 <https://github.com/LanceWang12>`__ for
+   `t-SNE-implementation <LanceWang12/readme.md>`__: https://github.com/LanceWang12/t-SNE-implementation
