@@ -81,12 +81,16 @@ save_model
 
 - Planning phase (9/16~10/31): Plan the architecture for overall program and study the detail of implementation like how back propogation works
 - Week 1(10/31): Complete the class part Node, Layer, MLP
-- Week 2(11/07): Component testing
+- Week 2(11/07): Component testing, and implement backpropagation
 - Week 3(11/14): Complete the class part Dataset and manage data
 - Week 4(11/21): Complete fuction part train, test 
 - Week 5(11/28): Debug and make sure system 
 - Week 6(12/05): Test performance(maybe compare inference time and accuracy with same model on pytorch eager mode)
 - week 7(12/12~): prepare presentation
+
+After class:
+  Try to deal with I/O among different platform.
+  Try to map this implement to gpu(cuda)
 
 ## References
 
