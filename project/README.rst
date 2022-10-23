@@ -75,3 +75,5 @@ Project List by Account Name
    `celluar-automata-3d <ian-chiu/README.md>`__: https://github.com/ian-chiu/celluar-automata-3d
 #. `LanceWang12 <https://github.com/LanceWang12>`__ for
    `t-SNE-implementation <LanceWang12/readme.md>`__: https://github.com/LanceWang12/t-SNE-implementation
+#. `HaHaFi <https://github.com/HaHaFi>`__ for
+   `Line-Segment-Detection <HaHaFi/README.md>`__: https://github.com/HaHaFi/Line-Segment-Detection
