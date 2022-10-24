@@ -1,32 +1,27 @@
-# Image Filtering 
+# Gussian bluring for Image  
 
 ## Basic Information
-One common way to implement image filtering is using a NxN kernel to convolute the origin image. By setting different value in kernel, you will obtain distinct image after convoluting.The other way is to calculate the rgb separately according to the characteristics of the filter, for example, We get the new value by subtracting the old value from 255 for Film filter.
+
+There are many ways to blur image, for example box blurring which is to replacing the original value by the average of the nearby values. However, the blurriness provided by some of them are not strong enough even if  the calculation are high. So in this project, I implement a common blurring way which is call **Gussian blur** to improve the quilty and Stability for bluring image.
+
 
 ## Problem to Solve
 
-In this project, I use c++ to make the calculation of image filters faster. The use python to show and store image. 
+In this project, I use c++ to make the calculation of image filters faster and use python to show and store image. 
 
-**Gussian blur** is useful for bluring image by Guassian function. It is widely use in Adobe Photoshop, GIMP, Paint.NET and so on. We setting the kernel with the normal distribution  in 2-dimension space: 
+
+One common way to implement image filtering is using a NxN kernel to convolute the origin image. By setting different value in kernel, you will obtain distinct image after convoluting. Guassian blur is to set the values of kernel by Guassian function.
 
 ![](image/gussian.png) 
 
+where `u` is the distance from the origin in the horizontal axis, `v` is the distance from the origin in the vertical axis, and σ is the standard deviation of the Gaussian distribution. Setting the kernel with the normal distribution in 2-dimension space will be like this.
+
 <img src=image/gussian_matrix.png width=300>
 
-where `u` is the distance from the origin in the horizontal axis, `v` is the distance from the origin in the vertical axis, and σ is the standard deviation of the Gaussian distribution.
+1. Convolution matrix radius of Gaussian blur: r (here we set r=1)
 
-```
-1.Convolution matrix radius of Gaussian blur: r (here we set r=1)
-2.Standard deviation: σ 
+2. Standard deviation: σ 
         (it is appropriate to take 1/3 of the radius r of the convolution matrix)
-```
-
-
-    
-    
-
-
-
 
 The expecting outcome:
 - bluring image
@@ -36,23 +31,41 @@ The expecting outcome:
         <img src=image/flower_gussian.png width=100>
     </div>
 
-- filtering
-    
-    <div>
-        <img src=image/building_ori.png width=100>
-        <img src=image/building_filter.png width=100>
-    
-    </div>
+
 
 ## Prospective Users
 
-Anyone who wants to filtering the image.
+Anyone who wants to bluring the image.
 
-This project use pybind to wrap the c++ based Gussian blur function and other filter function to provide high-level API in python.
+This project use pybind to wrap the c++ based Gussian blur function to provide high-level API in python.
 
+If time is enough, I will implement another bluring ways for users to compare different bluring resluts. 
 ## System Architecture
 
+```c
+class Image:
+    // Store pixel of image with array [channel,width,height]
+    int ori[c][w][h];   
+    int guassian_blur[w][h];
+
+class kernel:
+
+    float map[][]
+    update() // update map by different fucntion
+
+
+def Convolute():
+    // convolute the image using map
+
+def Guassian_blur():
+    //
+     implement guassian algorian and count value on kernel.
+
+```
+
+
 ![](image/architecture.png)
+
 
 ## API Description
 
@@ -63,9 +76,8 @@ This project use pybind to wrap the c++ based Gussian blur function and other fi
         
 - C++
     - Gussianblur() : calculate the gussian blur.
-    - nostalgic() : calculate the rgb for nostalgic filter
-    - colorChange() ： alculate the rgb for colorChange filter
-    - film() ： alculate the rgb for film filter.
+    - Image() : Store every pixel in image
+    - Kernel() : store the kernel map
         
 ## Engineering Infrastructure
 - Build System : Makefile
@@ -79,7 +91,7 @@ This project use pybind to wrap the c++ based Gussian blur function and other fi
 
 
 - week1(11/07): Setup Python and c++ environment
-- week2(11/14): Python in/out screen, contructing GUI.
+- week2(11/14): Python I/O interface.
 - week3(11/21): Research filter formulas
 - week4(11/28): Implement Gussian blur in c++
 - week5(12/05): Implement other filter in c++
