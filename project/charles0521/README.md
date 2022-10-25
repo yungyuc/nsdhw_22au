@@ -101,4 +101,20 @@ void QR_solver(double **A, double *x, double *b, int n)
 * Documentation: GitHub [[README.md]](https://github.com/charles0521/Gaussian-Elimination-and-QR-decomposition/blob/main/README.md)
 
 ## Schedule
-Week 1 (now ~ 10/31): Study Linear Algebra
+## Schedule
+
+Week 1 (10/31): Study Linear Algebra
+
+Week 2 (11/7):  Implement the simple QR-decomposition and Gaussian-Elimination with C++
+
+Week 3 (11/14): Finish C++, and start visualizing some data(time) in python
+
+Week 4 (11/21): Implement some simple parallel programs for matrix
+
+Week 5 (11/28): Compare time with other libraries
+
+Week 6 (12/5): Finish up, debug, and write the documentation
+
+Week 7 (12/12): Buffer time for further testing and debugging
+
+Week 8 (12/19): Make slides and prepare for the presentation
