@@ -77,3 +77,5 @@ Project List by Account Name
    `t-SNE-implementation <LanceWang12/readme.md>`__: https://github.com/LanceWang12/t-SNE-implementation
 #. `huang-me <https://github.com/huang-me>`__ for
    `TSP with gene algorithm <huang-me/README.md>`__: https://github.com/huang-me/parallel_TSP_gene_algo
+#. `HaHaFi <https://github.com/HaHaFi>`__ for
+   `Line-Segment-Detection <HaHaFi/README.md>`__: https://github.com/HaHaFi/Line-Segment-Detection
