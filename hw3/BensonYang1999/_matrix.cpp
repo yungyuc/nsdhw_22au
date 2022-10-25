@@ -17,16 +17,12 @@ public:
     Matrix(size_t nrow, size_t ncol)
         : m_nrow(nrow), m_ncol(ncol)
     {
-        if (nrow * ncol == 0)
-            throw std::runtime_error("invalid row or column size");
         set_buffer(nrow, ncol);
     }
 
     Matrix(size_t nrow, size_t ncol, const std::vector<double> &vec)
         : m_nrow(nrow), m_ncol(ncol)
     {
-        if (nrow * ncol == 0)
-            throw std::runtime_error("invalid row or column size");
         set_buffer(nrow, ncol);
         std::copy(vec.begin(), vec.end(), m_buffer);
     }
@@ -57,14 +53,10 @@ public:
     // get and set data
     double operator()(size_t row, size_t col) const
     {
-        if (row > m_nrow || col > m_ncol)
-            throw std::runtime_error("invalid row or column size");
         return m_buffer[row * m_ncol + col];
     }
     double &operator()(size_t row, size_t col)
     {
-        if (row > m_nrow || col > m_ncol)
-            throw std::runtime_error("invalid row or column size");
         return m_buffer[row * m_ncol + col];
     }
 

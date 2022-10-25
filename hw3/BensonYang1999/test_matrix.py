@@ -112,7 +112,8 @@ class GradingTest(unittest.TestCase):
 
     def test_tile(self):
 
-        show_ratio = bool(os.environ.get('SHOW_RATIO', False))
+        # show_ratio = bool(os.environ.get('SHOW_RATIO', False))
+        show_ratio = True
 
         mat1, mat2, *_ = self.make_matrices(500)
 
