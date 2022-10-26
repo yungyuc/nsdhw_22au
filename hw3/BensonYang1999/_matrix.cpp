@@ -99,9 +99,6 @@ public:
  */
 Matrix multiply_naive(const Matrix &m1, const Matrix &m2)
 {
-    if (m1.ncol() != m2.nrow())
-        throw std::runtime_error("ivalid matrix size");
-
     Matrix m3(m1.nrow(), m2.ncol());
     size_t m1r = m1.nrow(), m1c = m1.ncol(), m2c = m2.ncol();
 
@@ -124,9 +121,6 @@ Matrix multiply_naive(const Matrix &m1, const Matrix &m2)
  */
 Matrix multiply_tile(const Matrix &m1, const Matrix &m2, size_t cache_size)
 {
-    if (m1.ncol() != m2.nrow())
-        throw std::runtime_error("ivalid matrix size");
-
     Matrix m3(m1.nrow(), m2.ncol());
     size_t m1r = m1.nrow(), m1c = m1.ncol(), m2c = m2.ncol();
 
@@ -164,9 +158,6 @@ Matrix multiply_tile(const Matrix &m1, const Matrix &m2, size_t cache_size)
  */
 Matrix multiply_mkl(const Matrix &m1, const Matrix &m2)
 {
-    if (m1.ncol() != m2.nrow())
-        throw std::runtime_error("ivalid matrix size");
-
     Matrix m3(m1.nrow(), m2.ncol());
     cblas_dgemm(CblasRowMajor,
                 CblasNoTrans,
