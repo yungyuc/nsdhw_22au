@@ -71,10 +71,11 @@ vector<int> kmeans(vector<vector<float>>&dataset, int K, double epsilone);
 2. Pybind
 3. handcraft thread pool or OpenMP.
 
-## Engineering Infrastructure
-Build System : make
-Version Control : git
-Test : pytest or goolge test
+## Engineering Infrastructure     
+
+Build System : make     
+Version Control : git     
+Test : pytest or goolge test      
 
 
 ## Schedule   
