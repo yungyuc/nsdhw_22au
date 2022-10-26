@@ -8,11 +8,12 @@ PYFLAGS = -lpython3.8
 main:
 	$(CXX) $(CXXFLAGS) -I$(MKLINCLUDE) -I$(PYINCLUDE) `python3 -m pybind11 --includes` _matrix.cpp -o _matrix`python3-config --extension-suffix` $(PYFLAGS) $(MKLFLAGS)
 
-# test:
-# 	$(CXX) test.cpp -I$(MKLINCLUDE) $(MKLFLAGS)
-# 	./a.out 
 test: main
 	python3 -m pytest
 
 clean:
 	rm -rf *.out *.so .pytest_cache* __pycache__*
+
+statistic: clean
+	$(CXX) -O3 -Wall -std=c++11 -fPIC statistic.cpp -I$(MKLINCLUDE) -o statistic.out $(MKLFLAGS)
+	./statistic.out | tee performance.txt

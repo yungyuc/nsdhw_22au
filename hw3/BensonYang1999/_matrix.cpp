@@ -142,9 +142,9 @@ Matrix multiply_tile(const Matrix &m1, const Matrix &m2, size_t cache_size)
             {
                 size_t kmax = std::min(k0 + cache_size, m1c);
 
-                for (size_t i1 = i0; i1 < imax; i1++)
+                for (size_t j1 = j0; j1 < jmax; j1++)
                 {
-                    for (size_t j1 = j0; j1 < jmax; j1++)
+                    for (size_t i1 = i0; i1 < imax; i1++)
                     {
                         for (size_t k1 = k0; k1 < kmax; k1++)
                         {
