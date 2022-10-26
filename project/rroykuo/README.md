@@ -1,4 +1,4 @@
-# 3D Retro Bouncing DVD
+# 3D-Retro-Bouncing-DVD
 
 ## Basic Information
 Bouncing DVD is a retro screensaver that would appear in people's childhood. When taking tour bus and watching movie via DVD, we could see the screensaver due to device idling for a while. My object is to reproduce a DVD screensaver but in 3D space. Moreover, I'll try to make the interface to allow users create new DVD plate at any position.
