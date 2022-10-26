@@ -77,3 +77,5 @@ Project List by Account Name
    `t-SNE-implementation <LanceWang12/readme.md>`__: https://github.com/LanceWang12/t-SNE-implementation
 #. `HaHaFi <https://github.com/HaHaFi>`__ for
    `Line-Segment-Detection <HaHaFi/README.md>`__: https://github.com/HaHaFi/Line-Segment-Detection
+#. `rroykuo <https://github.com/rroykuo>`__ for
+   `3D-Retro-Bouncing-DVD <rroykuo/README.md>`__: https://github.com/rroykuo/3D-Retro-Bouncing-DVD
