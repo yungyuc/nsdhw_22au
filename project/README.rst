@@ -83,3 +83,5 @@ Project List by Account Name
    `kmeans <Twl09008181/README.md>`__: https://github.com/Twl09008181/KMeans
 #. `lipper1110 <https://github.com/lipper1110>`__ for
    `Quantitative Trading System <lipper1110/README.md>`__: https://github.com/lipper1110/Quantitative-Trading-System
+#. `Vinci881027 <https://github.com/Vinci881027>`__ for
+   `HOG <Vinci881027/README.md>`__: https://github.com/Vinci881027/HOG
