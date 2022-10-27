@@ -89,3 +89,5 @@ Project List by Account Name
    `KD-Tree <davidzwei/README.md>`__: https://github.com/davidzwei/KD-Tree
 #. `charles0521 <https://github.com/charles0521>`__ for
    `Gaussian-Elimination and QR-decomposition <charles0521/README.md>`__: https://github.com/charles0521/Gaussian-Elimination-and-QR-decomposition
+#. `soulrrrrr <https://github.com/soulrrrrr>`__ for
+   `Columnar Array <soulrrrrr/README.rst>`__: https://github.com/soulrrrrr/ColumnarArray

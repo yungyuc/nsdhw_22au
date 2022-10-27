@@ -10,24 +10,23 @@ https://github.com/soulrrrrr/ColumnarArray
 Problem to Solve
 ================
 
-This problem is from https://yyc.solvcon.net/en/latest/nsd/schedule/22au_nycu/schedule.html#columnar-array.
+Columnar Array (or dataframe) is useful in data analysis area. Pandas is a famous library
+that provides dataframe library for Python users. I want to implement my version of it, and I
+hope it helps people dealing with problems that need to use columnar array.
 
 Prospective Users
 =================
 
 People originally uses Array of Struct in Python and wants to speed up.
+People wants lighter library for using dataframe.
 
 System Architecture
 ===================
 
-Analyze how your system takes input, produces results, provide interface, and
-performs any other operations.  Describe the system's work flow.  You may
-consider to use a flow chart but it is not required.  Specify the constraints
-assumed in your system.  Describe the modularization of the system.
-
 A class template :cpp:class:`!ColumnarArray` is holding the arrays of struct
 and the row accessor of it. The arrays of struct inside :cpp:class:`!SimpleArray`
-is :cpp:class:`!Vector`.
+is :cpp:class:`!Vector`. If it is needed, I will implement the bitmap which
+mentioned in https://arrow.apache.org/docs/format/Columnar.html.
 
 At the moment I am planning, :cpp:class:`!ColumnarArray` can only deal with 
 structs have numeric types only.
@@ -68,10 +67,11 @@ Schedule
 
 * Planning phase (6 weeks from 9/19 to 10/31):
 * Week 1 (10/31): Read C++ template programming and pybind11 docs.
-* Week 2 (11/7): Implement ColumnarArray infrastructure.
-* Week 3 (11/14): Implement push_back, erase function.
-* Week 4 (11/21): Implement other useful functions mentioned in API description.
-* Week 5 (11/28): Finish unfinished things above.
+* Week 2 (11/7): Read C++ template programming and pybind11 docs, try to write a
+  little piece of code to understand them well.
+* Week 3 (11/14): Implement columnarArray imfrastructure.
+* Week 4 (11/21): Implement push_back, erase function.
+* Week 5 (11/28): Implement other useful functions mentioned in API description.
 * Week 6 (12/5): Implement python interface.
 * Week 7 (12/12): Integrate python tests. (Tests should be done once
   a new feature is added to the test.)
@@ -83,3 +83,4 @@ References
 https://yyc.solvcon.net/en/latest/nsd/schedule/22au_nycu/schedule.html#columnar-array
 https://en.cppreference.com/w/cpp/language/templates
 https://github.com/Lunarsong/StructureOfArrays
+https://arrow.apache.org/docs/format/Columnar.html
