@@ -1,6 +1,8 @@
 #include <iostream>
 #include <iomanip>
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+#include <pybind11/operators.h>
 #include <mkl.h>
 
 namespace py = pybind11;
@@ -122,8 +124,8 @@ PYBIND11_MODULE(_matrix, m) {
 
     py::class_<Matrix>(m, "Matrix")
         .def(py::init<size_t, size_t>())
-        .def("__setitem__", [](Matrix &self, size_t row, size_t col, double val) { self(row, col) = val; })
-        .def("__getitem__", [](Matrix &self, size_t row, size_t col) { return self(row, col); })
+        .def("__setitem__", [](Matrix &self, std::pair<size_t, size_t> index, double val) { self(index.first, index.second) = val; })
+        .def("__getitem__", [](Matrix &self, std::pair<size_t, size_t> index) { return self(index.first, index.second); })
         .def("__eq__", &operator==)
         .def_property("nrow", &Matrix::nrow, nullptr)
         .def_property("ncol", &Matrix::ncol, nullptr);
