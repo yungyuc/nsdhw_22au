@@ -25,7 +25,7 @@ _matrix.so: _matrix.cpp
 	$(CC) $(CC_FLAGS) _matrix.cpp -o _matrix$(SPEC) -I/usr/include/python3.8 ${MKL_LIBS}
 
 test: all
-	python3 -m pytest -v
+	python3 -m pytest -s -v
 
 clean:
 	rm -rf *.so *.o __pycache__ .pytest_cache
