@@ -3,7 +3,7 @@
 
 build_file_name=_matrix$(shell python3-config --extension-suffix)
 
-$(build_file_name): multiplication.cpp matrix.o 
+$(build_file_name): multiplication.cpp matrix.o
 	g++ -O3 -Wall -shared -std=c++11 -fPIC `python3-config --includes`  `python3 -m pybind11 --includes` \
 	multiplication.cpp matrix.o  -o $(build_file_name) -L/usr/lib/x86_64-linux-gnu -lblas -I/usr/include/mkl
 

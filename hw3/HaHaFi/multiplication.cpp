@@ -19,42 +19,42 @@ inline void Check_mutiply_valid(Matrix mat1, Matrix mat2)
     }
 }
 
-
 Matrix multiply_naive(Matrix &mat1, Matrix &mat2)
 {
     Check_mutiply_valid(mat1, mat2);
-    Matrix ret_mat(mat1.n_row(), mat2.n_col());
-    for (size_t i = 0; i < mat1.n_row(); i++)
+    const size_t K = mat1.n_col(), M = mat1.n_row(), N = mat2.n_col();
+    Matrix ret_mat(M, N);
+    for (size_t i = 0; i < M; i++)
     {
-        for (size_t j = 0; j < mat2.n_col(); j++)
+        for (size_t j = 0; j < N; j++)
         {
             double count = 0;
-            for (size_t k = 0; k < mat1.n_col(); k++)
+            const size_t m1_leader = i * K;
+            for (size_t k = 0; k < K; k++)
             {
-                count += mat1(i, k) * mat2(k, j);
+                count += mat1.m_buffer[m1_leader + k] * mat2.m_buffer[k * N + j];
             }
-            ret_mat(i, j) = count;
+            ret_mat.m_buffer[i * N + j] = count;
         }
     }
     return ret_mat;
 }
 
-
 Matrix multiply_tile(Matrix &mat1, Matrix &mat2, size_t tile_size)
 {
     Check_mutiply_valid(mat1, mat2);
-    size_t K = mat1.n_col(), M = mat1.n_row(), N = mat2.n_col();
+    const size_t K = mat1.n_col(), M = mat1.n_row(), N = mat2.n_col();
     Matrix ret_mat(M, N);
 
     for (size_t m1_start_index = 0; m1_start_index < M; m1_start_index += tile_size)
     {
-        size_t m1_end_index = std::min(m1_start_index + tile_size, M);
-        for (size_t m2_start_index = 0; m2_start_index < N; m2_start_index += tile_size)
+        const size_t m1_end_index = std::min(m1_start_index + tile_size, M);
+        for (size_t common_start_index = 0; common_start_index < K; common_start_index += tile_size)
         {
-            size_t m2_end_index = std::min(m2_start_index + tile_size, N);
-            for (size_t common_start_index = 0; common_start_index < K; common_start_index += tile_size)
+            const size_t common_end_index = std::min(common_start_index + tile_size, K);
+            for (size_t m2_start_index = 0; m2_start_index < N; m2_start_index += tile_size)
             {
-                size_t common_end_index = std::min(common_start_index + tile_size, K);
+                const size_t m2_end_index = std::min(m2_start_index + tile_size, N);
                 /*
                 start calculate multiply on  tile_size*tile_size (mat1 block * mat2 block)
                 mat1 block = (m1_start_index ~ m1_end_index) * (common_start_index ~ common_end_index)
@@ -62,14 +62,14 @@ Matrix multiply_tile(Matrix &mat1, Matrix &mat2, size_t tile_size)
                 */
                 for (size_t i = m1_start_index; i < m1_end_index; ++i)
                 {
-                    
-                    for (size_t j = m2_start_index; j < m2_end_index; ++j)
+                    const size_t leader_i = i * N;
+                    for (size_t _k = common_start_index; _k < common_end_index; ++_k)
                     {
-                       
-                        for (size_t _k = common_start_index; _k < common_end_index; ++_k)
+                        const size_t mat_1_index = leader_i + _k;
+                        const size_t mat_2_leader = _k * M;
+                        for (size_t j = m2_start_index; j < m2_end_index; ++j)
                         {
-                            
-                            ret_mat(i,j) += mat1(i, _k) * mat2(_k, j);
+                            ret_mat.m_buffer[leader_i + j] += mat1.m_buffer[mat_1_index] * mat2.m_buffer[mat_2_leader + j];
                         }
                     }
                 }
@@ -78,9 +78,6 @@ Matrix multiply_tile(Matrix &mat1, Matrix &mat2, size_t tile_size)
     }
     return ret_mat;
 }
-
-
-
 
 Matrix multiply_mkl(Matrix &mat1, Matrix &mat2)
 {
@@ -111,8 +108,6 @@ Matrix multiply_mkl(Matrix &mat1, Matrix &mat2)
         m);
     return ret_mat;
 }
-Matrix a = Matrix(21, 21);
-Matrix b = multiply_mkl(a, a);
 
 PYBIND11_MODULE(_matrix, m)
 {
@@ -140,5 +135,4 @@ PYBIND11_MODULE(_matrix, m)
             "__ne__", [](Matrix &c, Matrix &a)
             { return !(c == a); },
             py::is_operator());
-
 }
