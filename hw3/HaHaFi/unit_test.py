@@ -1,6 +1,4 @@
 from statistics import mean
-from time import time
-import _matrix
 from _matrix import Matrix as M
 from _matrix import multiply_mkl,multiply_naive,multiply_tile
 import statistics

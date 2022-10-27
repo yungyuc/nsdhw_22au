@@ -20,7 +20,6 @@ inline void Check_mutiply_valid(Matrix mat1, Matrix mat2)
 }
 
 
-
 Matrix multiply_naive(Matrix &mat1, Matrix &mat2)
 {
     Check_mutiply_valid(mat1, mat2);
@@ -40,20 +39,6 @@ Matrix multiply_naive(Matrix &mat1, Matrix &mat2)
     return ret_mat;
 }
 
-bool Check_zero_init(Matrix &mat)
-{
-    for (size_t i = 0; i < mat.n_row(); ++i)
-    {
-        for (size_t j = 0; j < mat.n_col(); ++j)
-        {
-            if (mat(i, j) != 0)
-            {
-                throw std::range_error("The matrix is not zero init");
-            }
-        }
-    }
-    return true;
-}
 
 Matrix multiply_tile(Matrix &mat1, Matrix &mat2, size_t tile_size)
 {
@@ -156,6 +141,4 @@ PYBIND11_MODULE(_matrix, m)
             { return !(c == a); },
             py::is_operator());
 
-    // .def("__getitem__", static_cast<double (Matrix::*)(size_t, size_t)>(&Matrix::operator()), "get copy")
-    // .def("__getitem__", static_cast<double &(Matrix::*)(size_t, size_t)>(&Matrix::operator()), "get ref");
 }
