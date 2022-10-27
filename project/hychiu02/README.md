@@ -13,6 +13,7 @@ Heart diseases are one of the significant reasons for death all over the planet.
 people who want to do abnormal sound detection, cardiac diseases classification or other regression or classification problem can take advantage of my implementation
 
 ## System Architecture
+### Currently I implement functions to read csv files and train on ubuntu 20.04, I did not implement fucntions to read other datatypes and try on other platforms.  
 There will be a Node class for storing weight, a Layer class with Nodes for forward and backward weights calculation and a MLP class containing Layers  
 The flow will look like this
 ![](Flow.png)
