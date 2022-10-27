@@ -1,5 +1,5 @@
 CC = c++
-CC_FLAGS = -O3 -Wall -shared -std=c++11 -fPIC -I/usr/include/mkl -I/usr/include/python3.8 -I/usr/include/pybind11 -lpython3.8 `python3 -m pybind11 --includes`
+CC_FLAGS = -O3 -Wall -shared -std=c++11 -fPIC -I/usr/include/mkl -I/usr/include/pybind11 -lpython3.8 `python3 -m pybind11 --includes`
 SPEC = `python3-config --extension-suffix`
 MKL_DIR=/usr/lib/x86_64-linux-gnu
 MKL_LIBS=${MKL_DIR}/libmkl_def.so \
@@ -22,10 +22,10 @@ mac:
 	$(CC) -O3 -Wall -shared -std=c++11 -undefined dynamic_lookup -fPIC `python3 -m pybind11 --includes` _matrix.cpp -o _matrix`python3-config --extension-suffix`
 
 _matrix.so: _matrix.cpp
-	$(CC) $(CC_FLAGS) _matrix.cpp -o _matrix$(SPEC) ${MKL_LIBS}
+	$(CC) $(CC_FLAGS) _matrix.cpp -o _matrix$(SPEC) -I/usr/include/python3.8 ${MKL_LIBS}
 
 test: all
-	python3 -m pytest
+	python3 -m pytest -v
 
 clean:
 	rm -rf *.so *.o __pycache__ .pytest_cache
