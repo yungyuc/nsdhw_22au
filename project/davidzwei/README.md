@@ -5,7 +5,7 @@ K-D tree (k-dimensional tree) is a space-partitioning data structure for organiz
 
 ![](https://i.imgur.com/0VUKaEH.gif=500x)
 
-Find the minimum distance in kd-tree
+Find the minimum distance in kd-tree.
 
 ## Problem to solve
 In computational geometry, it is often necessary to find a point or line segment in a specific block among a bunch of points or line segments on the coordinate plane. For example, I want to find all the points on the two-dimensional coordinate plane that fall in the rectangular area of (0, 0) ~ (10, 10).
@@ -28,7 +28,7 @@ For those who want to do range searches and nearest neighbor searches in multidi
 
 ## API
 ### Python
-- `Load_data('data.txt'):`
+- `Load_data('data.txt')`
     - load data points from data.txt
 ### C++
 - `Build_Tree(int k-dimension, node_set)`
@@ -47,7 +47,7 @@ For those who want to do range searches and nearest neighbor searches in multidi
 
 ## Schedule
 * Week 1 (10/31): Survey k-d tree & Implement the k-d tree with C++
-* Week 2 (11/7): Implement `Build_Tree`, `Find_min_distance`,`Search` in k-d tree with C++
+* Week 2 (11/7): Implement `Build_Tree`, `Find_min_distance`, `Search` in k-d tree with C++
 * Week 3 (11/14): Implement `Range_search`, `insert`, `delete` in k-d tree with C++
 * Week 4 (11/21): Make python wrappers for C++ with pybind
 * Week 5 (11/28): Test all features with pytest
