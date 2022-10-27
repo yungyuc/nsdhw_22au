@@ -77,5 +77,9 @@ Project List by Account Name
    `t-SNE-implementation <LanceWang12/readme.md>`__: https://github.com/LanceWang12/t-SNE-implementation
 #. `HaHaFi <https://github.com/HaHaFi>`__ for
    `Line-Segment-Detection <HaHaFi/README.md>`__: https://github.com/HaHaFi/Line-Segment-Detection
+#. `Twl09008181 <https://github.com/Twl09008181>`__ for
+   `kmeans <Twl09008181/README.md>`__: https://github.com/Twl09008181/KMeans
+#. `lipper1110 <https://github.com/lipper1110>`__ for
+   `Quantitative Trading System <lipper1110/README.md>`__: https://github.com/lipper1110/Quantitative-Trading-System
 #. `hychiu02 <https://github.com/hychiu02>`__ for
    `AutoEncoder-for-arrhythmia-detection <hychiu02/README.md>`__: https://github.com/hychiu02/AutoEncoder-for-arrhythmia-detection
