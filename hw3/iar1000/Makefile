@@ -1,6 +1,12 @@
-CC = c++
-CC_FLAGS = -O3 -Wall -shared -m64 -std=c++11 -fPIC -I/usr/include/mkl `python3 -m pybind11 --includes`
+CC = g++
+CC_FLAGS = -O3 -Wall -shared -std=c++11 -fPIC
+MKL_INCL = -I/usr/include/mkl
+BLAS_INCL = -lblas
+PY_INCL = -I/usr/include/python3.8
+PY_FLAG = -lpython3.8
+PYBIND_INCL = `python3 -m pybind11 --includes`
 SPEC = `python3-config --extension-suffix`
+
 MKL_DIR=/usr/lib/x86_64-linux-gnu
 MKL_LIBS=${MKL_DIR}/libmkl_def.so \
 			${MKL_DIR}/libmkl_avx2.so \
@@ -22,7 +28,7 @@ mac:
 	$(CC) -O3 -Wall -shared -std=c++11 -undefined dynamic_lookup -fPIC `python3 -m pybind11 --includes` _matrix.cpp -o _matrix`python3-config --extension-suffix`
 
 _matrix.so: _matrix.cpp
-	$(CC) $(CC_FLAGS) _matrix.cpp -o _matrix$(SPEC) -I/usr/include/python3.8 ${MKL_LIBS}
+	$(CC) $(CC_FLAGS) $(MKL_INCL) $(PY_INCL) $(PYBIND_INCL) _matrix.cpp -o _matrix$(SPEC) ${PY_FLAG} ${BLAS_INCL}
 
 test: all
 	python3 -m pytest -s -v
