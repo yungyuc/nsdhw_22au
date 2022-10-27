@@ -84,8 +84,8 @@ week0(11/01): sequential kmeans algorithm study.
 week1(11/07): Implement sequential kmeans by C++ and try to use pybind to call by python.   
 week2(11/14): parallel kmeans algorithm study.      
 week3(11/21): parallel programming framework study.     
-week4(11/28): Implement paralle kmeans by C++.      
-week5(12/05): Testing and compare with sklearn kmeans.      
+week4(11/28): Implement parallel kmeans by C++.       
+week5(12/05): Testing and compare with sklearn kmeans.        
 week6(12/12): Buffer time for checking speedup or add another features.     
 week7(12/19): Prepare slides.     
 week8(12/26): Project Present     
