@@ -22,7 +22,7 @@ mac:
 	$(CC) -O3 -Wall -shared -std=c++11 -undefined dynamic_lookup -fPIC `python3 -m pybind11 --includes` _matrix.cpp -o _matrix`python3-config --extension-suffix`
 
 _matrix.so: _matrix.cpp
-	$(CC) $(CC_FLAGS) ${MKL_LIBS} _matrix.cpp -o _matrix$(SPEC)
+	$(CC) $(CC_FLAGS) _matrix.cpp -o _matrix$(SPEC) ${MKL_LIBS}
 
 test: all
 	python3 -m pytest
