@@ -24,70 +24,73 @@ Github repository: https://github.com/charles0521/Gaussian-Elimination-and-QR-de
 * Comparing the precision and speed of the three solutions
 
 ## System Architecture
-* ubuntu 22.04
-* ...(TODO)
+![image](https://user-images.githubusercontent.com/56105794/198303409-4f84d384-d547-446b-bb73-364d8bd0b036.png)
 
 ## API Description
 1. Gaussian Elimination
 2. QR decomposition
-
-```
+```c++
 # This is the pseudo code
 
 void gauss_elm(double **A, double *b, int n)
 {
-	int     p, i, j, k;
-	double  maxEntry, t, r;
+    int     p, i, j, k;
+    double  maxEntry, t, r;
 
-	for(i=0;i<n-1;i++){
-		// Partial pivoting
-		maxEntry = fabs(A[i][i]);
-		p = i;
-		for(k=i;k<n;k++)
-			if(fabs(A[k][i])>maxEntry){
-				p = k;
-				maxEntry = fabs(A[k][i]);
-			}
-		if(p!=i){
-			for(j=i;j<n;j++){
-				t = A[p][j];
-				A[p][j] = A[i][j];
-				A[i][j] = t;
-			}
-			t = b[p];
-			b[p] = b[i];
-			b[i] = t;
-		}
-		//Forward elimination.
-        for(k=i+1;k<n;k++){
-			if(A[k][i]==0.0) continue;
-			
-			r = A[k][i]/A[i][i];
-			for(j=i;j<n;j++)
-				A[k][j] = A[k][j] - r*A[i][j];
-			b[k] = b[k] - r*b[i];
-		}
+    for(i=0;i<n-1;i++)
+    {
+	// Partial pivoting
+	maxEntry = fabs(A[i][i]);
+	p = i;
+	for(k=i;k<n;k++)
+	    if(fabs(A[k][i])>maxEntry)
+	    {
+		p = k;
+		maxEntry = fabs(A[k][i]);
+	    }
+	if(p!=i)
+	{
+	    for(j=i;j<n;j++)
+	    {
+		t = A[p][j];
+		A[p][j] = A[i][j];
+		A[i][j] = t;
+	    }
+	    t = b[p];
+	    b[p] = b[i];
+	    b[i] = t;
 	}
+		//Forward elimination.
+        for(k=i+1;k<n;k++)
+	{
+	    if(A[k][i]==0.0) continue;
+			
+	    r = A[k][i]/A[i][i];
+	    for(j=i;j<n;j++)
+	    A[k][j] = A[k][j] - r*A[i][j];
+	    b[k] = b[k] - r*b[i];
+	}
+    }
 }
 
 void QR_reflect(double **A, double *b, int n)
 {
-    ...
+    // Procedure to reflect matrix A into an upper triangular
 }
 
 void back_substitute(double **U, double *x, double *b, int n)
 {
-    ...
+    // Procedure to solve a lower triangular system
 }
 
 
 
 void QR_solver(double **A, double *x, double *b, int n)
 {
-	// Reflect A into an upper triangular matrix.
-	QR_reflect(A, b, n);
+    // Reflect A into an upper triangular matrix.
+    QR_reflect(A, b, n);
     // Solve the upper triangular system by using backward
-	// substitution.
+    // substitution.
     back_substitute(A, x, b, n);
 }
 
@@ -100,7 +103,6 @@ void QR_solver(double **A, double *x, double *b, int n)
 * Testing framework: pytest
 * Documentation: GitHub [[README.md]](https://github.com/charles0521/Gaussian-Elimination-and-QR-decomposition/blob/main/README.md)
 
-## Schedule
 ## Schedule
 
 Week 1 (10/31): Study Linear Algebra
@@ -118,3 +120,4 @@ Week 6 (12/5): Finish up, debug, and write the documentation
 Week 7 (12/12): Buffer time for further testing and debugging
 
 Week 8 (12/19): Make slides and prepare for the presentation
+
