@@ -79,3 +79,7 @@ Project List by Account Name
    `TSP with gene algorithm <huang-me/README.md>`__: https://github.com/huang-me/parallel_TSP_gene_algo
 #. `HaHaFi <https://github.com/HaHaFi>`__ for
    `Line-Segment-Detection <HaHaFi/README.md>`__: https://github.com/HaHaFi/Line-Segment-Detection
+#. `Twl09008181 <https://github.com/Twl09008181>`__ for
+   `kmeans <Twl09008181/README.md>`__: https://github.com/Twl09008181/KMeans
+#. `lipper1110 <https://github.com/lipper1110>`__ for
+   `Quantitative Trading System <lipper1110/README.md>`__: https://github.com/lipper1110/Quantitative-Trading-System
