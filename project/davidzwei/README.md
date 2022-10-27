@@ -29,21 +29,21 @@ For those who want to do range searches and nearest neighbor searches in multidi
 ## API
 ### Python
 - `Load_data('data.txt'):`
-    - load data points from data.txt.
+    - load data points from data.txt
 ### C++
 - `Build_Tree(int k-dimension, node_set)`
-    - build a k-d tree based on the the dimension size and the data point.
-    - every node in node_set is a k-dimensional point.
+    - build a k-d tree based on the the dimension size and the data point
+    - every node in node_set is a k-dimensional point
 - `Find_min_distance(target_node)`
-    - find the minimum distance between the target node and one of the node in K-D tree.
+    - find the minimum distance between the target node and one of the node in k-d tree
 - `Search(min/max, which_dimension)`
     - search the the minimum/maximun in dimension in k-d tree
 - `Range_search([x1, x2], [y1, y2])`
-    - find all the points that are in the given range.
+    - find all the points that are in the given range
 - `Insert_node(node)`
-    - insert a node in K-D Tree
+    - insert a node in k-d tree
 - `Delete_Node(node)`
-    - delete a node in K-D Tree
+    - delete a node in k-d tree
 
 ## Schedule
 * Week 1 (10/31): Survey k-d tree & Implement the k-d tree with C++
