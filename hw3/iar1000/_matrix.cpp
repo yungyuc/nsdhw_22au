@@ -7,40 +7,50 @@
 
 namespace py = pybind11;
 
-class Matrix {
-    public:
+class Matrix
+{
+    friend Matrix multiply_naive(Matrix const &mat1, Matrix const &mat2);
+    friend Matrix multiply_tile(Matrix const &mat1, Matrix const &mat2, size_t const tsize);
+    friend Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2);
+    friend bool operator==(Matrix const &mat1, Matrix const &mat2);
 
-        Matrix(size_t nrow, size_t ncol) : m_nrow(nrow), m_ncol(ncol) {
-            size_t nelement = nrow * ncol;
-            m_buffer = new double[nelement];
-        }
+public:
 
-        ~Matrix() {
+    Matrix(size_t nrow, size_t ncol) : m_nrow(nrow), m_ncol(ncol) {
+        reset_buffer(nrow, ncol);
+    }
+
+    size_t nrow() const { return m_nrow; }
+    size_t ncol() const { return m_ncol; }
+    size_t index(size_t row, size_t col) const { return row * m_ncol + col; }
+    
+
+    void reset_buffer(size_t nrow, size_t ncol) {
+        if (m_buffer) {
             delete[] m_buffer;
         }
-
-        double   operator() (size_t row, size_t col) const {
-            return m_buffer[row*m_ncol + col];
+        const size_t nelement = nrow * ncol;
+        if (nelement) {
+            m_buffer = new double[nelement];
         }
-
-        double & operator() (size_t row, size_t col) {
-            return m_buffer[row*m_ncol + col];
+        else {
+            m_buffer = nullptr;
         }
+        m_nrow = nrow;
+        m_ncol = ncol;
+    }
 
+    double operator()(size_t row, size_t col) const {
+        return m_buffer[index(row, col)];
+    }
+    
+    double &operator()(size_t row, size_t col) {
+        return m_buffer[index(row, col)];
+    }
 
-        size_t nrow() const { return m_nrow; }
-        size_t ncol() const { return m_ncol; }
-
-    private:
-
-        size_t m_nrow = 0;
-        size_t m_ncol = 0;
-        double * m_buffer = nullptr;
-
-        friend Matrix multiply_naive(Matrix const &mat1, Matrix const &mat2);
-        friend Matrix multiply_tile(Matrix const &mat1, Matrix const &mat2, size_t const ts);
-        friend Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2);
-        friend bool operator==(Matrix const &mat1, Matrix const &mat2);
+    size_t m_nrow = 0;
+    size_t m_ncol = 0;
+    double *m_buffer = nullptr;
 };
 
 bool operator==(Matrix const &mat1, Matrix const &mat2) {
