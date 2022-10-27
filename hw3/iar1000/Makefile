@@ -1,5 +1,5 @@
 CC = c++
-CC_FLAGS = -O3 -Wall -shared -std=c++11 -fPIC -I/usr/include/mkl -I/usr/include/pybind11 -lpython3.8 `python3 -m pybind11 --includes`
+CC_FLAGS = -O3 -Wall -shared -m64 -std=c++11 -fPIC -I/usr/include/mkl `python3 -m pybind11 --includes`
 SPEC = `python3-config --extension-suffix`
 MKL_DIR=/usr/lib/x86_64-linux-gnu
 MKL_LIBS=${MKL_DIR}/libmkl_def.so \

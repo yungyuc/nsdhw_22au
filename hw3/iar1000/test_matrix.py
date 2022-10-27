@@ -1,3 +1,17 @@
+#!/bin/bash
+
+''':'
+export PYTHONPATH=".:$PYTHONPATH"
+export VECLIB_MAXIMUM_THREADS=1
+export MKL_NUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
+export OMP_NUM_THREADS=1
+
+if [ -f "PRELOAD_MKL" ] ; then
+    PRELOAD_MKL=1
+fi
+'''
+
 import _matrix
 import math
 import numpy as np
