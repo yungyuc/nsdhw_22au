@@ -1,0 +1,3 @@
+multiply_naive : 1.0421859892085195 seconds
+multiply_mkl :0.5365545670501888 seconds
+mkl speed-up over naive: 1.9423671947070287
