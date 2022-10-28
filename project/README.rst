@@ -83,3 +83,6 @@ Project List by Account Name
    `kmeans <Twl09008181/README.md>`__: https://github.com/Twl09008181/KMeans
 #. `lipper1110 <https://github.com/lipper1110>`__ for
    `Quantitative Trading System <lipper1110/README.md>`__: https://github.com/lipper1110/Quantitative-Trading-System
+#. `charles0521 <https://github.com/charles0521>`__ for
+   `Gaussian-Elimination and QR-decomposition <charles0521/README.md>`__: https://github.com/charles0521/Gaussian-Elimination-and-QR-decomposition
+
