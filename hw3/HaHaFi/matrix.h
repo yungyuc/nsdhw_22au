@@ -3,12 +3,9 @@
 class Matrix{
 
 private:
-
-    
     void reset_buffer(size_t n_row,size_t n_col);
     size_t index(size_t,size_t)const;
 
-    
 public:
 // should be private but need to access mlk library
 double * m_buffer = nullptr;

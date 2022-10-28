@@ -27,6 +27,20 @@ class TestClass:
 
         return mat1, mat2, mat3
 
+    def make_matrices_rect(self, size,size2):
+
+        mat1 = M(size,size2)
+        mat2 = M(size2,size)
+
+
+        for it in range(size):
+            for jt in range(size2):
+                mat1[it, jt] = it * size + jt + 1
+                mat2[jt, it] = it * size + jt + 1
+  
+
+        return mat1, mat2
+
     def test_basic(self):
         size = 100
         mat1, mat2, mat3 = self.make_matrices(size)
@@ -88,8 +102,31 @@ class TestClass:
         
         assert ret[0,0]==2
 
-    def test_mix(self):
+    def test_mix_rect(self):
         size=250
+        size2=350
+        mat1, mat2 = self.make_matrices_rect(size,size2)
+
+        mkl,navie,tile=multiply_mkl(mat1,mat2),multiply_naive(mat1,mat2),multiply_tile(mat1,mat2,128)
+        assert mkl == navie
+        assert  tile == navie
+        assert tile ==mkl
+
+        size=350
+        size2=250
+        mat1, mat2 = self.make_matrices_rect(size,size2)
+        
+        mkl,navie,tile=multiply_mkl(mat1,mat2),multiply_naive(mat1,mat2),multiply_tile(mat1,mat2,128)
+        assert mkl == navie
+        assert  tile == navie
+        assert tile ==mkl
+
+
+
+
+
+    def test_mix(self):
+        size=500
         mat1, mat2, mat3 = self.make_matrices(size)
         mkl,navie,tile=multiply_mkl(mat1,mat2),multiply_naive(mat1,mat2),multiply_tile(mat1,mat2,128)
         assert mkl==navie
@@ -105,6 +142,10 @@ class TestClass:
         assert navie==mat1
         assert tile==mat1
 
+
+
+
+        
 class Writer:
 
     def __init__(self, streams):
@@ -121,10 +162,11 @@ class Writer:
 
 if __name__ =="__main__":
     retcode = pytest.main()
-    setup="""
+    size=1000
+    setup=f"""
 import _matrix
 
-size = 1000
+size = {size}
 
 mat1 = _matrix.Matrix(size,size)
 mat2 = _matrix.Matrix(size,size)
@@ -139,7 +181,7 @@ for it in range(size):
     with open("performance.txt","w")as f:
         w = Writer([sys.stdout,f])
         repeat=5
-        size=1000
+        
 
         str_format="%.3f\t%.3f\t%.3f\t%.3f\t\n"
         title_format="%s\t%s\t%s\t%s\t\n"%("min","max",'mean',"std_dev")
@@ -165,6 +207,8 @@ for it in range(size):
         w.write(str_format%(navie_min,navie_max,navie_mean,navie_std_dev))
         w.write(f"\n\n")
 
+
+ 
         # start timer for mkl
         mkl_time = Timer('_matrix.multiply_mkl(mat1, mat2)', setup=setup)
         
@@ -185,7 +229,7 @@ for it in range(size):
         w.write(f"\n\n")
 
         # start timer for tile
-        tile_list=[8,16,32,64]
+        tile_list=[8,16,32,64,128,256,512]
         tile_time = [Timer(f'_matrix.multiply_tile(mat1, mat2,{i})', setup=setup) for i in tile_list ]
 
         # only take min value because of timeit documentation.

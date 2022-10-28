@@ -26,6 +26,7 @@ Matrix multiply_naive(Matrix &mat1, Matrix &mat2)
     Matrix ret_mat(M, N);
     for (size_t i = 0; i < M; i++)
     {
+        const size_t ret_leader=i * N;
         for (size_t j = 0; j < N; j++)
         {
             double count = 0;
@@ -34,7 +35,7 @@ Matrix multiply_naive(Matrix &mat1, Matrix &mat2)
             {
                 count += mat1.m_buffer[m1_leader + k] * mat2.m_buffer[k * N + j];
             }
-            ret_mat.m_buffer[i * N + j] = count;
+            ret_mat.m_buffer[ret_leader+ j] = count;
         }
     }
     return ret_mat;
@@ -62,14 +63,15 @@ Matrix multiply_tile(Matrix &mat1, Matrix &mat2, size_t tile_size)
                 */
                 for (size_t i = m1_start_index; i < m1_end_index; ++i)
                 {
-                    const size_t leader_i = i * N;
+                    const size_t leader_i = i * K;
+                    const size_t leader_ret = i * N;
                     for (size_t _k = common_start_index; _k < common_end_index; ++_k)
                     {
                         const size_t mat_1_index = leader_i + _k;
-                        const size_t mat_2_leader = _k * M;
+                        const size_t mat_2_leader = _k * N;
                         for (size_t j = m2_start_index; j < m2_end_index; ++j)
                         {
-                            ret_mat.m_buffer[leader_i + j] += mat1.m_buffer[mat_1_index] * mat2.m_buffer[mat_2_leader + j];
+                            ret_mat.m_buffer[leader_ret + j] += mat1.m_buffer[mat_1_index] * mat2.m_buffer[mat_2_leader + j];
                         }
                     }
                 }
@@ -84,7 +86,7 @@ Matrix multiply_mkl(Matrix &mat1, Matrix &mat2)
     Check_mutiply_valid(mat1, mat2);
     const int m = mat1.n_row(), n = mat2.n_col(), k = mat1.n_col();
     const double alpha = 1.0, beta = 0.0;
-    Matrix ret_mat(mat1.n_row(), mat2.n_col());
+    Matrix ret_mat(m,n);
 
     // void cblas_dgemm(const CBLAS_LAYOUT Layout, const CBLAS_TRANSPOSE TransA,
     //              const CBLAS_TRANSPOSE TransB, const MKL_INT M, const MKL_INT N,
@@ -100,12 +102,12 @@ Matrix multiply_mkl(Matrix &mat1, Matrix &mat2)
         k,
         alpha,
         mat1.m_buffer,
-        m,
-        mat2.m_buffer,
         k,
+        mat2.m_buffer,
+        n,
         beta,
         ret_mat.m_buffer,
-        m);
+        n);
     return ret_mat;
 }
 

@@ -1,7 +1,7 @@
 #include "matrix.h"
 #include <stddef.h>
 #include <algorithm>
-
+#include <iostream>
 // constructor
 Matrix::Matrix(size_t n_row, size_t n_col) : m_row(n_row), m_col(n_col)
 {
