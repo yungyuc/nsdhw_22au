@@ -91,3 +91,5 @@ Project List by Account Name
    `Gaussian-Elimination and QR-decomposition <charles0521/README.md>`__: https://github.com/charles0521/Gaussian-Elimination-and-QR-decomposition
 #. `soulrrrrr <https://github.com/soulrrrrr>`__ for
    `Columnar Array <soulrrrrr/README.rst>`__: https://github.com/soulrrrrr/ColumnarArray
+#. `rroykuo <https://github.com/rroykuo>`__ for
+   `Clip your arbitrary polygons <rroykuo/README.rst>`__: https://github.com/rroykuo/Clip-your-arbitrary-polygons
