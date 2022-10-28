@@ -3,7 +3,7 @@ INCLUDE = `python3 -m pybind11 --includes`
 POSFIX = `python3-config --extension-suffix`
 CONFIG = `python3-config --includes`
 CFLAGS = -O3 -Wall -shared -std=c++11 -fPIC
-MKLCONFIG = -L/usr/lib/x86_64-linux-gnu -lblas -I/opt/intel/mkl
+MKLCONFIG = -L/usr/lib/x86_64-linux-gnu -lblas -I/usr/include/mkl #-I/opt/intel/mkl
 
 
 .PHONY: all, matrix, test, clean 
