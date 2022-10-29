@@ -17,7 +17,7 @@ all: matrix test
 matrix: _matrix.cpp
 	$(CC)  $(CFLAGS) $(INCLUDE) _matrix.cpp -o _matrix$(POSFIX)  -lblas $(MKLINCLUDE) $(CONFIG) 
 
-test:
+test: matrix
 	python3  test_file.py -v
 clean:
 	rm -f *.so 
