@@ -14,6 +14,5 @@ test:
 	python3 -m pytest
 
 clean:
-	rm *.so performance.txt
 	rm -rf __pycache__ .pytest_cache
 	
