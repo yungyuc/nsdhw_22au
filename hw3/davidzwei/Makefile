@@ -14,5 +14,5 @@ test:
 	python3 -m pytest
 
 clean:
-	rm -rf __pycache__ .pytest_cache
+	rm -rf __pycache__ .pytest_cache _matrix*.so
 	
