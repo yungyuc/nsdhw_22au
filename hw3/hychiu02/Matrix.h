@@ -25,11 +25,15 @@ public:
     Matrix(size_t nrow, size_t ncol, std::vector<double> const & vec)
         : m_nrow(nrow), m_ncol(ncol)
     {
-        reset_buffer(nrow, ncol);
-        (*this) = vec;
+        reset_buffer(other.m_nrow, other.m_ncol);
+        for (size_t i=0; i<m_nrow; ++i){
+            for (size_t j=0; j<m_ncol; ++j) {
+                (*this)(i,j) = other(i,j);
+            }
+        }
     }
     /* copy */
-    Matrix &operator=(const Matrix &other)
+    Matrix &operator=(Matrix const & other)
     {
         if (this == &other) { return *this; }
         if (m_nrow != other.m_nrow || m_ncol != other.m_ncol){
