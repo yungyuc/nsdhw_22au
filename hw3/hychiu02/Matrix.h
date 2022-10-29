@@ -17,9 +17,9 @@ public:
     }
     /* copy constructor */
     Matrix(const Matrix &other)
-        : m_nrow(other.m_nrow), m_ncol(other.m_ncol)
+        : m_nrow(other.nrow()), m_ncol(other.ncol())
     {
-        reset_buffer(other.m_nrow, other.m_ncol);
+        reset_buffer(other.nrow(), other.ncol());
         (*this) = other;
     }
     Matrix(size_t nrow, size_t ncol, std::vector<double> const & vec)
