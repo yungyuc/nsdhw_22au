@@ -8,7 +8,7 @@ def test_correctness():
     m2 = _matrix.Matrix(size, size)
 
     m3_naive = _matrix.multiply_naive(m1, m2)
-    m3_tile = _matrix.multiply_tile(m1, m2)
+    m3_tile = _matrix.multiply_tile(m1, m2, 256)
     m3_mkl = _matrix.multiply_mkl(m1, m2)
 
     assert (m3_naive == m3_tile)
