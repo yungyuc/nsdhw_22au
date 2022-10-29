@@ -91,3 +91,5 @@ Project List by Account Name
    `Gaussian-Elimination and QR-decomposition <charles0521/README.md>`__: https://github.com/charles0521/Gaussian-Elimination-and-QR-decomposition
 #. `soulrrrrr <https://github.com/soulrrrrr>`__ for
    `Columnar Array <soulrrrrr/README.rst>`__: https://github.com/soulrrrrr/ColumnarArray
+#. `hychiu02 <https://github.com/hychiu02>`__ for
+   `AutoEncoder-for-arrhythmia-detection <hychiu02/README.md>`__: https://github.com/hychiu02/AutoEncoder-for-arrhythmia-detection
