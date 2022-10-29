@@ -93,3 +93,5 @@ Project List by Account Name
    `Columnar Array <soulrrrrr/README.rst>`__: https://github.com/soulrrrrr/ColumnarArray
 #. `hychiu02 <https://github.com/hychiu02>`__ for
    `AutoEncoder-for-arrhythmia-detection <hychiu02/README.md>`__: https://github.com/hychiu02/AutoEncoder-for-arrhythmia-detection
+#. `rroykuo <https://github.com/rroykuo>`__ for
+   `Clip your arbitrary polygons <rroykuo/README.rst>`__: https://github.com/rroykuo/Clip-your-arbitrary-polygons
