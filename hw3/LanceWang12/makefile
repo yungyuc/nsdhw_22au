@@ -1,20 +1,31 @@
-CC = g++
+EXE = _matrix$(shell python3-config --extension-suffix)
+OBJ_DIR = obj
 
-MKLROOT = /opt/intel/compilers_and_libraries_2018.2.199/linux/mkl
-CFlag = -std=c++11 -Wl,--no-as-needed -Wall -O3 \
-		-I$(MKLROOT)/include -L$(MKLROOT)/lib/intel64 \
-        -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core \
-        -liomp5 -lpthread -lm \
-		-fPIC -shared $(shell python3 -m pybind11 --includes) -I/usr/include/mkl
-suffix = $(shell python3-config --extension-suffix)
+TEST_FILE = $(wildcard test_*.py)
 
-all: _matrix$(suffix)
+TRASH = .cache __pycache__ .pytest_cache performance.txt
 
-_matrix$(suffix): _matrix.cpp
-	$(CC) $(CFlag) _matrix.cpp -o _matrix$(suffix)
+SOURCES = $(wildcard *.cpp)
+OBJS = $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(basename $(notdir $(SOURCES)))))
+
+CXXFLAGS = -std=c++17 -Wall -O3 -shared -fPIC $(shell python3-config --includes) -Iextern/pybind11/include -I/usr/include/mkl
+
+LIBS = -L/usr/lib/x86_64-linux-gnu/mkl -lblas
+
+all: create_object_directory $(EXE)
+	@echo Compile Success
+
+create_object_directory:
+	mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+$(EXE): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
 
 test: all
-	python3 -m pytest -q test_matrix.py
+	python3 -m pytest -q $(TEST_FILE)
 
 clean:
-	rm -rf *.so
+	rm -rf $(EXE) $(OBJ_DIR) $(TRASH)
