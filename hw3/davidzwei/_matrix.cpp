@@ -52,6 +52,7 @@ public:
     {
         return m_buffer[index(row, col)];
     }
+
     double &operator()(size_t row, size_t col)
     {
         return m_buffer[index(row, col)];
@@ -81,7 +82,6 @@ public:
 
     size_t nrow() const { return m_nrow; }
     size_t ncol() const { return m_ncol; }
-
     size_t size() const { return m_nrow * m_ncol; }
     double buffer(size_t i) const { return m_buffer[i]; }
 
@@ -139,37 +139,6 @@ Matrix multiply_naive(const Matrix &mat1, const Matrix &mat2)
     return res;
 }
 
-// multiply_mkl
-Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2)
-{
-    if (mat1.ncol() != mat2.nrow())
-    {
-        throw std::out_of_range(
-            "the number of first matrix column "
-            "differs from that of second matrix row");
-    }
-
-    Matrix ret(mat1.nrow(), mat2.ncol());
-
-    cblas_dgemm(
-        CblasRowMajor,
-        CblasNoTrans,
-        CblasNoTrans,
-        mat1.nrow(),
-        mat2.ncol(),
-        mat1.ncol(),
-        1.0,
-        mat1.m_buffer,
-        mat1.ncol(),
-        mat2.m_buffer,
-        mat2.ncol(),
-        0.0,
-        ret.m_buffer,
-        ret.ncol());
-
-    return ret;
-}
-
 Matrix multiply_tile(Matrix const &mat1, Matrix const &mat2, size_t tile_size)
 {
     if (mat1.ncol() != mat2.nrow())
@@ -204,6 +173,37 @@ Matrix multiply_tile(Matrix const &mat1, Matrix const &mat2, size_t tile_size)
     return ret;
 }
 
+// multiply_mkl
+Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2)
+{
+    if (mat1.ncol() != mat2.nrow())
+    {
+        throw std::out_of_range(
+            "the number of first matrix column "
+            "differs from that of second matrix row");
+    }
+
+    Matrix ret(mat1.nrow(), mat2.ncol());
+
+    cblas_dgemm(
+        CblasRowMajor,
+        CblasNoTrans,
+        CblasNoTrans,
+        mat1.nrow(),
+        mat2.ncol(),
+        mat1.ncol(),
+        1.0,
+        mat1.m_buffer,
+        mat1.ncol(),
+        mat2.m_buffer,
+        mat2.ncol(),
+        0.0,
+        ret.m_buffer,
+        ret.ncol());
+
+    return ret;
+}
+
 PYBIND11_MODULE(_matrix, m)
 {
     m.def("multiply_naive", &multiply_naive);
@@ -215,9 +215,7 @@ PYBIND11_MODULE(_matrix, m)
              { self(i.first, i.second) = val; })
         .def("__getitem__", [](Matrix &self, std::pair<size_t, size_t> i)
              { return self(i.first, i.second); })
-        // .def("__eq__", [](const Matrix &mat, const Matrix &other) { return mat == other; })
         .def(pybind11::self == pybind11::self)
-        // .def("__eq__", &operator==)
-        .def_property("nrow", &Matrix::nrow, nullptr)
-        .def_property("ncol", &Matrix::ncol, nullptr);
+        .def_property_readonly("nrow", &Matrix::nrow)
+        .def_property_readonly("ncol", &Matrix::ncol);
 }

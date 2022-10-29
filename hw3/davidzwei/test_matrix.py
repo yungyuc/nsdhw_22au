@@ -1,7 +1,5 @@
-import math
 import pytest
 import timeit
-import random
 import _matrix
 
 
