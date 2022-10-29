@@ -1,7 +1,3 @@
----
-tags: nsd-course
----
-
 # Simple Machine Learning Toolkit
 
 ## Basic Information
