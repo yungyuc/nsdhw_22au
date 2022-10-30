@@ -11,7 +11,7 @@ all:
 	$(CC) -O3 -Wall -shared -std=c++11 -fPIC $(INCLUDE) _matrix.cpp -o _matrix$(POSFIX) -lblas $(MKLINCLUDE) $(CONFIG) $(CONFIG)
 
 test:
-	python3  pytest test_matrix.py
+	python3 test_matrix.py
 
 clean:
 	rm -f *.so 
