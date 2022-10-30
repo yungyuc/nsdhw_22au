@@ -17,7 +17,8 @@ class Matrix {
 
 public:
     vector<double> m_buffer;
-
+    size_t n_row;
+    size_t n_col;
     Matrix(size_t nrow, size_t ncol) : n_row(nrow), n_col(ncol){
 
 
@@ -49,10 +50,7 @@ public:
     double* addr() { return m_buffer.data(); }
 
 
-private:
-
-    size_t n_row;
-    size_t n_col;
+    
     
 
 };
@@ -140,8 +138,9 @@ PYBIND11_MODULE(_matrix, m) {
         .def(pybind11::init<size_t, size_t>())
         .def("__getitem__", [](const Matrix &mat, array<int, 2> i){ return mat(i[0], i[1]);}) // lambda function.
         .def("__setitem__",[](Matrix &mat, pair<size_t, size_t> idx, double val) { return mat(idx.first, idx.second) = val; })
-        .def("nrow", &Matrix::nrow)
-        .def("ncol", &Matrix::ncol);
+        .def("__eq__", [](const Matrix &mat, const Matrix &other) { return mat == other; })
+        .def_property_readonly("nrow", &Matrix::nrow)
+        .def_property_readonly("ncol", &Matrix::ncol);
     m.def("multiply_naive",&multiply_naive);
     m.def("multiply_tile",&multiply_tile);
     m.def("multiply_mkl",&multiply_mkl);

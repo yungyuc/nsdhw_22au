@@ -21,7 +21,6 @@ def count_time(row,col):
 
     mat1 = _matrix.Matrix(row,col)
     mat2 = _matrix.Matrix(row,col)
-
     for i in range(row):
         for j in range(col):
             mat1[i, j] =  mat1_np[i, j]
@@ -46,7 +45,7 @@ def count_time(row,col):
     mkl_result = _matrix.multiply_mkl(mat1, mat2)
     mkl_time = time.time() - time_tmp
     check(row,col,numpy_result, mkl_result)
-
+    print(mat1, mat2)
     return numpy_time, naive_time, tile_time, mkl_time
 
 
@@ -64,6 +63,7 @@ def test_performance():
 	fout.write("Ratio of mkl / buildin :" + str(mkl_time / numpy_time) + "X\n")
 	
 	fout.close()
+    
 	return 
 
 test_performance()
