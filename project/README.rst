@@ -65,3 +65,6 @@ Project List by Account Name
 
 #. `github_username <https://github.com/github_username>`__ for
    `Project title <github_username/README.rst>`__: https://github.com/github_username/project_name
+
+#. `kexuan5458 <https://github.com/kexuan5458>`__ for
+   `Self-Driving Car Localization <kexuan5458/README.md>`__: https://github.com/kexuan5458/Self-Driving_Car_Localization
