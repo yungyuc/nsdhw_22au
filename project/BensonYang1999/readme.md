@@ -14,26 +14,26 @@ Anyone who want to use machine learning in either C++ or Python to solve various
 
 
 ## System Architecture
-Use `C++` to implement various algorithm
-
-Users can choice using `Python` or `C++` to read data
-
-Use `pybind11` to convert `C++ library` to `Python library` 
+Use `C++` to implement various algorithm  
+Use `Python` to read data  
+Use `pybind11` to convert `C++ library` to `Python library`  
 
 ```mermaid
 graph TD
-    A[Data] --> B[C++ reading]
+    A[Data] -->|optional| B[C++ reading]
     A --> F[Python reading]
-    B --> C[C++ preprocessing]
+    B -->|optional| C[C++ preprocessing]
     F --> G[Python preprocessing]
-    C --> D[C++ Machine Learning algorithm]
+    C -->|optional| D[C++ Machine Learning algorithm]
     G --> D
-    D --> E[C++ output]
+    D -->|optional| E[C++ output]
     D --> H[Python output]
 
 ```
 
 ## Engineering Infrastructure
+ - Environment: Ubuntu 20.04
+ - Compiler: g++, python
  - Build System: make
  - Version Control: git
  - Test Framework: pytest
@@ -42,10 +42,10 @@ graph TD
 ## Schedule
  - Week 0 (11/02): project planning and writing proposal
  - Week 1 (11/07): construct c++ class structure
- - Week 2 (11/14): add regression implementation
- - Week 3 (11/21): add classification implementation
- - Week 4 (11/28): add clustering implementation
- - Week 5 (12/05): make some test case for testing
+ - Week 2 (11/14): code and test regression approach
+ - Week 3 (11/21): code and test classification approach
+ - Week 4 (11/28): code and test clustering approach
+ - Week 5 (12/05): combine every approach and test them
  - Week 6 (12/12): test and optimize every algorithm
  - Week 7 (12/19): buffer time for optimize and presentation
  - Week 8 (12/26): prepare presentation slides

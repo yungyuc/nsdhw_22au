@@ -65,3 +65,5 @@ Project List by Account Name
 
 #. `github_username <https://github.com/github_username>`__ for
    `Project title <github_username/README.rst>`__: https://github.com/github_username/project_name
+#. `BensonYang1999 <https://github.com/BensonYang1999>`__ for
+   `Simple Machine Learning Toolkit <BensonYang1999/readme.md>`__: https://github.com/BensonYang1999/simple_ML_toolkit
