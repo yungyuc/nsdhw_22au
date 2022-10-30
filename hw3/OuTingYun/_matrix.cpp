@@ -1,8 +1,14 @@
 //gemfield.cpp
-#include <pybind11/pybind11.h>
-#include <pybind11/stl.h>
 #include <iostream>
-#include "mkl.h"
+#include <iomanip>
+#include <vector>
+#include <stdexcept>
+#include <numeric>
+
+#include <mkl.h>
+#include <pybind11/pybind11.h>
+#include <pybind11/operators.h>
+#include <pybind11/stl.h>
 
 #include <bits/stdc++.h>
 
@@ -117,7 +123,10 @@ Matrix multiply_mkl(Matrix& mat1, Matrix& mat2)
     double* B = mat2.addr();
     double* C = ret.addr();
 
-    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, m, n, k, alpha, A, k, B, n, beta, C, n);
+    cblas_dgemm(
+        CblasRowMajor, 
+        CblasNoTrans, 
+        CblasNoTrans, m, n, k, alpha, A, k, B, n, beta, C, n);
 
     return ret;
 }
