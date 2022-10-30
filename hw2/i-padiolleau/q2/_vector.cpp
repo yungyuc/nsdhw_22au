@@ -8,8 +8,9 @@
 
 namespace py = pybind11;
 
-float comp_angle(std::vector<float> v1 , std::vector<float> v2){
+float comp_angle(float xx, float xy, float yx, float yy){
     float angle = 0;
+    
     return angle ;
 }
 
