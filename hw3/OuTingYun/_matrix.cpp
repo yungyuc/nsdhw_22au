@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <numeric>
 
-// #include <mkl.h>
+#include <mkl.h>
 #include <pybind11/pybind11.h>
 #include <pybind11/operators.h>
 #include <pybind11/stl.h>
@@ -46,7 +46,7 @@ public:
                     return false;
         return true;
     }
-    double* addr() { return &m_buffer[0]; }
+    double* addr() { return m_buffer.data(); }
 
 
 private:
@@ -116,17 +116,22 @@ Matrix multiply_mkl(Matrix& mat1, Matrix& mat2)
     }
 
     Matrix ret(mat1.nrow(), mat2.ncol());
-    
-    const size_t m = mat1.nrow(), n = mat2.ncol(), k = mat1.ncol();
-    double alpha = 1.0, beta = 0.0;
-    double* A = mat1.addr();
-    double* B = mat2.addr();
-    double* C = ret.addr();
 
     cblas_dgemm(
         CblasRowMajor, 
         CblasNoTrans, 
-        CblasNoTrans, m, n, k, alpha, A, k, B, n, beta, C, n);
+        CblasNoTrans, 
+        mat1.nrow(), 
+        mat2.ncol(), 
+        mat1.ncol(), 
+        1.0, 
+        mat1.addr(), 
+        mat1.ncol(), 
+        mat2.addr(), 
+        mat2.ncol(), 
+        0.0, 
+        ret.addr(), 
+        mat2.ncol());
 
     return ret;
 }

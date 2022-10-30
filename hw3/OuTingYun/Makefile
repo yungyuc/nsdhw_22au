@@ -8,12 +8,14 @@ MKLINCLUDE = -I/usr/include/mkl
 .PHONY: all, matrix, test, clean 
 
 all:
-	$(CC) -O3 -Wall -shared -std=c++11 -fPIC $(INCLUDE) _matrix.cpp -o _matrix$(POSFIX) -lblas $(MKLINCLUDE) $(CONFIG) $(CONFIG)
+	$(CC) -O3 -Wall -shared -std=c++11 -fPIC $(INCLUDE) _matrix.cpp -o _matrix$(POSFIX) -lblas $(MKLINCLUDE) $(CONFIG) 
 
 test:
-	python3 test_matrix.py
+	python3 -m pytest
 
 clean:
-	rm -f *.so 
-	rm -rf __pycache* .pytest*
+	rm -rf *.so __pycache__ .pytest_cache performance.txt
+
+
+
 

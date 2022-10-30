@@ -39,8 +39,8 @@ def count_time(row,col):
     tile_time = time.time() - time_tmp
     check(row,col, numpy_result, tile_result)
 
-    mkl_time=1
-    return numpy_time, naive_time, tile_time, mkl_time
+    # mkl_time=1
+    # return numpy_time, naive_time, tile_time, mkl_time
 
     time_tmp = time.time()
     mkl_result = _matrix.multiply_mkl(mat1, mat2)
