@@ -13,6 +13,7 @@ def test_init():
             mat2[it, jt] = it * size + jt + 1
                 
 
+
     assert size == mat1.nrow
     assert size == mat1.ncol
     assert size == mat2.nrow
