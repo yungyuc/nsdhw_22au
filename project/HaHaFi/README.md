@@ -4,20 +4,26 @@ In computer vision region, detection of the line on the images in real time is a
 
 ![](https://i.imgur.com/WD8w34b.png)
 
+**Alogorithm**
+![](https://i.imgur.com/EXi6z32.png)
+
 reference from [2](https://www.ipol.im/pub/art/2012/gjmr-lsd/article.pdf)
 ## Problem to solve
-1. The time of line detection should be as fast as possible.
-2. The detection result should be visualized.
+1. The implementation of this project should be the linear time algorithm as the same as in [paper](https://ieeexplore.ieee.org/document/4731268).
+3. The detection result should be visualized and compare to others line detection algorithms.
 
 
 ## Prospective Users
-The people who want to get line information on the image and need a fast algorithm. 
+The people who want to get line information on the image and need a fast algorithm.
 
 
 ## System Architecture
-OS imformation: ubuntu 22.04
+* OS imformation: ubuntu 22.04
+* Architecture: amd64
 
-flow chart below ( TODO )
+
+
+
 
 ## API Description
 1. Load image function
@@ -40,27 +46,28 @@ Automatic build system: make
 
 Version control: git
 
-
 Testing framework: [pytest](https://pytest.org)
 
 Documentation: [doxygen](https://doxygen.nl/) For automatic document generation.
 
 ## Schedule
+week 0(10/24): Study algorithm and search third party library.
+
 Week 1 (10/31): Study algorithm and search third party library.
 
-Week 2 (11/7): Complete make file and image I/O control.
+Week 2 (11/7): Complete make file and implement the line detection algorithm.
 
-Week 3 (11/14): Complete testing part and image preprocess function.
+Week 3 (11/14): Implement the line detection algorithm.
 
-Week 4 (11/21): Implement the line detection algorithm.
+Week 4 (11/21): Complete testing part and use third party library to implement others line detection algorithm to compare.
 
-Week 5 (11/28): Code review for speed up(Maybe use BLAS).
+Week 5 (11/28): If the schedule is not delay, do the code review for speed up(Maybe use mkl library) .
 
-Week 6 (12/5): Optimize the performance.
+Week 6 (12/5): Optimize the performance and Complete documentation (Maybe trun it into the web page).
 
-Week 7 (12/12): Complete documentation (Maybe trun it into the web page).
+Week 7 (12/12): Prepare the presentation.
 
-Week 8 (12/19): Prepare the presentation.
+Week 8 (12/19): Prepare the presentation and make the speech draft.
 
 ## References
 1. https://www.ipol.im/pub/art/2012/gjmr-lsd/article.pdf
