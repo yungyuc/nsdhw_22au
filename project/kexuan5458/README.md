@@ -6,8 +6,6 @@ Kalman Filter and Iterative Closest Point(ICP) algorithm are good tools in the s
 
 ## Problem to Solve
 
-Develop a localization module for estimating the poses of a self-driving car with a given map. Then visualize it with rviz.
-
 One of the biggest challenges of self-driving car's tracking and control systems is providing an accurate and precise estimation of the hidden states, location and velocity, in the presence of uncertainty. There are numerous sensors on the self-driving cars that estimate hidden states based on a series of measurements . The Kalman Filter can fuse information from different sensors, and produce estimates of hidden variables based on inaccurate and uncertain measurements.  
 
 In this project, I will develop a localization module for estimating the poses of a self-driving car with a given map. The algorithm will be based on the ICP.
