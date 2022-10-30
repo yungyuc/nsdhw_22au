@@ -32,11 +32,15 @@ def count_time(row,col):
     naive_time = time.time() - time_tmp
     # Check the multiplication 
     check(row,col,numpy_result,naive_result)
+    
 
     time_tmp = time.time()
     tile_result = _matrix.multiply_tile(mat1, mat2, 16)
     tile_time = time.time() - time_tmp
     check(row,col, numpy_result, tile_result)
+
+    tile_time = 1;mkl_time=1
+    return numpy_time, naive_time, tile_time, mkl_time
 
     time_tmp = time.time()
     mkl_result = _matrix.multiply_mkl(mat1, mat2)
@@ -61,3 +65,5 @@ def test_performance():
 	
 	fout.close()
 	return 
+
+test_performance()
