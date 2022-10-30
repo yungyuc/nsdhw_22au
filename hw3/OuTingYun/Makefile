@@ -1,15 +1,6 @@
 
-CC = g++
-INCLUDE = `python3 -m pybind11 --includes`
-POSFIX = `python3-config --extension-suffix`
-CONFIG = `python3-config --includes`
-MKLINCLUDE = -I/usr/include/mkl
-
-.PHONY: all, matrix, test, clean 
-
-all:
-	$(CC) -O3 -Wall -shared -std=c++11 -fPIC $(INCLUDE) _matrix.cpp -o _matrix$(POSFIX) -lblas $(MKLINCLUDE) $(CONFIG) 
-
+all: _matrix.cpp
+	g++ -O3 -Wall -shared -std=c++11 -fPIC `python3 -m pybind11 --includes` _matrix.cpp -o _matrix`python3-config --extension-suffix` -lblas -I/usr/include/mkl -I/usr/include/python3.8
 test:
 	python3 -m pytest
 
