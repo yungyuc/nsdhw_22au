@@ -90,10 +90,11 @@ Schedule
 
 * Planning phase (6 weeks from 9/19 to 10/31):
 * Week 1 (10/31): 
-- Build oncept how math should be implemented
+- Build concept how math should be implemented
 - Start developing a testing strategy
 
 * Week 2 (11/7):
+- Prototyping classes
 - Get used to new tools e.g. Catch
 - Set up version control, environments, build tools, testing framework, etc.
 - Elaborate architecture and scope
