@@ -30,7 +30,7 @@ def np_to_matrix(npmat):
     
     return mat
 
-def test_naive():
+def test_mul_naive():
     for _ in range(200):
         npm1 = np_random_mat(50, 50)
         npm2 = np_random_mat(50, 50)
@@ -40,7 +40,7 @@ def test_naive():
         mref = np_to_matrix(np.matmul(npm1, npm2))
         assert is_mat_equal(m3, mref)
 
-def test_tile():
+def test_mul_tile():
     for _ in range(200):
         npm1 = np_random_mat(50, 50)
         npm2 = np_random_mat(50, 50)
@@ -50,7 +50,7 @@ def test_tile():
         mref = np_to_matrix(np.matmul(npm1, npm2))
         assert is_mat_equal(m3, mref)
 
-def test_mkl():
+def test_mul_mkl():
     for _ in range(200):
         npm1 = np_random_mat(50, 50)
         npm2 = np_random_mat(50, 50)
@@ -60,7 +60,7 @@ def test_mkl():
         mref = np_to_matrix(np.matmul(npm1, npm2))
         assert is_mat_equal(m3, mref)
 
-def test_speed():
+def test_performance():
     npm1 = np_random_mat(1000, 1000)
     npm2 = np_random_mat(1000, 1000)
     m1 = np_to_matrix(npm1)
@@ -84,6 +84,13 @@ def test_speed():
     
     m_ref = np_to_matrix(np.matmul(npm1, npm2))
 
+    assert is_mat_equal(m_ref, m_naive)
+    assert is_mat_equal(m_ref, m_tile16)
+    assert is_mat_equal(m_ref, m_tile256)
+    assert is_mat_equal(m_ref, m_mkl)
+    assert tTile16  < 0.8 * tNaive
+    assert tTile256 < 0.8 * tNaive
+
     with open("performance.txt", "w") as fh:
         fh.write(f'Multiplication in naive way: {tNaive: 10.4f} sec.\n')
         fh.write(f'-----------------------------------------------------------------------\n')
@@ -99,9 +106,3 @@ def test_speed():
         faster = (tNaive / tMKL)
         fh.write(f'Multiplication use MKL faster than in naive way: {faster: 10.4f} times.\n')
     
-    assert is_mat_equal(m_ref, m_naive)
-    assert is_mat_equal(m_ref, m_tile16)
-    assert is_mat_equal(m_ref, m_tile256)
-    assert is_mat_equal(m_ref, m_mkl)
-    assert tTile16  < 0.8 * tNaive
-    assert tTile256 < 0.8 * tNaive
