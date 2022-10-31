@@ -1,10 +1,8 @@
-
 #ifndef MATRIX_HPP
 #define MATRIX_HPP
 
 #include <cstdlib>
 #include <vector>
-
 
 class Matrix
 {
@@ -32,7 +30,6 @@ public:
     double   operator[](size_t idx) const             { return m_buffer[idx]; }
 
     //bool operator==(Matrix & mat) const;
-    //bool operator== (Matrix &mat) const;
     
     //funcitons
     
