@@ -61,8 +61,8 @@ def test_mul_mkl():
         assert is_mat_equal(m3, mref)
 
 def test_performance():
-    npm1 = np_random_mat(1000, 1000)
-    npm2 = np_random_mat(1000, 1000)
+    npm1 = np_random_mat(1200, 1200)
+    npm2 = np_random_mat(1200, 1200)
     m1 = np_to_matrix(npm1)
     m2 = np_to_matrix(npm2)
 
@@ -73,6 +73,10 @@ def test_performance():
     tStart = time.process_time()
     m_tile16 = _matrix.multiply_tile(m1, m2, 16)
     tTile16 = time.process_time() - tStart
+
+    tStart = time.process_time()
+    m_tile64 = _matrix.multiply_tile(m1, m2, 64)
+    tTile64 = time.process_time() - tStart
 
     tStart = time.process_time()
     m_tile256 = _matrix.multiply_tile(m1, m2, 256)
@@ -86,9 +90,11 @@ def test_performance():
 
     assert is_mat_equal(m_ref, m_naive)
     assert is_mat_equal(m_ref, m_tile16)
+    assert is_mat_equal(m_ref, m_tile64)
     assert is_mat_equal(m_ref, m_tile256)
     assert is_mat_equal(m_ref, m_mkl)
     assert tTile16  < 0.8 * tNaive
+    assert tTile64  < 0.8 * tNaive
     assert tTile256 < 0.8 * tNaive
 
     with open("performance.txt", "w") as fh:
@@ -97,6 +103,10 @@ def test_performance():
         fh.write(f'Multiplication use tiling: {tTile16: 10.4f} sec.\n')
         faster = (tNaive / tTile16)
         fh.write(f'Multiplication use tiling(16) faster than in naive way: {faster: 10.4f} times.\n')
+        fh.write(f'-----------------------------------------------------------------------\n')
+        fh.write(f'Multiplication use tiling: {tTile64: 10.4f} sec.\n')
+        faster = (tNaive / tTile64)
+        fh.write(f'Multiplication use tiling(64) faster than in naive way: {faster: 10.4f} times.\n')
         fh.write(f'-----------------------------------------------------------------------\n')
         fh.write(f'Multiplication use tiling: {tTile256: 10.4f} sec.\n')
         faster = (tNaive / tTile256)
