@@ -3,7 +3,7 @@ CXXFLAGS = -O3 -Wall -shared -std=c++11 -fPIC
 SRC = _matrix.cpp
 
 PYFLAGS = $(shell python3 -m pybind11 --includes)
-PYBD11 = -I /usr/include/python3.10 -I /usr/include/pybind11 -lpython3.10 `python3 -m pybind11 --includes`
+PYBD11 = -I /usr/include/python3.8 -I /usr/include/pybind11 -lpython3.8 `python3 -m pybind11 --includes`
 
 BLAS = -I /usr/include/mkl/ -L /usr/lib/x86_64-linux-gnu/mkl/ -lblas
 
