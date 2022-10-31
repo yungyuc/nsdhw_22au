@@ -76,8 +76,7 @@ merge runnig code into master from there.
 Testing framework: pytest
 
 The mains testing framework will be pytest. Since the project deals with a non-deterministic method, a suitable testing strategy still has to be developed.
-For C++ "Doctest" can be used as a light and flexible testing framework for small
-projects. 
+For C++ Catch can be used as a testing Framework.
 
 Documentation: README.md
 
@@ -91,11 +90,11 @@ Schedule
 
 * Planning phase (6 weeks from 9/19 to 10/31):
 * Week 1 (10/31): 
-- Review mathematical foundations
+- Build oncept how math should be implemented
 - Start developing a testing strategy
 
 * Week 2 (11/7):
-- Get used to new tools e.g. Doctest
+- Get used to new tools e.g. Catch
 - Set up version control, environments, build tools, testing framework, etc.
 - Elaborate architecture and scope
 - Elaborate and define testing strategy
