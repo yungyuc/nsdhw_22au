@@ -155,7 +155,7 @@ Matrix multiply_tile(Matrix const &l_m, Matrix const &r_m, int tile_size) {
 }
 
 Matrix multiply_mkl(Matrix const &l_m, Matrix const &r_m) {
-    mkl_set_num_threads(1);
+    // mkl_set_num_threads(1);
 
     Matrix ret(l_m.get_nrow(), r_m.get_ncol());
     cblas_dgemm(
