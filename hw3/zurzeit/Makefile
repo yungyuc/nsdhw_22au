@@ -8,4 +8,4 @@ test: build
 
 .PHONY: clean
 clean:
-	rm -rf *.so *.exe
+	rm -rf *.so
