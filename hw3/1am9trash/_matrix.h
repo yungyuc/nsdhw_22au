@@ -12,8 +12,8 @@ public:
     bool operator!=(Matrix const &other) const;
     double const *get_buffer() const;
     double *get_buffer();
-    int const &get_nrow() const;
-    int const &get_ncol() const;
+    inline int const &get_nrow() const;
+    inline int const &get_ncol() const;
     void display_matrix() const;
 
 private:

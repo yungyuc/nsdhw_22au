@@ -69,11 +69,11 @@ double *Matrix::get_buffer() {
     return m;
 }
 
-int const &Matrix::get_nrow() const {
+inline int const &Matrix::get_nrow() const {
     return m_nrow;
 }
 
-int const &Matrix::get_ncol() const {
+inline int const &Matrix::get_ncol() const {
     return m_ncol;
 }
 
@@ -120,11 +120,9 @@ Matrix multiply_naive(Matrix const &l_m, Matrix const &r_m) {
     Matrix ret(l_m.get_nrow(), r_m.get_ncol());
     for (int i = 0; i < ret.get_nrow(); i++) {
         for (int j = 0; j < ret.get_ncol(); j++) {
-            double value = 0;
             for (int k = 0; k < l_m.get_ncol(); k++) {
-                value += l_m(i, k) * r_m(k, j);
+                ret(i, j) += l_m(i, k) * r_m(k, j);
             }
-            ret(i, j) = value;
         }
     }
     return ret;
