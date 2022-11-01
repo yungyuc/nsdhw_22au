@@ -1,7 +1,6 @@
 from _matrix import Matrix, multiply_naive, multiply_tile, multiply_mkl
 
 import pytest
-from pytest import approx as ap
 from timeit import Timer
 
 class Testclass:
