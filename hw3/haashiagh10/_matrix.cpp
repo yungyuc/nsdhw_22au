@@ -56,6 +56,31 @@ public:
 
 };
 
+Matrix multiply_naive(Matrix const& mat1, Matrix const& mat2) {
+    if (mat1.ncol() != mat2.nrow()) // mat1_row*mat1_column * mat2_row*mat2_column
+    {
+        throw out_of_range("2 matrix dimensions are mismatch");
+    }
+
+    Matrix ret(mat1.nrow(), mat2.ncol());
+
+    for (size_t i = 0; i < ret.nrow(); i++)
+    {
+        for (size_t k = 0; k < ret.ncol(); k++)
+        {
+            double v = 0;
+            for (size_t j = 0; j < mat1.ncol(); j++) {
+                v += mat1(i, j) * mat2(j, k);
+            }
+            ret(i, k) = v;
+        }
+    }
+
+    return ret;
+}
+
+
+
 // Matrix multiply_tile
 Matrix multiply_tile(const Matrix& mat1, const Matrix& mat2, size_t tile_size) {
     if (mat1.ncol() != mat2.nrow()) // mat1_row*mat1_column * mat2_row*mat2_column
