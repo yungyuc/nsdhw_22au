@@ -1,0 +1,3 @@
+10/3
+why we don't want to stop when exception occur?
+	Because there are a lot of them.
