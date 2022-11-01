@@ -6,12 +6,13 @@ PY = -I /usr/include/python3.8
 MKL_INC = -I/usr/include/mkl
 MKL_LIB = -L/usr/lib/x86_64-linux-gnu -lblas
 
-all:
-	$(CXX) $(CFLAGS) $(INCLUDE) _matrix.cpp -o _matrix$(CONFIG) $(PY) $(MKL_LIB) $(MKL_INC)
+all: matrix test
 
-test:
-	$(CXX) $(CFLAGS) $(INCLUDE) _matrix.cpp -o _matrix$(CONFIG) $(PY) $(MKL_LIB) $(MKL_INC)
-	python3 -m pytest
+matrix: _matrix.cpp
+	$(CC)  $(CFLAGS) $(INCLUDE) _matrix.cpp -o _matrix$(POSFIX)  -lblas $(MKLINCLUDE) $(CONFIG) 
 
+test: matrix
+	python3  test_file.py -v
 clean:
-	rm -rf __pycache__ .pytest_cache _matrix*.so
+	rm -f *.so 
+	rm -rf __pycache* .pytest*
