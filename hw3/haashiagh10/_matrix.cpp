@@ -76,83 +76,114 @@ public:
 
 };
 
-Matrix multiply_naive(const Matrix& mat1, const Matrix& mat2)
-{
-    Matrix mat(mat1.nrow(), mat2.ncol());
-    for (size_t i = 0; i < mat1.nrow(); i++)
+Matrix multiply_naive(Matrix const& mat1, Matrix const& mat2) {
+    if (mat1.ncol() != mat2.nrow()) // mat1_row*mat1_column * mat2_row*mat2_column
     {
-        for (size_t k = 0; k < mat2.ncol(); k++)
+        throw out_of_range("2 matrix dimensions are mismatch");
+    }
+
+    Matrix ret(mat1.nrow(), mat2.ncol());
+
+    for (size_t i = 0; i < ret.nrow(); i++)
+    {
+        for (size_t k = 0; k < ret.ncol(); k++)
         {
             double v = 0;
-            for (size_t j = 0; j < mat1.ncol(); j++)
-            {
+            for (size_t j = 0; j < mat1.ncol(); j++) {
                 v += mat1(i, j) * mat2(j, k);
             }
-            mat(i, k) = v;
+            ret(i, k) = v;
         }
     }
-    return mat;
+
+    return ret;
 }
 
-
-Matrix multiply_tile(const Matrix& mat1, const Matrix& mat2, size_t len_size)
-{
-    Matrix mat(mat1.nrow(), mat2.ncol());
-    for (size_t i_start = 0; i_start < mat1.nrow(); i_start += len_size)
+// Matrix multiply_tile
+Matrix multiply_tile(const Matrix& mat1, const Matrix& mat2, size_t tile_size) {
+    if (mat1.ncol() != mat2.nrow()) // mat1_row*mat1_column * mat2_row*mat2_column
     {
-        for (size_t k_start = 0; k_start < mat2.ncol(); k_start += len_size)
-        {
-            for (size_t j_start = 0; j_start < mat1.ncol(); j_start += len_size)
-            {
-                size_t i_end = min(i_start + len_size, mat1.nrow());
-                size_t k_end = min(k_start + len_size, mat2.ncol());
-                size_t j_end = min(j_start + len_size, mat1.ncol());
+        throw out_of_range("2 matrix dimensions are mismatch");
+    }
 
-                for (size_t i = i_start; i < i_end; i++)
+    Matrix ret(mat1.nrow(), mat2.ncol());
+
+    for (size_t i = 0; i < mat1.nrow(); i += tile_size)
+    {
+        for (size_t j = 0; j < mat2.ncol(); j += tile_size)
+        {
+            for (size_t k = 0; k < mat1.ncol(); k += tile_size)
+            {
+
+
+                for (size_t l = i; l < min((i + tile_size), mat1.nrow()); l++)
                 {
-                    for (size_t k = k_start; k < k_end; k++)
+                    for (size_t m = j; m < min((j + tile_size), mat2.ncol()); m++)
                     {
-                        for (size_t j = j_start; j < j_end; j++)
+                        for (size_t n = k; n < min((k + tile_size), mat1.ncol()); n++)
                         {
-                            mat(i, k) += mat1(i, j) * mat2(j, k);
+                            ret(l, m) += mat1(l, n) * mat2(n, m);
                         }
                     }
                 }
+
             }
         }
     }
-    return mat;
+    return ret;
 }
 
-Matrix multiply_mkl(const Matrix& mat1, const Matrix& mat2)
+Matrix multiply_mkl(Matrix const& mat1, Matrix const& mat2)
 {
-    Matrix mat(mat1.nrow(), mat2.ncol());
+
+    if (mat1.ncol() != mat2.nrow()) // mat1_row*mat1_column * mat2_row*mat2_column
+    {
+        throw out_of_range("2 matrix dimensions are mismatch");
+    }
+    Matrix ret(mat1.nrow(), mat2.ncol());
     size_t m = mat1.nrow();
     size_t n = mat2.ncol();
     size_t k = mat1.ncol();
-    double alpha = 1.0;
-    double beta = 0.0;
-    double* A = mat1.m_buffer;
-    double* B = mat2.m_buffer;
-    double* C = mat.m_buffer;
-    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans,
-        m, n, k, alpha, A, k, B, n, beta, C, n);
-    return mat;
+    cblas_dgemm(
+        CblasRowMajor 
+        , CblasNoTrans 
+        , CblasNoTrans 
+        , m   
+        , n   
+        , k   
+        , 1.0 
+        , mat1.m_buffer 
+        , k   
+        , mat2.m_buffer 
+        , n   
+        , 0.0 
+        , ret.m_buffer 
+        , n   
+    );
+
+    return ret;
 }
-PYBIND11_MODULE(_matrix, m) 
+
+
+PYBIND11_MODULE(_matrix, m)
 {
-
-            m.def("multiply_naive", &multiply_naive, "multiply 2 matrix naively.");
-            m.def("multiply_tile", &multiply_tile, "multiply 2 matrix by tiling the matrices.");
-            m.def("multiply_mkl", &multiply_mkl, "multiply 2 matrix by using mkl library.");
-            pybind11::class_<Matrix>(m, "Matrix")
-                .def(pybind11::init<size_t, size_t>())
-                .def("__setitem__", [](Matrix& self, std::pair<size_t, size_t> i, double val)
-                    { self(i.first, i.second) = val; })
-                .def("__getitem__", [](Matrix& self, std::pair<size_t, size_t> i)
-                    { return self(i.first, i.second); })
-                .def(pybind11::self == pybind11::self)
-                .def_property_readonly("nrow", &Matrix::nrow)
-                .def_property_readonly("ncol", &Matrix::ncol);
-
+    m.doc() = "maxtrix multiply function"; // ??????????????????????????????????????????
+    m.def("multiply_naive", &multiply_naive);   //
+    m.def("multiply_mkl", &multiply_mkl);       //
+    m.def("multiply_tile", &multiply_tile);     //
+    pybind11::class_<Matrix>(m, "Matrix")       // 
+        .def(pybind11::init<size_t, size_t>())  //
+        .def("__setitem__", [](Matrix& mat, pair<size_t, size_t> row_col, double val)
+            {
+                mat(row_col.first, row_col.second) = val;
+            })
+        .def("__getitem__", [](Matrix& mat, pair<size_t, size_t> row_col)
+            {
+                return mat(row_col.first, row_col.second);
+            })
+                .def("__eq__", &Matrix::operator==)
+                // .def_property_readonly("nrow", &Matrix::nrow)
+                // .def_property_readonly("ncol", &Matrix::ncol);
+                .def_property("nrow", &Matrix::nrow, nullptr)
+                .def_property("ncol", &Matrix::ncol, nullptr);
 }
