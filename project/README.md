@@ -1,6 +1,6 @@
-#Raman Spectroscopy analyze
+# Raman Spectroscopy analyze
 
-#Basic information
+# Basic information
 GitHub repository: https://github.com/haashiagh10/propsal
 
 # Problem to Solve
