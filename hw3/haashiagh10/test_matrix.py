@@ -1,23 +1,24 @@
 import pytest
+from pytest import approx as ap # import approx
 import timeit
 import _matrix
+# from timeit import Timer
 
-
-def make_matrices(size):
+def create_matrices(size):
     mat1 = _matrix.Matrix(size,size)
     mat2 = _matrix.Matrix(size,size)
 
-    for it in range(size):
-        for jt in range(size):
-            mat1[it, jt] = it * size + jt + 1
-            mat2[it, jt] = it * size + jt + 1
+    for i in range(size):
+        for j in range(size):
+            mat1[i, j] = i * size + j + 1
+            mat2[i, j] = i * size + j + 1
 
     return mat1, mat2
 
 def test_function():
     size = 1000
-    tile_size = 16
-    m1, m2 = make_matrices(size)
+    tile_size = 16 
+    m1, m2 = create_matrices(size)
 
     matrix_naive = _matrix.multiply_naive(m1, m2)
     matrix_tile = _matrix.multiply_tile(m1, m2, tile_size)
@@ -30,7 +31,7 @@ def test_function():
 def test_time():
     size = 1000
     tile_size = 16
-    m1, m2 = make_matrices(size)
+    m1, m2 = create_matrices(size)
 
     init = dict(_matrix=_matrix, _m1 = m1, _m2= m2, tile_size = tile_size)
     time_naive = timeit.timeit("_matrix.multiply_naive(_m1, _m2)", number=1, globals=init)
