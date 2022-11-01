@@ -4,7 +4,6 @@ INCLUDE = $(shell python3 -m pybind11 --includes)
 SUFFIX = $(shell python3-config --extension-suffix)
 CONFIG = $(shell python3-config --includes)
 mklinc=/usr/include/mkl
-#/home/chiehchiyang/intel/mkl/include
 
 
 .PHONY: all test clean
@@ -15,6 +14,7 @@ _matrix: _matrix.cpp
 	$(CXX) $(FLAG) $(INCLUDE) $< -o $@$(SUFFIX) $(CONFIG) -I$(mklinc) -lblas
 
 test:
+	$(CXX) $(FLAG) $(INCLUDE) $< -o $@$(SUFFIX) $(CONFIG) -I$(mklinc) -lblas
 	python3 -m pytest -v
 
 clean:
