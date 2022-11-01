@@ -10,94 +10,51 @@ class Matrix {
 
 public:
 
-    Matrix(size_t nrow, size_t ncol)
-        : m_nrow(nrow), m_ncol(ncol)
+    size_t m_nrow = 0;
+    size_t m_ncol = 0;
+    double* m_buffer = nullptr;
+
+    Matrix(size_t nrow, size_t ncol) : m_nrow(nrow), m_ncol(ncol)
     {
-        reset_buffer(nrow, ncol);
+        size_t nelement = nrow * ncol;
+        m_buffer = new double[nelement];
     }
 
-
-    Matrix(Matrix const& other) 
-        : m_nrow(other.m_nrow), m_ncol(other.m_ncol)
-    {
-        reset_buffer(other.m_nrow, other.m_ncol);
-        for (size_t i = 0; i < m_nrow; i += 1)
-        {
-            for (size_t j = 0; j < m_ncol; j += 1)
-            {
-                (*this)(i, j) = other(i, j);
-            }
-        }
-    }
     void reset_buffer(size_t nrow, size_t ncol)
     {
-        if (m_buffer)
-        {
+        if (m_buffer)    // if exist
             delete[] m_buffer;
-        }
         m_buffer = new double[nrow * ncol];
     }
 
     size_t nrow() const { return m_nrow; }
     size_t ncol() const { return m_ncol; }
 
-    //operator
-    double operator()(size_t row, size_t col)const
+    double  operator() (size_t row, size_t col) const
     {
-        size_t index = row * m_ncol + col;
-        return m_buffer[index];
+        return m_buffer[row * m_ncol + col];
     }
 
-    double& operator()(size_t row, size_t col)
+    double& operator() (size_t row, size_t col)
     {
-        size_t index = row * m_ncol + col;
-        return m_buffer[index];
+        return m_buffer[row * m_ncol + col];
     }
 
     bool operator==(const Matrix& other) const
     {
-        //bool flag = true
-        for (size_t i = 0; i < m_nrow; ++i)
+        for (size_t i = 0; i < m_nrow; i++)
         {
-            for (size_t j = 0; j < m_ncol; ++j)
+            for (size_t j = 0; j < m_ncol; j++)
             {
-                size_t idx = i * m_ncol + j;
-                if (m_buffer[idx] != other.m_buffer[idx])
+                size_t index = i * m_ncol + j;
+                if (m_buffer[index] != other.m_buffer[index])
                     return false;
             }
         }
-
         return true;
     }
 
-    size_t m_nrow;
-    size_t m_ncol;
-    double* m_buffer;
-
 };
-
-Matrix multiply_naive(Matrix const& mat1, Matrix const& mat2) {
-    if (mat1.ncol() != mat2.nrow()) // mat1_row*mat1_column * mat2_row*mat2_column
-    {
-        throw out_of_range("2 matrix dimensions are mismatch");
-    }
-
-    Matrix ret(mat1.nrow(), mat2.ncol());
-
-    for (size_t i = 0; i < ret.nrow(); i++)
-    {
-        for (size_t k = 0; k < ret.ncol(); k++)
-        {
-            double v = 0;
-            for (size_t j = 0; j < mat1.ncol(); j++) {
-                v += mat1(i, j) * mat2(j, k);
-            }
-            ret(i, k) = v;
-        }
-    }
-
-    return ret;
-}
 
 // Matrix multiply_tile
 Matrix multiply_tile(const Matrix& mat1, const Matrix& mat2, size_t tile_size) {
