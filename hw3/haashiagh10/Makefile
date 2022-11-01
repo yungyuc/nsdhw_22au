@@ -12,7 +12,7 @@ matrix: _matrix.cpp
 	$(CC)  $(CFLAGS) $(INCLUDE) _matrix.cpp -o _matrix$(POSFIX)  -lblas $(MKLINCLUDE) $(CONFIG) 
 
 test: matrix
-	python3  test_file.py -v
+	python3  test_matrix.py -v
 clean:
 	rm -f *.so 
 	rm -rf __pycache* .pytest*
