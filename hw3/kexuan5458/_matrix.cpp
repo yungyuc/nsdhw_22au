@@ -1,16 +1,12 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/operators.h>
-
+// https://dboyliao.medium.com/pybind11-%E5%85%A5%E9%96%80%E7%8E%A9%E6%A8%82%E6%89%8B%E8%A8%98-9da22f6193f2
 #include <stdexcept>
 #include <vector>
 #include <mkl.h>
 
 using namespace std;
-
-// Hooje hw3
-// wst24365888 hw3 submission
-// davidzwei hw3 attempt1
 
 class Matrix {
 
@@ -156,10 +152,10 @@ Matrix multiply_mkl(Matrix const & mat1, Matrix const & mat2)
     return ret;
 }
 
-
+// first argument of PYBIND11_MODULE must be as the same as '.so' file you would compile later
 PYBIND11_MODULE(_matrix, m)
 {
-    m.doc() = "maxtrix multiply function"; // ??????????????????????????????????????????
+    m.doc() = "maxtrix multiply function";      // module doc string
     m.def("multiply_naive", &multiply_naive);   //
     m.def("multiply_mkl", &multiply_mkl);       //
     m.def("multiply_tile", &multiply_tile);     //

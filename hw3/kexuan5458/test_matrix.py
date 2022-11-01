@@ -5,8 +5,8 @@ import _matrix
 # from timeit import Timer
 
 def create_matrices(size):
-    mat1 = _matrix.Matrix(size,size)
-    mat2 = _matrix.Matrix(size,size)
+    mat1 = _matrix.Matrix(size, size)
+    mat2 = _matrix.Matrix(size, size)
 
     for i in range(size):
         for j in range(size):
@@ -39,6 +39,6 @@ def test_time():
     time_mkl = timeit.timeit("_matrix.multiply_mkl(_m1, _m2)", number=1, globals=init)
 
     with open("performance.txt", "w") as f:
-        f.write(f"multiply_naive: {time_naive:.4f} seconds.\n")
-        f.write(f"multiply_tile: {time_tile:.4f} seconds.\n")
-        f.write(f"multiply_mkl: {time_mkl:.4f} seconds.\n")
+        f.write(f"1. multiply_naive: {time_naive:.5f} seconds.\n")
+        f.write(f"2. multiply_tile: {time_tile:.5f} seconds.\n")
+        f.write(f"3. multiply_mkl: {time_mkl:.5f} seconds.\n")
