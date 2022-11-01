@@ -36,6 +36,6 @@ def test_performance():
     time_mkl = timeit.timeit("_matrix.multiply_mkl(_m1, _m2)", number=1, globals=init)
 
     with open("performance.txt", "w") as f:
-        print("multiply_naive: {time_naive:.4f} seconds.\n", file=f)
+        print(f"multiply_naive: {time_naive:.4f} seconds.\n", file=f)
         print(f"multiply_tile: {time_tile:.4f} seconds.\n",file=f)
         print(f"multiply_mkl: {time_mkl:.4f} seconds.\n",file=f)
