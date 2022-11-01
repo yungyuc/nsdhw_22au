@@ -16,7 +16,8 @@ public:
     }
 
 
-    Matrix(Matrix const& other) : m_nrow(nrow), m_ncol(ncol)
+    Matrix(Matrix const& other) 
+        : m_nrow(other.m_nrow), m_ncol(other.m_ncol)
     {
         reset_buffer(other.m_nrow, other.m_ncol);
         for (size_t i = 0; i < m_nrow; i += 1)
@@ -132,7 +133,7 @@ Matrix multiply_mkl(const Matrix& mat1, const Matrix& mat2)
     double beta = 0.0;
     double* A = mat1.m_buffer;
     double* B = mat2.m_buffer;
-    double* C = ret.m_buffer;
+    double* C = mat.m_buffer;
     cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans,
         m, n, k, alpha, A, k, B, n, beta, C, n);
     return mat;
