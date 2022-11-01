@@ -1,7 +1,7 @@
 .. default-role:: math
 
 ========================
-Proposal Template (22au)
+SpinningBall (22au)
 ========================
 
 Basic Information
