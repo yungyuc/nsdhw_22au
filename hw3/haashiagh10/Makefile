@@ -1,17 +1,11 @@
-CXX = g++
-CFLAGS = -O3 -Wall -shared -std=c++11 -fPIC
-INCLUDE = `python3 -m pybind11 --includes`
-CONFIG = `python3-config --extension-suffix`
-PY = -I /usr/include/python3.8
-MKL_INC = -I/usr/include/mkl
-MKL_LIB = -L/usr/lib/x86_64-linux-gnu -lblas
+.PHONY: build
+build:
+	g++ -O3 -Wall -shared -std=c++11 -fPIC `python3 -m pybind11 --includes` q1.cpp -o _matrix`python3-config --extension-suffix` `python3-config --includes` -lblas -I/usr/include/mkl
 
-all:
-	$(CXX) $(CFLAGS) $(INCLUDE) _matrix.cpp -o _matrix$(CONFIG) $(PY) $(MKL_LIB) $(MKL_INC)
+.PHONY: test
+test: build
+	python3 -m pytest test_matrix.py
 
-test:
-	$(CXX) $(CFLAGS) $(INCLUDE) _matrix.cpp -o _matrix$(CONFIG) $(PY) $(MKL_LIB) $(MKL_INC)
-	python3 -m pytest
-
+.PHONY: clean
 clean:
-	rm -rf __pycache__ .pytest_cache _matrix*.so
+	rm -rf *.so
