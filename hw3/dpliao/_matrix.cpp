@@ -226,7 +226,7 @@ size_t calc_nflo(Matrix const & mat1, Matrix const & mat2)
  */
 Matrix multiply_mkl(Matrix const & mat1, Matrix const & mat2)
 {
-    mkl_set_num_threads(1);
+    // mkl_set_num_threads(1);
 
     Matrix ret(mat1.nrow(), mat2.ncol());
 
