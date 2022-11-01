@@ -1,6 +1,8 @@
-include<iostream>
-include<vector>
-
+#include<iostream>
+#include<vector>
+#include <pybind11/stl.h>
+#include <pybind11/pybind11.h>
+#include <pybind11/operators.h>
 using namespace std
 
 class Matrix {
@@ -10,10 +12,10 @@ public:
     Matrix(size_t nrow, size_t ncol)
         : m_nrow(nrow), m_ncol(ncol)
     {
-        reset_buffer(nrow , ncol)
+        reset_buffer(nrow, ncol)
     }
 
-    
+
     Matrix(Matrix const& other) : m_nrow(nrow), m_ncol(ncol)
     {
         reset_buffer(other.m_nrow, other.m_nol);
@@ -40,14 +42,14 @@ public:
     //operator
     double operator()(size_t row, size_t col)const
     {
-        size_t index = row * m_ncol +col
-        return m_buffer[index]
+        size_t index = row * m_ncol + col
+            return m_buffer[index]
     }
 
     double& operator()(size_t row, size_t col)
     {
         size_t index = row * m_ncol + col
-        return m_buffer[index]
+            return m_buffer[index]
     }
 
     bool operator==(const Matrix& other) const
