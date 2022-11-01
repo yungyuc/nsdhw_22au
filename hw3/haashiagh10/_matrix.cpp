@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 #include <pybind11/pybind11.h>
 #include <pybind11/operators.h>
-using namespace std
+using namespace std;
 
 class Matrix {
 
@@ -12,14 +12,14 @@ public:
     Matrix(size_t nrow, size_t ncol)
         : m_nrow(nrow), m_ncol(ncol)
     {
-        reset_buffer(nrow, ncol)
+        reset_buffer(nrow, ncol);
     }
 
 
     Matrix(Matrix const& other) : m_nrow(nrow), m_ncol(ncol)
     {
-        reset_buffer(other.m_nrow, other.m_nol);
-        for (size_t i = 0; i < m_row; i += 1)
+        reset_buffer(other.m_nrow, other.m_ncol);
+        for (size_t i = 0; i < m_nrow; i += 1)
         {
             for (size_t j = 0; j < m_ncol; j += 1)
             {
@@ -42,14 +42,14 @@ public:
     //operator
     double operator()(size_t row, size_t col)const
     {
-        size_t index = row * m_ncol + col
-            return m_buffer[index]
+        size_t index = row * m_ncol + col;
+        return m_buffer[index];
     }
 
     double& operator()(size_t row, size_t col)
     {
-        size_t index = row * m_ncol + col
-            return m_buffer[index]
+        size_t index = row * m_ncol + col;
+        return m_buffer[index];
     }
 
     bool operator==(const Matrix& other) const
@@ -67,9 +67,6 @@ public:
 
         return true;
     }
-
-
-private:
 
     size_t m_nrow;
     size_t m_ncol;
