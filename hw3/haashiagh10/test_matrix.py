@@ -1,85 +1,45 @@
-from _matrix import Matrix, multiply_naive, multiply_tile, multiply_mkl
-
 import pytest
-from timeit import Timer
+import timeit
+import _matrix
 
-class Testclass:
-    def test_matrix_basic(self):
-        size = 20
-        mat1 = Matrix(size, size)
-        mat2 = Matrix(size, size)
-        mat3 = Matrix(size, size)
-        for i in range(size):
-            for j in range(size):
-                mat1[i, j] = 2
-                mat2[i, j] = 7
-                mat3[i, j] = 0
-        ans_naive = multiply_naive(mat1, mat3)
-        ans_mkl = multiply_mkl(mat1, mat3)
-        ans_tile = multiply_tile(mat2, mat3, 64)
-        assert ans_naive.nrow == size 
-        assert ans_naive.ncol == size 
-        assert ans_mkl.nrow == size 
 
-        for i in range(size):
-            for j in range(size):
-                assert ans_naive[i, j] == ap(0.0)
-                assert ans_mkl[i, j] == ap(0.0)
-                assert ans_tile[i, j] == ap(0.0)
-    def test_matrix_complicate(self):
-        size = 20
-        mat1 = Matrix(size, size)
-        mat2 = Matrix(size, size)
-        mat3 = Matrix(size, size)
-        for i in range(size):
-            for j in range(size):
-                mat1[i, j] = 2
-                mat2[i, j] = 7
-                mat3[i, j] = 8
-        ans_naive = multiply_naive(mat1, mat3)
-        ans_mkl = multiply_mkl(mat1, mat3)
-        ans_tile = multiply_tile(mat1, mat3, 64)
-        assert ans_naive.nrow == size 
-        assert ans_naive.ncol == size 
-        assert ans_mkl.nrow == size 
+def setup_matrices(size):
+    mat1 = _matrix.Matrix(size,size)
+    mat2 = _matrix.Matrix(size,size)
 
-        for i in range(size):
-            for j in range(size):
-                assert ans_naive[i, j] == ap(ans_mkl[i, j])
-                assert ans_mkl[i, j] == ap(ans_tile[i, j])
+    for i in range(size):
+        for j in range(size):
+            mat1[i, j] = i * size + j + 1
+            mat2[i, j] = i * size + j + 1
 
-def get_performance():
+    return mat1, mat2
 
-    setup = '''
-from _matrix import Matrix, multiply_naive, multiply_tile, multiply_mkl
-size = 1000
-mat1 = Matrix(size,size)
-mat2 = Matrix(size,size)
-for it in range(size):
-    for jt in range(size):
-        mat1[it, jt] = it * size + jt + 1
-        mat2[it, jt] = it * size + jt + 1
-    '''
+def test_function():
+    size = 500
+    tile_size = 10
+    m1, m2 = setup_matrices(size)
 
-    naive = Timer('multiply_naive(mat1, mat2)', setup=setup)
-    mkl = Timer('multiply_mkl(mat1, mat2)', setup=setup)
+    matrix_naive = _matrix.multiply_naive(m1, m2)
+    matrix_tile = _matrix.multiply_tile(m1, m2, tile_size)
+    matrix_mkl = _matrix.multiply_mkl(m1, m2)
 
-    repeat = 5
+    assert matrix_naive == matrix_tile
+    assert matrix_tile == matrix_mkl
 
-    with open('performance.txt', 'w') as f:
+def test_performance():
+    size = 500
+    tile_size = 10
+    m1, m2 = setup_matrices(size)
 
-        log = 'multiply_naive : '
-        naive_sec  = min(naive.repeat(repeat=repeat, number=1))
-        log += f'{naive_sec} seconds\n'
+    init = dict(_matrix=_matrix, _m1 = m1, _m2= m2, tile_size = tile_size)
+    time_naive = timeit.timeit("_matrix.multiply_naive(_m1, _m2)", number=1, globals=init)
+    time_tile = timeit.timeit("_matrix.multiply_tile(_m1, _m2, tile_size)", number=1, globals=init)
+    time_mkl = timeit.timeit("_matrix.multiply_mkl(_m1, _m2)", number=1, globals=init)
 
-        log += f'multiply_mkl :'
-        mkl_sec = min(mkl.repeat(repeat=repeat, number=1))
-        log += f'{mkl_sec} seconds\n'
-
-        log += f'mkl speed-up over naive: {naive_sec/mkl_sec}'
-        f.write(log)
-if __name__ == '__main__':
-    get_performance()
+    with open("performance.txt", "w") as f:
+        f.write(f"multiply_naive: {time_naive:.4f} seconds.\n")
+        f.write(f"multiply_tile: {time_tile:.4f} seconds.\n")
+        f.write(f"multiply_mkl: {time_mkl:.4f} seconds.\n")
 
 
 
