@@ -1,24 +1,17 @@
-CC = g++
-MKLINCLUDE = -I/usr/include/mkl
-INCLUDE = `python3 -m pybind11 --includes`
-POSFIX = `python3-config --extension-suffix`
-CONFIG = `python3-config --includes`
+CXX = g++
 CFLAGS = -O3 -Wall -shared -std=c++11 -fPIC
+INCLUDE = `python3 -m pybind11 --includes`
+CONFIG = `python3-config --extension-suffix`
+PY = -I /usr/include/python3.8
+MKL_INC = -I/usr/include/mkl
+MKL_LIB = -L/usr/lib/x86_64-linux-gnu -lblas
 
+all:
+	$(CXX) $(CFLAGS) $(INCLUDE) _matrix.cpp -o _matrix$(CONFIG) $(PY) $(MKL_LIB) $(MKL_INC)
 
+test:
+	$(CXX) $(CFLAGS) $(INCLUDE) _matrix.cpp -o _matrix$(CONFIG) $(PY) $(MKL_LIB) $(MKL_INC)
+	python3 -m pytest
 
-#MKLCONFIG = -L/usr/lib/x86_64-linux-gnu -lblas -I/opt/intel/mkl #-I/usr/include/mkl #
-
-
-.PHONY: all, matrix, test, clean 
-
-all: matrix test
-
-matrix: _matrix.cpp
-	$(CC)  $(CFLAGS) $(INCLUDE) _matrix.cpp -o _matrix$(POSFIX)  -lblas $(MKLINCLUDE) $(CONFIG) 
-
-test: matrix
-	python3  test_file.py -v
 clean:
-	rm -f *.so 
-	rm -rf __pycache* .pytest*
+	rm -rf __pycache__ .pytest_cache _matrix*.so
