@@ -24,7 +24,7 @@ This project is a `C++` implementation of Stream VByte, including `Python` bindi
 
 ## System Architecture
 
-![System Architecture](assets/system-architecture.png)
+![System Architecture](./assets/system-architecture.png)
 
 ## API Description
 
