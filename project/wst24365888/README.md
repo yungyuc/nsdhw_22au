@@ -10,7 +10,7 @@ Integer compression can often be used in many places. One of the most famous is 
 
 In 2015, a well-known speedup version was proposed, Masked VByte (Vectorized VByte Decoding), which data format is the same as the standard VByte, using SIMD to speed up the decoding process, but its proposed algorithm has some limitations, such as only considering first 12 bytes in 16 byte input data and a hardcoded table that requires a lot of pre-computation. 
 
-Later, one of its authors, Prof. Daniel Lemire, proposed Stream VByte which uses a different data format, splitting the control bytes and data bytes. This results in better access spped and it's more suitable for SIMD approaches.
+Later, one of its authors, Prof. Daniel Lemire, proposed Stream VByte which uses a different data format, splitting the control bytes and data bytes. This results in better access speed and it's more suitable for SIMD approaches.
 
 This project is a `C++` implementation of Stream VByte, including `Python` bindings in newer versions, which was previosly lacking.
 
