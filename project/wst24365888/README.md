@@ -4,6 +4,8 @@
 
 A `C++` implementation with `Python` bindings of Stream VByte, which is an efficient integer compression technique.
 
+GitHub repository: <https://github.com/wst24365888/stream-vbyte>
+
 ## Problem to Solve
 
 Integer compression can often be used in many places. One of the most famous is VByte, which is everywhere. 
