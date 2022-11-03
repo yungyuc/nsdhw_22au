@@ -29,7 +29,7 @@ Given a list of scene attributes, we can generate a bird eye view map with seman
 
 
 Here is the pseudo code from the parper ( Ref. 1)
-![](https://i.imgur.com/P0N7k6v.png =400x)
+![](https://i.imgur.com/P0N7k6v.png)
 
 
 ## Prospective Users
