@@ -101,3 +101,4 @@ Project List by Account Name
 #. `wst24365888 <https://github.com/wst24365888>`__ for
    `Strem VByte <wst24365888/README.md>`__: https://github.com/wst24365888/stream-vbyte
 #. `chiehchiYang <https://github.com/chiehchiYang>`__ for `BEV-ROAD-MAP-Generator <chiehchiYang/README.md>`__ : https://github.com/chiehchiYang/BEV-ROAD-MAP-Generator
+#. `1am9trash <https://github.com/1am9trash>`__ for `Boolean Operations on Polygons <1am9trash/README.md>`__ : https://github.com/1am9trash/Boolean_Operations_on_Polygons
