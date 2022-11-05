@@ -98,3 +98,5 @@ Project List by Account Name
 #. `jasonchen1221 <https://github.com/jasonchen1221>`__ for
    `HB--tree-based-SA-scheme-for-analog-floorplan-design <jasonchen1221/README.md>`__: https://github.com/jasonchen1221/HB--tree-based-SA-scheme-for-analog-floorplan-design>>>>>> 8ade63394a213d53bc0953b1c9cefbba618079ab
 #. `Hooje <https://github.com/Hooje>`__ for `Parallel_Decision_Tree <Hooje/README.md>`__ : https://github.com/Hooje/Parallel_Decision_Tree
+#. `wst24365888 <https://github.com/wst24365888>`__ for
+   `Strem VByte <wst24365888/README.md>`__: https://github.com/wst24365888/stream-vbyte
