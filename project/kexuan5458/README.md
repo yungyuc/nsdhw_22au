@@ -1,4 +1,6 @@
 # Self-Driving Car Localization
+#. `kexuan5458 <https://github.com/kexuan5458>`__ for
+   `Self-Driving Car Localization <kexuan5458/README.md>`__: https://github.com/kexuan5458/Self-Driving_Car_Localization
 
 ## Basic Information
 
@@ -58,8 +60,8 @@ It would be updated after coding has started.
 * Week 8 (12/19): Prepare presentation
 
 ## References
-[My Project](https://github.com/kexuan5458/Self-Driving_Car_Localization)
-[SDC-EKF](https://github.com/kharikri/Self-Driving-Car-Extended-Kalman-Filters)
-[PCL (ICP)](https://github.com/PointCloudLibrary/pcl)  
+[My Project](https://github.com/kexuan5458/Self-Driving_Car_Localization)  
+[SDC-EKF](https://github.com/kharikri/Self-Driving-Car-Extended-Kalman-Filters)  
+[PCL (ICP)](https://github.com/PointCloudLibrary/pcl)    
 [tf](http://wiki.ros.org/tf)  
-[Direction Cosine Matrix](http://www.starlino.com/dcm_tutorial.html) 
+[Direction Cosine Matrix](http://www.starlino.com/dcm_tutorial.html)   

@@ -100,5 +100,3 @@ Project List by Account Name
 #. `wst24365888 <https://github.com/wst24365888>`__ for
    `Strem VByte <wst24365888/README.md>`__: https://github.com/wst24365888/stream-vbyte
 #. `chiehchiYang <https://github.com/chiehchiYang>`__ for `BEV-ROAD-MAP-Generator <chiehchiYang/README.md>`__ : https://github.com/chiehchiYang/BEV-ROAD-MAP-Generator
-#. `kexuan5458 <https://github.com/kexuan5458>`__ for
-   `Self-Driving Car Localization <kexuan5458/README.md>`__: https://github.com/kexuan5458/Self-Driving_Car_Localization
