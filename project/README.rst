@@ -62,7 +62,6 @@ entry too.  You can request my review in the PR.
 
 Project List by Account Name
 ++++++++++++++++++++++++++++
-
 #. `github_username <https://github.com/github_username>`__ for
    `Project title <github_username/README.rst>`__: https://github.com/github_username/project_name
 #. `ìar1000 <https://github.com/iar1000>`__ for
@@ -97,5 +96,9 @@ Project List by Account Name
    `Clip your arbitrary polygons <rroykuo/README.rst>`__: https://github.com/rroykuo/Clip-your-arbitrary-polygons
 #. `jasonchen1221 <https://github.com/jasonchen1221>`__ for
    `HB--tree-based-SA-scheme-for-analog-floorplan-design <jasonchen1221/README.md>`__: https://github.com/jasonchen1221/HB--tree-based-SA-scheme-for-analog-floorplan-design>>>>>> 8ade63394a213d53bc0953b1c9cefbba618079ab
+#. `Hooje <https://github.com/Hooje>`__ for `Parallel_Decision_Tree <Hooje/README.md>`__ : https://github.com/Hooje/Parallel_Decision_Tree
+#. `wst24365888 <https://github.com/wst24365888>`__ for
+   `Strem VByte <wst24365888/README.md>`__: https://github.com/wst24365888/stream-vbyte
+#. `chiehchiYang <https://github.com/chiehchiYang>`__ for `BEV-ROAD-MAP-Generator <chiehchiYang/README.md>`__ : https://github.com/chiehchiYang/BEV-ROAD-MAP-Generator
 #. `kexuan5458 <https://github.com/kexuan5458>`__ for
    `Self-Driving Car Localization <kexuan5458/README.md>`__: https://github.com/kexuan5458/Self-Driving_Car_Localization
