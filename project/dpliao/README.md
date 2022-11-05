@@ -50,5 +50,5 @@ Week 7 (12/12): Summarize in presentation slide
 Week 8 (12/19): Check presentation content
 
 ## References
-https://en.wikipedia.org/wiki/Histogram_equalization
+https://en.wikipedia.org/wiki/Histogram_equalization \
 https://docs.opencv.org/4.x/d5/daf/tutorial_py_histogram_equalization.html
