@@ -28,29 +28,23 @@ entry too.  You can request my review in the PR.
 
 .. Presentation
 .. ============
-
 .. The presentation schedule is set.  If you want to change time slots, ask for
    the owner of the other time slot and file a PR tagging him or her and the
    instructor (@yungyuc) against the branch `master`. The other owner needs to
    respond to agree the exchange in the PR. The PR subject line should start
    with ``[presentation]``.
-
 .. Each presentation can use at most 15 minutes.  Presenters may decide how to
    use their time.  A possible arrangement is to use 12 minutes in the
    presentation itself and 3 minutes for questions and discussions.  Presenters
    are expected to prepare their own computer for presentation.
-
 .. The time for setting up the computer is included in the allotted
    presentation time.  If presenters have difficulty in preparing a computer
    themselves, they may seek help from the instructor, and resolve the issue
    one week before their presentation.
-
 .. Time Table
 .. ++++++++++
-
 .. .. list-table:: 12/26 7:00-??:00
 ..   :header-rows: 1
-
 ..   * - ID
 ..     - Time
 ..     - Presenter
@@ -59,9 +53,9 @@ entry too.  You can request my review in the PR.
 ..     - 07:00 - 07:15
 ..     -
 ..     -
-
 Project List by Account Name
 ++++++++++++++++++++++++++++
+
 #. `github_username <https://github.com/github_username>`__ for
    `Project title <github_username/README.rst>`__: https://github.com/github_username/project_name
 #. `ìar1000 <https://github.com/iar1000>`__ for
@@ -96,7 +90,8 @@ Project List by Account Name
    `Clip your arbitrary polygons <rroykuo/README.rst>`__: https://github.com/rroykuo/Clip-your-arbitrary-polygons
 #. `jasonchen1221 <https://github.com/jasonchen1221>`__ for
    `HB--tree-based-SA-scheme-for-analog-floorplan-design <jasonchen1221/README.md>`__: https://github.com/jasonchen1221/HB--tree-based-SA-scheme-for-analog-floorplan-design>>>>>> 8ade63394a213d53bc0953b1c9cefbba618079ab
-#. `Hooje <https://github.com/Hooje>`__ for `Parallel_Decision_Tree <Hooje/README.md>`__ : https://github.com/Hooje/Parallel_Decision_Tree
 #. `wst24365888 <https://github.com/wst24365888>`__ for
    `Strem VByte <wst24365888/README.md>`__: https://github.com/wst24365888/stream-vbyte
 #. `chiehchiYang <https://github.com/chiehchiYang>`__ for `BEV-ROAD-MAP-Generator <chiehchiYang/README.md>`__ : https://github.com/chiehchiYang/BEV-ROAD-MAP-Generator
+#. `kexuan5458 <https://github.com/kexuan5458>`__ for
+   `Self-Driving Car Localization <kexuan5458/README.md>`__: https://github.com/kexuan5458/Self-Driving_Car_Localization
