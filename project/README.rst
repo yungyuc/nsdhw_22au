@@ -103,3 +103,5 @@ Project List by Account Name
 #. `chiehchiYang <https://github.com/chiehchiYang>`__ for `BEV-ROAD-MAP-Generator <chiehchiYang/README.md>`__ : https://github.com/chiehchiYang/BEV-ROAD-MAP-Generator
 #. `BensonYang1999 <https://github.com/BensonYang1999>`__ for
    `Simple Machine Learning Toolkit <BensonYang1999/readme.md>`__: https://github.com/BensonYang1999/simple_ML_toolkit
+#. `dpliao <https://github.com/dpliao>`__ for
+   `Histogram Equalization <dpliao/README.md>`__: https://github.com/dpliao/histogram-equalization
