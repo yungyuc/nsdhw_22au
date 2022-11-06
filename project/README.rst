@@ -62,7 +62,6 @@ entry too.  You can request my review in the PR.
 
 Project List by Account Name
 ++++++++++++++++++++++++++++
-
 #. `github_username <https://github.com/github_username>`__ for
    `Project title <github_username/README.rst>`__: https://github.com/github_username/project_name
 #. `ìar1000 <https://github.com/iar1000>`__ for
@@ -83,6 +82,7 @@ Project List by Account Name
    `kmeans <Twl09008181/README.md>`__: https://github.com/Twl09008181/KMeans
 #. `lipper1110 <https://github.com/lipper1110>`__ for
    `Quantitative Trading System <lipper1110/README.md>`__: https://github.com/lipper1110/Quantitative-Trading-System
+
 #. `Vinci881027 <https://github.com/Vinci881027>`__ for
    `HOG <Vinci881027/README.md>`__: https://github.com/Vinci881027/HOG
 #. `davidzwei <https://github.com/davidzwei>`__ for
@@ -103,3 +103,6 @@ Project List by Account Name
 #. `chiehchiYang <https://github.com/chiehchiYang>`__ for `BEV-ROAD-MAP-Generator <chiehchiYang/README.md>`__ : https://github.com/chiehchiYang/BEV-ROAD-MAP-Generator
 #. `BensonYang1999 <https://github.com/BensonYang1999>`__ for
    `Simple Machine Learning Toolkit <BensonYang1999/readme.md>`__: https://github.com/BensonYang1999/simple_ML_toolkit
+#. `OuTingYun <https://github.com/OuTingYun>`__ for
+   `Gussian bluring for Image  <https://github.com/OuTingYun/nsdhw_22au/blob/OuTingYun-proposal-submission/project/OuTingYun/README.md>`__: https://github.com/OuTingYun/Gussian-Bluring
+
