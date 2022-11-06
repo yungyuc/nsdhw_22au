@@ -103,3 +103,5 @@ Project List by Account Name
 #. `chiehchiYang <https://github.com/chiehchiYang>`__ for `BEV-ROAD-MAP-Generator <chiehchiYang/README.md>`__ : https://github.com/chiehchiYang/BEV-ROAD-MAP-Generator
 #. `BensonYang1999 <https://github.com/BensonYang1999>`__ for
    `Simple Machine Learning Toolkit <BensonYang1999/readme.md>`__: https://github.com/BensonYang1999/simple_ML_toolkit
+#. `OuTingYun <https://github.com/OuTingYun>`__ for
+   `Gussian bluring for Image  <https://github.com/OuTingYun/nsdhw_22au/blob/OuTingYun-proposal-submission/project/OuTingYun/README.md>`__: https://github.com/OuTingYun/Gussian-Bluring
