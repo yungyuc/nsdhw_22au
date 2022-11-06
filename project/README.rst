@@ -82,6 +82,27 @@ Project List by Account Name
    `kmeans <Twl09008181/README.md>`__: https://github.com/Twl09008181/KMeans
 #. `lipper1110 <https://github.com/lipper1110>`__ for
    `Quantitative Trading System <lipper1110/README.md>`__: https://github.com/lipper1110/Quantitative-Trading-System
+
+#. `Vinci881027 <https://github.com/Vinci881027>`__ for
+   `HOG <Vinci881027/README.md>`__: https://github.com/Vinci881027/HOG
+#. `davidzwei <https://github.com/davidzwei>`__ for
+   `KD-Tree <davidzwei/README.md>`__: https://github.com/davidzwei/KD-Tree
+#. `charles0521 <https://github.com/charles0521>`__ for
+   `Gaussian-Elimination and QR-decomposition <charles0521/README.md>`__: https://github.com/charles0521/Gaussian-Elimination-and-QR-decomposition
+#. `soulrrrrr <https://github.com/soulrrrrr>`__ for
+   `Columnar Array <soulrrrrr/README.rst>`__: https://github.com/soulrrrrr/ColumnarArray
+#. `hychiu02 <https://github.com/hychiu02>`__ for
+   `AutoEncoder-for-arrhythmia-detection <hychiu02/README.md>`__: https://github.com/hychiu02/AutoEncoder-for-arrhythmia-detection
+#. `rroykuo <https://github.com/rroykuo>`__ for
+   `Clip your arbitrary polygons <rroykuo/README.rst>`__: https://github.com/rroykuo/Clip-your-arbitrary-polygons
+#. `jasonchen1221 <https://github.com/jasonchen1221>`__ for
+   `HB--tree-based-SA-scheme-for-analog-floorplan-design <jasonchen1221/README.md>`__: https://github.com/jasonchen1221/HB--tree-based-SA-scheme-for-analog-floorplan-design>>>>>> 8ade63394a213d53bc0953b1c9cefbba618079ab
+#. `Hooje <https://github.com/Hooje>`__ for `Parallel_Decision_Tree <Hooje/README.md>`__ : https://github.com/Hooje/Parallel_Decision_Tree
+#. `wst24365888 <https://github.com/wst24365888>`__ for
+   `Strem VByte <wst24365888/README.md>`__: https://github.com/wst24365888/stream-vbyte
+#. `chiehchiYang <https://github.com/chiehchiYang>`__ for `BEV-ROAD-MAP-Generator <chiehchiYang/README.md>`__ : https://github.com/chiehchiYang/BEV-ROAD-MAP-Generator
+#. `BensonYang1999 <https://github.com/BensonYang1999>`__ for
+   `Simple Machine Learning Toolkit <BensonYang1999/readme.md>`__: https://github.com/BensonYang1999/simple_ML_toolkit
 #. `OuTingYun <https://github.com/OuTingYun>`__ for
    `Gussian bluring for Image  <https://github.com/OuTingYun/nsdhw_22au/blob/OuTingYun-proposal-submission/project/OuTingYun/README.md>`__: https://github.com/OuTingYun/Gussian-Bluring
 
