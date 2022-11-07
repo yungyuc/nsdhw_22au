@@ -103,3 +103,5 @@ Project List by Account Name
 #. `chiehchiYang <https://github.com/chiehchiYang>`__ for `BEV-ROAD-MAP-Generator <chiehchiYang/README.md>`__ : https://github.com/chiehchiYang/BEV-ROAD-MAP-Generator
 #. `BensonYang1999 <https://github.com/BensonYang1999>`__ for
    `Simple Machine Learning Toolkit <BensonYang1999/readme.md>`__: https://github.com/BensonYang1999/simple_ML_toolkit
+#. `haashiagh10 <https://github.com/haashiagh10>`__ for
+   `Raman Spectroscopy analyze <haashiagh10/readme.md>`__: https://github.com/haashiagh10/nsdhw_22au/tree/haashiagh10-project/project
