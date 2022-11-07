@@ -102,4 +102,9 @@ Project List by Account Name
    `Strem VByte <wst24365888/README.md>`__: https://github.com/wst24365888/stream-vbyte
 #. `chiehchiYang <https://github.com/chiehchiYang>`__ for `BEV-ROAD-MAP-Generator <chiehchiYang/README.md>`__ : https://github.com/chiehchiYang/BEV-ROAD-MAP-Generator
 #. `1am9trash <https://github.com/1am9trash>`__ for `Boolean Operations on Polygons <1am9trash/README.md>`__ : https://github.com/1am9trash/Boolean_Operations_on_Polygons
-#. `BensonYang1999 <https://github.com/BensonYang1999>`__ for `Simple Machine Learning Toolkit <BensonYang1999/readme.md>`__: https://github.com/BensonYang1999/simple_ML_toolkit
+#. `BensonYang1999 <https://github.com/BensonYang1999>`__ for
+   `Simple Machine Learning Toolkit <BensonYang1999/readme.md>`__: https://github.com/BensonYang1999/simple_ML_toolkit
+#. `OuTingYun <https://github.com/OuTingYun>`__ for
+   `Gussian bluring for Image  <https://github.com/OuTingYun/nsdhw_22au/blob/OuTingYun-proposal-submission/project/OuTingYun/README.md>`__: https://github.com/OuTingYun/Gussian-Bluring
+#. `dpliao <https://github.com/dpliao>`__ for
+   `Histogram Equalization <dpliao/README.md>`__: https://github.com/dpliao/histogram-equalization
