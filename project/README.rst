@@ -104,6 +104,8 @@ Project List by Account Name
 #. `1am9trash <https://github.com/1am9trash>`__ for `Boolean Operations on Polygons <1am9trash/README.md>`__ : https://github.com/1am9trash/Boolean_Operations_on_Polygons
 #. `BensonYang1999 <https://github.com/BensonYang1999>`__ for
    `Simple Machine Learning Toolkit <BensonYang1999/readme.md>`__: https://github.com/BensonYang1999/simple_ML_toolkit
+#. `kexuan5458 <https://github.com/kexuan5458>`__ for
+   `Self-Driving Car Localization <kexuan5458/README.md>`__: https://github.com/kexuan5458/Self-Driving_Car_Localization
 #. `haashiagh10 <https://github.com/haashiagh10>`__ for
    `Raman Spectroscopy analyze <haashiagh10/readme.md>`__: https://github.com/haashiagh10/nsdhw_22au/tree/haashiagh10-project/project
 #. `OuTingYun <https://github.com/OuTingYun>`__ for
