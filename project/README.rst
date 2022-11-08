@@ -28,23 +28,29 @@ entry too.  You can request my review in the PR.
 
 .. Presentation
 .. ============
+
 .. The presentation schedule is set.  If you want to change time slots, ask for
    the owner of the other time slot and file a PR tagging him or her and the
    instructor (@yungyuc) against the branch `master`. The other owner needs to
    respond to agree the exchange in the PR. The PR subject line should start
    with ``[presentation]``.
+   
 .. Each presentation can use at most 15 minutes.  Presenters may decide how to
    use their time.  A possible arrangement is to use 12 minutes in the
    presentation itself and 3 minutes for questions and discussions.  Presenters
    are expected to prepare their own computer for presentation.
+   
 .. The time for setting up the computer is included in the allotted
    presentation time.  If presenters have difficulty in preparing a computer
    themselves, they may seek help from the instructor, and resolve the issue
    one week before their presentation.
+   
 .. Time Table
 .. ++++++++++
+
 .. .. list-table:: 12/26 7:00-??:00
 ..   :header-rows: 1
+
 ..   * - ID
 ..     - Time
 ..     - Presenter
@@ -53,6 +59,7 @@ entry too.  You can request my review in the PR.
 ..     - 07:00 - 07:15
 ..     -
 ..     -
+
 Project List by Account Name
 ++++++++++++++++++++++++++++
 
