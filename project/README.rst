@@ -34,17 +34,17 @@ entry too.  You can request my review in the PR.
    instructor (@yungyuc) against the branch `master`. The other owner needs to
    respond to agree the exchange in the PR. The PR subject line should start
    with ``[presentation]``.
-   
+
 .. Each presentation can use at most 15 minutes.  Presenters may decide how to
    use their time.  A possible arrangement is to use 12 minutes in the
    presentation itself and 3 minutes for questions and discussions.  Presenters
    are expected to prepare their own computer for presentation.
-   
+
 .. The time for setting up the computer is included in the allotted
    presentation time.  If presenters have difficulty in preparing a computer
    themselves, they may seek help from the instructor, and resolve the issue
    one week before their presentation.
-   
+
 .. Time Table
 .. ++++++++++
 
