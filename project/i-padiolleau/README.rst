@@ -3,10 +3,13 @@ https://github.com/i-padiolleau/optimization-for-composite-type-data-structure
 
 ##Problem to Solve
 When it comes to optimize a code that manipulate at signicant amount of data, it is important to consider how the data is access to adapt the data structure used in the code. 
-There is different solutions to store composite types array and the data structure impact the efficiency of the cache loading it.
+Compostite types array can be used to represent individuals with specific data (str name, str surname, int age, str nationality, str job, boolean married, int sex, ..)
+There is differents solutions to store composite types array and the data structure impact the efficiency of the cache loading it. 
 - AoS : Arrays of composed data structure
 - SoA : Composite structure composed of different array types
 - Single array with maching index and different type 
+I will try with this project to manipule significant amount of data on a specific population and compute usefull data as (mean age, most given name, percentage of married person, ...)
+based on the three method to store this population data and see which is the more efficient and for what usage.
 
 ##Prospective Users
 The user will be able to manipulate the test that demonstrate the performance of each approch considering optimization
