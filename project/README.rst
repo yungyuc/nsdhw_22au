@@ -116,3 +116,5 @@ Project List by Account Name
    `Gussian bluring for Image  <https://github.com/OuTingYun/nsdhw_22au/blob/OuTingYun-proposal-submission/project/OuTingYun/README.md>`__: https://github.com/OuTingYun/Gussian-Bluring
 #. `dpliao <https://github.com/dpliao>`__ for
    `Histogram Equalization <dpliao/README.md>`__: https://github.com/dpliao/histogram-equalization
+#. `i-padiolleau <https://github.com/i-padiolleau>`__ for
+   `optimization-for-composite-type-data-structure <i-padiolleau/README.rst>`__: https://github.com/i-padiolleau/optimization-for-composite-type-data-structure
