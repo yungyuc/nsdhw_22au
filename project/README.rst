@@ -65,3 +65,5 @@ Project List by Account Name
 
 #. `github_username <https://github.com/github_username>`__ for
    `Project title <github_username/README.rst>`__: https://github.com/github_username/project_name
+#. `i-padiolleau <https://github.com/i-padiolleau>`__ for
+   `optimization-for-composite-type-data-structure <i-padiolleau/README.rst>`__: https://github.com/i-padiolleau/optimization-for-composite-type-data-structure
