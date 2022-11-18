@@ -1,24 +1,25 @@
-#include <iostream>
-#include <iomanip>
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/operators.h>
+#include <vector>
 #include <mkl.h>
+#include <atomic>
+
 
 namespace py = pybind11;
 
 struct ByteCounterStruct {
-    std::atomic_size_t allocated{0};
-    std::atomic_size_t deallocated{0};
-    std::atomic_size_t refcount{0};
+    std::atomic_size_t allocated = 0;
+    std::atomic_size_t deallocated = 0;
+    std::atomic_size_t refcount = 0;
 };
 
 class ByteCounter
 {
     ByteCounterStruct* m_bounter;
 
-    def incref() { ++m_bounter->refcount; }
-    def decref() {
+    void incref() { ++m_bounter->refcount; }
+    void decref() {
         if (nullptr == m_bounter){ }
         else if (1 == m_bounter->refcount) {
             delete m_bounter;
@@ -29,9 +30,10 @@ class ByteCounter
 
     public:
         ByteCounter() : m_bounter(new ByteCounterStruct) { incref(); }
-        ByteCounter(ByteCounter const &other) : m_bounter(other.m_bounter) { incref(); }
+        ByteCounter(ByteCounter const & other) : m_bounter(other.m_bounter) { incref(); }
+        ByteCounter(ByteCounter && other) : m_bounter(other.m_bounter) { incref(); }
 
-        ByteCounter &operator=(ByteCounter const &other) {
+        ByteCounter & operator=(ByteCounter const & other) {
             if (&other != this) {
                 decref();
                 m_bounter = other.m_bounter;
@@ -40,9 +42,8 @@ class ByteCounter
             return *this;
         }
 
-        ByteCounter(ByteCounter &&other) : m_bounter(other.m_bounter) { incref(); }
 
-        ByteCounter &operator=(ByteCounter &&other) {
+        ByteCounter & operator=(ByteCounter && other) {
             if (&other != this) {
                 decref();
                 m_bounter = other.m_bounter;
@@ -60,14 +61,13 @@ class ByteCounter
         std::size_t deallocated() const { return m_bounter->deallocated; }
         /* This is for debugging. */
         std::size_t refcount() const { return m_bounter->refcount; }
-}
+};
+
 
 template <class T>
 struct MyAllocator
 {
     using value_type = T;
-
-    ByteCounter counter;
 
     MyAllocator() = default;
 
@@ -94,9 +94,9 @@ struct MyAllocator
         counter.decrease(bytes);
     }
 
+    ByteCounter counter;
 };
 
-// static allocator instance
 static MyAllocator<double> allocator;
 size_t bytes(){ return allocator.counter.bytes(); }
 size_t allocated(){ return allocator.counter.allocated(); }
@@ -105,19 +105,15 @@ size_t deallocated(){ return allocator.counter.deallocated(); }
 
 class Matrix
 {
-    friend Matrix multiply_naive(Matrix const &mat1, Matrix const &mat2);
-    friend Matrix multiply_tile(Matrix const &mat1, Matrix const &mat2, size_t const tsize);
-    friend Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2);
-    friend bool operator==(Matrix const &mat1, Matrix const &mat2);
 
 public:
 
     size_t m_nrow = 0;
     size_t m_ncol = 0;
-    double *m_buffer = nullptr;
     std::vector<double, MyAllocator<double>> m_vector;
 
     Matrix(size_t nrow, size_t ncol) : m_nrow(nrow), m_ncol(ncol), m_vector(allocator) {
+        if(m_vector.size()) { m_vector.clear(); }
         m_vector.resize(nrow * ncol);
     }
 
@@ -126,20 +122,8 @@ public:
     size_t index(size_t row, size_t col) const { return row * m_ncol + col; }
     
 
-    // legacy
-    void reset_buffer(size_t nrow, size_t ncol) {
-        if (m_buffer) {
-            delete[] m_buffer;
-        }
-        const size_t nelement = nrow * ncol;
-        if (nelement) {
-            m_buffer = new double[nelement];
-        }
-        else {
-            m_buffer = nullptr;
-        }
-        m_nrow = nrow;
-        m_ncol = ncol;
+    double *get_data(){
+        return m_vector.data();
     }
 
     double operator()(size_t row, size_t col) const {
@@ -148,6 +132,17 @@ public:
     
     double &operator()(size_t row, size_t col) {
         return m_vector[index(row, col)];
+    }
+    bool operator==(const Matrix &other) const {
+        for (size_t i = 0; i < m_nrow; ++i){
+            for (size_t j = 0; j < m_ncol; ++j){
+                size_t idx = i * m_ncol + j;
+                if (m_vector[idx] != other.m_vector[idx])
+                    return false;
+            }
+        }
+
+        return true;
     }
 };
 
@@ -182,28 +177,20 @@ Matrix multiply_naive(const Matrix &mat1, const Matrix &mat2) {
     return result;
 }
 
-Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2){
-    mkl_set_num_threads(1);
+Matrix multiply_mkl(Matrix &mat1, Matrix &mat2){
+    Matrix ret(mat1.nrow(), mat2.ncol());
+    size_t m = mat1.nrow();
+    size_t n = mat2.ncol();
+    size_t k = mat1.ncol();
+    double alpha = 1.0;
+    double beta = 0.0;
+    double* A = mat1.get_data(); 
+    double* B = mat2.get_data(); 
+    double* C = ret.get_data(); 
 
-    Matrix result(mat1.nrow(), mat2.ncol());
-    cblas_dgemm(
-        CblasRowMajor,
-        CblasNoTrans,
-        CblasNoTrans,
-        mat1.nrow(),
-        mat2.ncol(),
-        mat1.ncol(),
-        1.0,
-        mat1.m_buffer,
-        mat1.ncol(),
-        mat2.m_buffer,
-        mat2.ncol(),
-        0.0,
-        result.m_buffer,
-        result.ncol()
-    );
-
-    return result;
+    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, 
+                m, n, k, alpha, A, k, B, n, beta, C, n);
+    return ret;
 }
 
 // reference: https://stackoverflow.com/questions/15829223/loop-tiling-blocking-for-large-dense-matrix-multiplication
