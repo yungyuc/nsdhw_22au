@@ -32,7 +32,8 @@ public:
       : m_nrow(nrow), m_ncol(ncol), m_buffer(alloc)
     {
         reset_buffer(nrow, ncol);
-        (*this) = vec;
+        for (int i = 0; i < nrow * ncol; i++)
+            m_buffer[i] = vec[i];
     }
 
     Matrix & operator=(std::vector<double> const & vec)
@@ -53,57 +54,6 @@ public:
         }
 
         return *this;
-    }
-
-    Matrix(Matrix const & other)
-      : m_nrow(other.m_nrow), m_ncol(other.m_ncol)
-    {
-        reset_buffer(other.m_nrow, other.m_ncol);
-        for (size_t i=0; i<m_nrow; ++i)
-        {
-            for (size_t j=0; j<m_ncol; ++j)
-            {
-                (*this)(i,j) = other(i,j);
-            }
-        }
-    }
-
-    Matrix & operator=(Matrix const & other)
-    {
-        if (this == &other) { return *this; }
-        if (m_nrow != other.m_nrow || m_ncol != other.m_ncol)
-        {
-            reset_buffer(other.m_nrow, other.m_ncol);
-        }
-        for (size_t i=0; i<m_nrow; ++i)
-        {
-            for (size_t j=0; j<m_ncol; ++j)
-            {
-                (*this)(i,j) = other(i,j);
-            }
-        }
-        return *this;
-    }
-
-    Matrix(Matrix && other)
-      : m_nrow(other.m_nrow), m_ncol(other.m_ncol)
-    {
-        std::swap(m_nrow, other.m_nrow);
-        std::swap(m_ncol, other.m_ncol);
-        std::swap(m_buffer, other.m_buffer);
-    }
-
-    Matrix & operator=(Matrix && other)
-    {
-        if (this == &other) { return *this; }
-        std::swap(m_nrow, other.m_nrow);
-        std::swap(m_ncol, other.m_ncol);
-        std::swap(m_buffer, other.m_buffer);
-        return *this;
-    }
-
-    ~Matrix()
-    {
     }
 
     bool operator== (const Matrix & other) const
@@ -154,6 +104,10 @@ public:
     vector<double, MyAllocator<double>>m_buffer;
 
 };
+
+size_t bytes() { return alloc.counter.bytes(); }
+size_t allocated() { return alloc.counter.allocated(); }
+size_t deallocated() { return alloc.counter.deallocated(); }
 
 Matrix multiply_naive(Matrix const & mat1, Matrix const & mat2)
 {
@@ -264,5 +218,8 @@ PYBIND11_MODULE(_matrix, m) {
     m.def("multiply_naive", &multiply_naive, "multiply 2 matrix naively.");
     m.def("multiply_tile", &multiply_tile, "multiply 2 matrix by tiling the matrices.");
     m.def("multiply_mkl", &multiply_mkl, "multiply 2 matrix by using mkl library.");
+    m.def("bytes", &bytes);
+    m.def("allocated", &allocated);
+    m.def("deallocated", &deallocated);
 }
 

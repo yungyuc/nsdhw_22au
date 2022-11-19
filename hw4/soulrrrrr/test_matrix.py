@@ -43,6 +43,20 @@ import numpy as np
 import timeit
 import sys
 
+def make_matrices(size):
+
+    mat1 = _matrix.Matrix(size,size)
+    mat2 = _matrix.Matrix(size,size)
+    mat3 = _matrix.Matrix(size,size)
+
+    for it in range(size):
+        for jt in range(size):
+            mat1[it, jt] = it * size + jt + 1
+            mat2[it, jt] = it * size + jt + 1
+            mat3[it, jt] = 0
+
+    return mat1, mat2, mat3
+
 def test_constructor():
     m = _matrix.Matrix(5, 3)
     npm = np.zeros((5, 3), dtype=np.float64)
@@ -99,6 +113,25 @@ def test_multiply_mkl():
     m3 = _matrix.multiply_mkl(m1, m2)
     npm3 = _matrix.Matrix(1000, 1000, np.ravel(np.matmul(npm1, npm2)))
     assert m3 == npm3
+
+def test_memory():
+
+    assert 0 == _matrix.bytes()
+    base_alloc = _matrix.allocated()
+    base_dealloc = _matrix.deallocated()
+
+    size = 1000
+    mat1, mat2, mat3 = make_matrices(size)
+    assert 3*8 * size*size == _matrix.bytes()
+    # New allocation.
+    assert base_alloc + 3*8 * size*size == _matrix.allocated()
+    # No deallocation.
+    assert base_dealloc, _matrix.deallocated()
+    mat1 = mat2 = mat3 = None
+    # Matrices are deallocated.
+    assert 0 == _matrix.bytes()
+    assert base_dealloc + 3*8 * size*size == _matrix.deallocated()
+    assert base_alloc + 3*8 * size*size == _matrix.allocated()
 
 class Writer:
 
