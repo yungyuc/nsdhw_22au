@@ -118,42 +118,28 @@ const Matrix multiply_tile(Matrix& m1, Matrix& m2, int tile_size) {
     return resultM;
 }
 
-Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2)
-{
-    // mkl_set_num_threads(1);
+Matrix multiply_mkl(Matrix const &m1, Matrix const &m2){
+    mkl_set_num_threads(1);
 
-    Matrix ret(mat1.nrow(), mat2.ncol());
-
+    Matrix resultM(m1.nrow(), m2.ncol());
     cblas_dgemm(
-        CblasRowMajor /* const CBLAS_LAYOUT Layout */
-        ,
-        CblasNoTrans /* const CBLAS_TRANSPOSE transa */
-        ,
-        CblasNoTrans /* const CBLAS_TRANSPOSE transb */
-        ,
-        mat1.nrow() /* const MKL_INT m */
-        ,
-        mat2.ncol() /* const MKL_INT n */
-        ,
-        mat1.ncol() /* const MKL_INT k */
-        ,
-        1.0 /* const double alpha */
-        ,
-        mat1.m_buffer /* const double *a */
-        ,
-        mat1.ncol() /* const MKL_INT lda */
-        ,
-        mat2.m_buffer /* const double *b */
-        ,
-        mat2.ncol() /* const MKL_INT ldb */
-        ,
-        0.0 /* const double beta */
-        ,
-        ret.m_buffer /* double * c */
-        ,
-        ret.ncol() /* const MKL_INT ldc */
+        CblasRowMajor,
+        CblasNoTrans,
+        CblasNoTrans,
+        m1.nrow(),
+        m2.ncol(),
+        m1.ncol(),
+        1.0,
+        m1.m_buffer,
+        m1.ncol(),
+        m2.m_buffer,
+        m2.ncol(),
+        0.0,
+        resultM.m_buffer,
+        resultM.ncol()
     );
-    return ret;
+
+    return resultM;
 }
 
 std::ostream & operator << (std::ostream & ostr, Matrix const & mat)
