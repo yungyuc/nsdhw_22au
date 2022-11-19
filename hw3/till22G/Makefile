@@ -1,17 +1,19 @@
-CXX = g++
-CFLAGS = -O3 -Wall -shared -std=c++11 -fPIC
-INCLUDE = `python3 -m pybind11 --includes`
-CONFIG = `python3-config --extension-suffix`
-PY = -I /usr/include/python3.8
-MKL_INC = -I/usr/include/mkl
-MKL_LIB = -L/usr/lib/x86_64-linux-gnu -lblas -pthread -liomp5 -lm -lmkl_intel_thread -lmkl_intel_lp64 -ldl
+CC=g++
+CCFLAGS=-O3 -Wall -m64 -shared -std=c++11 -fPIC
+PATHS=-I/usr/include/mkl -I/usr/include/python3.8
+PYINCLUDE=`python3 -m pybind11 --includes`
+SPEC=`python3-config --extension-suffix`
 
-all:
-	$(CXX) $(CFLAGS) $(INCLUDE) matrix.cpp -o _matrix$(CONFIG) $(PY) $(MKL_LIB) $(MKL_INC)
+MKL_LIB_DIR=-I/usr/include/mkl
+MKL_LIBS=-L/usr/lib/x86_64-linux-gnu -lblas -pthread -liomp5 -lm -lmkl_intel_thread -lmkl_intel_lp64 -ldl
 
-test:
-	$(CXX) $(CFLAGS) $(INCLUDE) matrix.cpp -o _matrix$(CONFIG) $(PY) $(MKL_LIB) $(MKL_INC)
-	python3 -m pytest
 
+run:
+	$(CC) $(CCFLAGS) $(PATHS) $(PYINCLUDE) matrix.cpp -o _matrix$(SPEC) $(MKL_LIBS)
+
+test: run
+	env PTHONPATH=".:PTHONTATH" python3 -m pytest -v
+	@touch performance.txt
+	@python3 matrix_test.py >| performance.txt
 clean:
-	rm -rf __pycache__ .pytest_cache _matrix*.so performance.txt
+	@rm -rf *.so __pycache__ .pytest_cache performance.txt
