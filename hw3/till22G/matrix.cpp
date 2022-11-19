@@ -57,64 +57,49 @@ public:
     double * m_buffer = nullptr;
 private:
 
+const Matrix multiply_naive(Matrix & m1, Matrix &m2) {
 
+    Matrix resultM = Matrix(m1.nrow(), m2.ncol());
+
+    for (size_t i = 0; i < m1.nrow(); ++i) {
+        for (size_t k = 0; k < m2.ncol(); ++k) {
+            double v = 0;
+            for (size_t j = 0; j < m1.ncol(); ++j){
+                v += m1(i, j) * m2(j, k);
+            }
+            resultM(i, k) = v;
+        }
+    }
+
+    return resultM;
 };
-Matrix multiply_naive(const Matrix &mat1, const Matrix &mat2)
-{
-    if (mat1.ncol() != mat2.nrow())
-    {
-        throw std::out_of_range(
-            "the number of first matrix column "
-            "differs from that of second matrix row");
-    }
-    Matrix res(mat1.nrow(), mat2.ncol());
-    for(size_t i = 0; i < mat1.nrow(); ++i)
-    {
-        for (size_t j = 0; j < mat2.ncol(); ++j)
-        {
-            double temp = 0;
-            for (size_t k = 0; k < mat1.ncol(); ++k)
-            {
-                temp += mat1(i, k) * mat2(k, j);
-            }
-            res(i,j) = temp;
-        }
 
-    }
-    return res;
+
+Matrix multiply_mkl(Matrix const &m1, Matrix const &m2){
+    mkl_set_num_threads(1);
+
+    Matrix resultM(m1.nrow(), m2.ncol());
+    cblas_dgemm(
+        CblasRowMajor,
+        CblasNoTrans,
+        CblasNoTrans,
+        m1.nrow(),
+        m2.ncol(),
+        m1.ncol(),
+        1.0,
+        m1.m_buffer,
+        m1.ncol(),
+        m2.m_buffer,
+        m2.ncol(),
+        0.0,
+        resultM.m_buffer,
+        resultM.ncol()
+    );
+
+    return resultM;
 }
-Matrix multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t t_size)
-{
-    if (mat1.ncol() != mat2.nrow())
-    {
-        throw std::out_of_range(
-            "the number of first matrix column "
-            "differs from that of second matrix row");
-    }
-    Matrix res(mat1.nrow(), mat2.ncol());
-    for (int ii = 0; ii < mat1.nrow(); ii+=t_size)
-    {
-        for (int jj = 0; jj < mat2.ncol(); jj+=t_size)
-        {
-            for(int kk = 0; kk < mat1.ncol(); kk+=t_size)
-            {
-                for (int i = ii; i < std::min(ii+t_size, mat1.nrow());  i++)
-                {
-                    for (int j = jj; j < std::min(jj+t_size, mat2.ncol()) ; j++)
-                    {
-                        for (int k = kk; k < std::min(kk+t_size, mat1.ncol()) ; k++)
-                        {
-                            res(i,j) += mat1(i,k) * mat2(k,j);
-                        }
-                    }
 
-                }
 
-            }
-        }
-    }
-    return res;
-}
 Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2)
 {
     // mkl_set_num_threads(1);
