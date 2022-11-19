@@ -6,7 +6,7 @@ SPEC=`python3-config --extension-suffix`
 
 #MKL_LIB_DIR=-I/usr/include/mkl
 #MKL_LIBS=-L/usr/lib/x86_64-linux-gnu -lblas -pthread -liomp5 -lm -lmkl_intel_thread -lmkl_intel_lp64 -ldl
-MKL_LIB_DIR=/usr/lib/x86_64-linux-gnu
+MKL_LIB_DIR=-I/usr/lib/x86_64-linux-gnu
 MKL_LIBS=${MKL_LIB_DIR}/libmkl_def.so \
 			${MKL_LIB_DIR}/libmkl_avx2.so \
 			${MKL_LIB_DIR}/libmkl_core.so \
