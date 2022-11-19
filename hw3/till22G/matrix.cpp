@@ -57,6 +57,9 @@ public:
     double * m_buffer = nullptr;
 private:
 
+
+};
+
 const Matrix multiply_naive(Matrix & m1, Matrix &m2) {
 
     Matrix resultM = Matrix(m1.nrow(), m2.ncol());
@@ -74,31 +77,46 @@ const Matrix multiply_naive(Matrix & m1, Matrix &m2) {
     return resultM;
 };
 
+const Matrix multiply_tile(Matrix& m1, Matrix& m2, int tile_size) {
 
-Matrix multiply_mkl(Matrix const &m1, Matrix const &m2){
-    mkl_set_num_threads(1);
+    const size_t row = m1.nrow();
+    const size_t col = m2.ncol();
 
-    Matrix resultM(m1.nrow(), m2.ncol());
-    cblas_dgemm(
-        CblasRowMajor,
-        CblasNoTrans,
-        CblasNoTrans,
-        m1.nrow(),
-        m2.ncol(),
-        m1.ncol(),
-        1.0,
-        m1.m_buffer,
-        m1.ncol(),
-        m2.m_buffer,
-        m2.ncol(),
-        0.0,
-        resultM.m_buffer,
-        resultM.ncol()
-    );
+    Matrix resultM = Matrix(m1.nrow(), m2.ncol());
 
+    for (size_t i = 0; i < m1.nrow(); ++i) {
+        for (size_t k = 0; k < m2.ncol(); ++k) {
+            resultM(i, k) = 0;
+        }
+    }
+
+    // size of cache line (64) devided by size of double(8)
+    // bigger numbers of incr give slightly better performance, i guess that
+    // is due to effective prefetching
+    size_t incr = tile_size;
+    // outer loops looping over tiles
+    for (size_t i = 0; i < row; i += incr) {
+        size_t x_row_min = std::min(i + incr, row);
+        for (size_t j = 0; j < col; j += incr) {
+            size_t j_col_min = std::min(j + incr, col);
+            for (size_t k = 0; k < col; k += incr){
+                size_t k_row_min = std::min(k + incr, row);
+
+                // inner loops performing matrix multiplications on tiles
+                for (size_t x = i; x < x_row_min; x++) {
+                    for (size_t y = j; y < j_col_min; y++) {
+                        for (size_t z = k; z < k_row_min; z++) {
+
+                           // resultM[x * col + y] += m1[x * col + z] * m2[z * col + y];
+                           resultM(x, y) += m1(x, z) * m2(z, y);
+                        }
+                    }
+                }
+            }
+        }
+    }
     return resultM;
 }
-
 
 Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2)
 {
