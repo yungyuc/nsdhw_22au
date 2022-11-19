@@ -119,7 +119,7 @@ const Matrix multiply_tile(Matrix& m1, Matrix& m2, int tile_size) {
 }
 
 Matrix multiply_mkl(Matrix const &m1, Matrix const &m2){
-    mkl_set_num_threads(1);
+   // mkl_set_num_threads(1);
 
     Matrix resultM(m1.nrow(), m2.ncol());
     cblas_dgemm(
