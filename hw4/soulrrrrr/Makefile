@@ -9,7 +9,7 @@ SUFFIX = $(shell python3-config --extension-suffix)
 
 all: _matrix
 
-_matrix: _matrix.cpp
+_matrix: _matrix.cpp alloc.hpp
 	$(CXX) $(CFLAGS) $(INCLUDE) $< -o $@$(SUFFIX) $(PYCONFIG) $(MKL_FLAGS)
 
 test: all

@@ -11,20 +11,25 @@
 #include <pybind11/operators.h>
 #include <pybind11/stl.h>
 
+#include "alloc.hpp"
+
 namespace py = pybind11;
+using std::vector;
+
+static MyAllocator<double> alloc;
 
 class Matrix {
 
 public:
 
     Matrix(size_t nrow, size_t ncol)
-        : m_nrow(nrow), m_ncol(ncol)
+        : m_nrow(nrow), m_ncol(ncol), m_buffer(alloc)
     {
         reset_buffer(nrow, ncol);
     }
 
     Matrix(size_t nrow, size_t ncol, std::vector<double> const & vec)
-      : m_nrow(nrow), m_ncol(ncol)
+      : m_nrow(nrow), m_ncol(ncol), m_buffer(alloc)
     {
         reset_buffer(nrow, ncol);
         (*this) = vec;
@@ -83,7 +88,6 @@ public:
     Matrix(Matrix && other)
       : m_nrow(other.m_nrow), m_ncol(other.m_ncol)
     {
-        reset_buffer(0, 0);
         std::swap(m_nrow, other.m_nrow);
         std::swap(m_ncol, other.m_ncol);
         std::swap(m_buffer, other.m_buffer);
@@ -92,7 +96,6 @@ public:
     Matrix & operator=(Matrix && other)
     {
         if (this == &other) { return *this; }
-        reset_buffer(0, 0);
         std::swap(m_nrow, other.m_nrow);
         std::swap(m_ncol, other.m_ncol);
         std::swap(m_buffer, other.m_buffer);
@@ -101,7 +104,6 @@ public:
 
     ~Matrix()
     {
-        reset_buffer(0, 0);
     }
 
     bool operator== (const Matrix & other) const
@@ -142,21 +144,14 @@ public:
 
     void reset_buffer(size_t nrow, size_t ncol)
     {
-        if (m_buffer) { delete[] m_buffer; }
-        size_t nelement = nrow * ncol; // const?
-        if (nelement)
-        { 
-            m_buffer = new double[nelement];
-            memset(m_buffer, 0, sizeof(double)*nelement);
-        }
-        else { m_buffer = nullptr; }
+        m_buffer.resize(nrow * ncol, 0);
         m_nrow = nrow;
         m_ncol = ncol;
     }
 
     size_t m_nrow = 0;
     size_t m_ncol = 0;
-    double * m_buffer = nullptr;
+    vector<double, MyAllocator<double>>m_buffer;
 
 };
 
@@ -235,12 +230,12 @@ Matrix multiply_mkl(Matrix const & mat1, Matrix const & mat2)
       , mat2.ncol() /* const MKL_INT n */
       , mat1.ncol() /* const MKL_INT k */
       , 1.0 /* const double alpha */
-      , mat1.m_buffer /* const double *a */
+      , mat1.m_buffer.data() /* const double *a */
       , mat1.ncol() /* const MKL_INT lda */
-      , mat2.m_buffer /* const double *b */
+      , mat2.m_buffer.data() /* const double *b */
       , mat2.ncol() /* const MKL_INT ldb */
       , 0.0 /* const double beta */
-      , ret.m_buffer /* double * c */
+      , ret.m_buffer.data() /* double * c */
       , ret.ncol() /* const MKL_INT ldc */
     );
 
