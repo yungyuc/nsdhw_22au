@@ -118,3 +118,5 @@ Project List by Account Name
    `Histogram Equalization <dpliao/README.md>`__: https://github.com/dpliao/histogram-equalization
 #. `i-padiolleau <https://github.com/i-padiolleau>`__ for
    `optimization-for-composite-type-data-structure <i-padiolleau/README.rst>`__: https://github.com/i-padiolleau/optimization-for-composite-type-data-structure
+#. `tmp54 <https://github.com/tmp54>`__ for
+   `r-tree <tmp54/README.md>`__: https://github.com/tmp54/r-tree
