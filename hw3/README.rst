@@ -80,4 +80,3 @@ There are totally 5 points in this homework assignment.
    it reasonable.  (1 point)
 
 .. vim: set ft=rst ff=unix fenc=utf8 et sw=2 ts=2 sts=2:
-
