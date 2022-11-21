@@ -91,7 +91,7 @@ PYBIND11_MODULE(_matrix, m)
     m.def("multiply_naive", multiply_naive<double>, "Matrix multiplication with naive method.");
     m.def("multiply_tile", multiply_tile<double>, "Matrix multiplication with tile method.");
     m.def("multiply_mkl", multiply_mkl<double>, "Matrix multiplication with mkl method.");
-    m.def("bytes", bytes, "MyAllocator bytes.");
-    m.def("allocated", allocated, "MyAllocator allocated.");
-    m.def("deallocated", deallocated, "MyAllocator deallocated.");
+    m.def("bytes", bytes, "Allocator bytes.");
+    m.def("allocated", allocated, "Allocator allocated.");
+    m.def("deallocated", deallocated, "Allocator deallocated.");
 }
