@@ -1,97 +1,254 @@
-#include <cassert>
-#include <utility>
-#include <sstream>
+#include <iostream>
 #include <pybind11/pybind11.h>
 #include <pybind11/operators.h>
+#include <pybind11/numpy.h>
+#include <pybind11/stl.h>
+#include <bits/stdc++.h>
+#include <cblas.h>
 
-
-#include "matrix.h"
-
-using namespace std;
-
-template<typename T>
-Matrix<T> multiply_naive(const Matrix<T>& m1, const Matrix<T>& m2)
+struct Byte_Counter_Impl
 {
-    assert(m1.cols() == m2.rows());
+    std::atomic_size_t allocated{0};
+    std::atomic_size_t deallocated{0};
+    std::atomic_size_t refcount{0};
+};
 
-    Matrix<T> m3(m1.rows(), m2.cols());
+class Byte_Counter
+{
+public:
+    Byte_Counter()
+        : m_impl(new Byte_Counter_Impl)
+    {
+        ++m_impl->refcount;
+    }
 
-    size_t rows = m1.rows();
-    size_t cols = m2.cols();
-    size_t inners = m1.cols();
+    Byte_Counter(Byte_Counter const &other)
+        : m_impl(other.m_impl)
+    {
+        ++m_impl->refcount;
+    }
 
-    for (size_t row = 0; row < rows; row++) {
-        for (size_t col = 0; col < cols; col++) {
-            for (size_t inner = 0; inner < inners; inner++) {
-                m3(row, col) += m1(row, inner) * m2(inner, col);
-            }
+    Byte_Counter &operator=(Byte_Counter const &other){
+        if (&other != this){
+            decref();
+            m_impl = other.m_impl;
+            ++m_impl->refcount;
+        }
+        return *this;
+    }
+
+    Byte_Counter(Byte_Counter &&other)
+        : m_impl(other.m_impl)
+    {
+        ++m_impl->refcount;
+    }
+
+    Byte_Counter &operator=(Byte_Counter &&other){
+        if (&other != this){
+            decref();
+            m_impl = other.m_impl;
+            ++m_impl->refcount;
+        }
+        return *this;
+    }
+
+    ~Byte_Counter() { decref(); }
+
+    void swap(Byte_Counter &other){
+        std::swap(m_impl, other.m_impl);
+    }
+
+    void increase(std::size_t amount){
+        m_impl->allocated += amount;
+    }
+
+    void decrease(std::size_t amount){
+        m_impl->deallocated += amount;
+    }
+
+    std::size_t bytes() const{
+        return m_impl->allocated - m_impl->deallocated;
+    }
+
+    std::size_t allocated() const{
+        return m_impl->allocated;
+    }
+
+    std::size_t deallocated() const{
+        return m_impl->deallocated;
+    }
+
+    std::size_t refcount() const{
+        return m_impl->refcount;
+    }
+
+private:
+        void decref(){
+        if (nullptr == m_impl){// Do nothing
+        }else if (1 == m_impl->refcount){
+            delete m_impl;
+            m_impl = nullptr;
+        }else{
+            --m_impl->refcount;
+        }
+    }
+    Byte_Counter_Impl *m_impl;
+};
+
+template <class T>
+struct CustomAllocator
+{
+    using value_type = T;
+
+    CustomAllocator() = default;
+
+    template <class U>
+    constexpr CustomAllocator(const CustomAllocator<U> &other) noexcept
+    {
+        counter = other.counter;
+    }
+
+    T *allocate(std::size_t n){
+        if (n > std::numeric_limits<std::size_t>::max() / sizeof(T)){
+            throw std::bad_alloc();
+        }
+        const std::size_t bytes = n * sizeof(T);
+        T *p = static_cast<T *>(std::malloc(bytes));
+        if (p){
+            counter.increase(bytes);
+            return p;
+        }else{
+            throw std::bad_alloc();
         }
     }
 
-    return m3;
+    void deallocate(T *p, std::size_t n) noexcept{
+        std::free(p);
+        const std::size_t bytes = n * sizeof(T);
+        counter.decrease(bytes);
+    }
+
+    Byte_Counter counter;
+};
+
+//functions
+static CustomAllocator<double> allocator;
+size_t bytes(){
+    return allocator.counter.bytes();
 }
 
-template<typename T>
-Matrix<T> multiply_tile(const Matrix<T>& m1, const Matrix<T>& m2, size_t size)
+size_t allocated(){
+    return allocator.counter.allocated();
+}
+
+size_t deallocated(){
+    return allocator.counter.deallocated();
+}
+
+
+class Matrix
 {
-    assert(m1.cols() == m2.rows());
+private:
+    std::vector<double, CustomAllocator<double>> m_array;
+    size_t m_row_num, m_col_num;
 
-    Matrix<T> m3(m1.rows(), m2.cols());
+public:
+    Matrix(size_t row_num, size_t col_num) : m_array(allocator){
+        m_row_num = row_num;
+        m_col_num = col_num;
+        m_array.resize(row_num * col_num);
+    }
 
-    for (size_t row = 0; row < m1.rows(); row += size) {
-        for (size_t col = 0; col < m2.cols(); col += size) {
-            for (size_t inner = 0; inner < m1.cols(); inner += size) {
-                // tile
-                for (size_t k = inner; k < min(m1.cols(), inner + size); k++) {
-                    for (size_t i = row; i < min(m1.rows(), row + size); i++) {
-                        for (size_t j = col; j < min(m2.cols(), col + size); j++) {
-                            m3(i, j) += m1(i, k) * m2(k, j);
-                        }
+    size_t nrow() const { return m_row_num; }
+    size_t ncol() const { return m_col_num; }
+
+    double *data(){
+        return m_array.data();
+    }
+
+    double operator()(size_t row, size_t col) const{
+        return m_array[row * m_col_num + col];
+    }
+
+    double &operator()(size_t row, size_t col){
+        return m_array[row * m_col_num + col];
+    }
+
+    double getitem(std::pair<size_t, size_t> index){
+        return (*this)(index.first, index.second);
+    }
+
+    void setitem(std::pair<size_t, size_t> index, double value){
+        (*this)(index.first, index.second) = value;
+    }
+};
+
+bool operator==(Matrix const &mat1, Matrix const &mat2)
+{
+    if (mat1.ncol() != mat2.ncol() || mat1.nrow() != mat2.ncol())
+        return false;
+
+    for (size_t i = 0; i < mat1.nrow(); i++){
+        for (size_t j = 0; j < mat1.ncol(); j++){
+            if (mat1(i, j) != mat2(i, j))
+                return false;
+        }
+    }
+    return true;
+}
+
+
+Matrix multiply_naive(Matrix &mat1, Matrix &mat2)
+{
+    Matrix res(mat1.nrow(), mat2.ncol());
+    for (size_t k = 0; k < mat2.ncol(); k++)
+        for (size_t i = 0; i < mat1.nrow(); i++)
+            for (size_t j = 0; j < mat1.ncol(); j++)
+                res(i, k) += mat1(i, j) * mat2(j, k);
+
+    return res;
+}
+
+Matrix multiply_tile(Matrix &mat1, Matrix &mat2, size_t tsize)
+{
+    Matrix res(mat1.nrow(), mat2.ncol());
+
+    for (size_t ti = 0; ti < mat1.nrow(); ti += tsize)
+        for (size_t tj = 0; tj < mat1.ncol(); tj += tsize)
+            for (size_t tk = 0; tk < mat2.ncol(); tk += tsize)
+                for (size_t i = ti; i < std::min(ti + tsize, mat1.nrow()); i++)
+                    for (size_t k = tk; k < std::min(tk + tsize, mat2.ncol()); k++){
+                        double tmp = 0.0;
+                        for (size_t j = tj; j < std::min(tj + tsize, mat1.ncol()); j++)
+                            tmp += mat1(i, j) * mat2(j, k);
+                        res(i, k) += tmp;
                     }
-                }
-            }
-        }
-    }
-
-    return m3;
+    return res;
 }
 
-template<typename T>
-Matrix<T> multiply_mkl(Matrix<T>& m1, Matrix<T>& m2)
+Matrix multiply_mkl(Matrix &mat1, Matrix &mat2)
 {
-    assert(m1.cols() == m2.rows());
-
-    Matrix<T> m3(m1.rows(), m2.cols());
-
-    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, m1.rows(), m2.cols(), m1.cols(), 1, m1.data(), m1.cols(), m2.data(), m2.cols(), 0, m3.data(), m3.cols());
-
-    return m3;
+    Matrix res(mat1.nrow(), mat2.ncol());
+    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans,mat1.nrow(), mat2.ncol(), mat1.ncol(),1.0, mat1.data(), mat1.ncol(), mat2.data(), mat2.ncol(), 0.0, res.data(), mat2.ncol());
+    return res;
 }
 
+//Python wrap for C++
 PYBIND11_MODULE(_matrix, m)
 {
-    pybind11::class_<Matrix<double>>(m, "Matrix")
+    m.doc() = "Matrix multiplication";
+    m.def("multiply_naive", &multiply_naive);
+    m.def("multiply_tile", &multiply_tile);
+    m.def("multiply_mkl", &multiply_mkl);
+    m.def("bytes", &bytes);
+    m.def("allocated", &allocated);
+    m.def("deallocated", &deallocated);
+
+    pybind11::class_<Matrix>(m, "Matrix")
         .def(pybind11::init<size_t, size_t>())
-        .def("__getitem__", [](Matrix<double>& m, pair<size_t, size_t> index) {
-            return m(index.first, index.second);
-        })
-        .def("__setitem__", [](Matrix<double>& m, pair<size_t, size_t> index, double value) {
-            m(index.first, index.second) = value;
-        })
-        .def("__str__", [](Matrix<double>& m) {
-            stringstream ss;
-            ss << m;
-
-            return ss.str();
-        })
         .def(pybind11::self == pybind11::self)
-        .def_property_readonly("nrow", &Matrix<double>::rows)
-        .def_property_readonly("ncol", &Matrix<double>::cols);
-
-    m.def("multiply_naive", multiply_naive<double>, "Matrix multiplication with naive method.");
-    m.def("multiply_tile", multiply_tile<double>, "Matrix multiplication with tile method.");
-    m.def("multiply_mkl", multiply_mkl<double>, "Matrix multiplication with mkl method.");
-    m.def("bytes", bytes, "Allocator bytes.");
-    m.def("allocated", allocated, "Allocator allocated.");
-    m.def("deallocated", deallocated, "Allocator deallocated.");
+        .def("__getitem__", &Matrix::getitem)
+        .def("__setitem__", &Matrix::setitem)
+        .def_property_readonly("nrow", &Matrix::nrow)
+        .def_property_readonly("ncol", &Matrix::ncol);
 }

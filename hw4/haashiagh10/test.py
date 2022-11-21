@@ -1,4 +1,4 @@
-import _matrix
+import matrix
 
 
 def test_correctness()
