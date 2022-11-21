@@ -8,7 +8,7 @@ BLAS = -I /usr/include/mkl/ -L /usr/lib/x86_64-linux-gnu -lblas
 .PHONY: clean
 
 all: $(SRC)
-	$(CXX) $(FLAGS) $(shell python3 -m pybind11 --includes) _matrix.cpp $(PYBD11) $(BLAS) -o $(EXE)	
+	$(CXX) $(FLAGS) $(shell python3 -m pybind11 --includes) matrix.cpp $(PYBD11) $(BLAS) -o $(EXE)	
 
 test: 
 	python3 -m pytest test.py
