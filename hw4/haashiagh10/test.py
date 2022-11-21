@@ -1,7 +1,7 @@
 import pytest
 import numpy
 import time
-import matrix
+import _matrix
 def test_correctness()
     size = 500
 
