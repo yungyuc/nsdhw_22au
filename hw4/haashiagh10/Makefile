@@ -1,5 +1,5 @@
 CXX = g++
-EXE = _matrix$(shell python3-config --extension-suffix)
+EXE = matrix$(shell python3-config --extension-suffix)
 
 FLAGS = -O3 -Wall -shared -fPIC -std=c++17
 PYBD11 = -I /usr/include/python3.8 -I /usr/include/pybind11 -lpython3.8 `python3 -m pybind11 --includes`
