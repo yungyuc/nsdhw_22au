@@ -1,18 +1,22 @@
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+#include <pybind11/operators.h>
 #include <cstdlib>
+#include <iostream>
+#include <atomic>
+#include <vector>
 #include <new>
 #include <memory>
 #include <limits>
-#include <atomic>
-#include <vector>
-#include <iostream>
+
+using namespace std;
+// based on https://yyc.solvcon.net/en/latest/nsd/07mem/example.html#nsd-mem-example-alloc
 
 struct ByteCounterImpl
 {
-
-    std::atomic_size_t allocated = 0;
-    std::atomic_size_t deallocated = 0;
-    std::atomic_size_t refcount = 0;
-
+    atomic_size_t allocated = 0;
+    atomic_size_t deallocated = 0;
+    atomic_size_t refcount = 0;
 }; /* end struct ByteCounterImpl */
 
 /**
@@ -69,21 +73,21 @@ public:
         std::swap(m_impl, other.m_impl);
     }
 
-    void increase(std::size_t amount)
+    void increase(size_t amount)
     {
         m_impl->allocated += amount;
     }
 
-    void decrease(std::size_t amount)
+    void decrease(size_t amount)
     {
         m_impl->deallocated += amount;
     }
 
-    std::size_t bytes() const { return m_impl->allocated - m_impl->deallocated; }
-    std::size_t allocated() const { return m_impl->allocated; }
-    std::size_t deallocated() const { return m_impl->deallocated; }
+    size_t bytes() const { return m_impl->allocated - m_impl->deallocated; }
+    size_t allocated() const { return m_impl->allocated; }
+    size_t deallocated() const { return m_impl->deallocated; }
     /* This is for debugging. */
-    std::size_t refcount() const { return m_impl->refcount; }
+    size_t refcount() const { return m_impl->refcount; }
 
 private:
 
@@ -110,11 +114,8 @@ private:
 
 }; /* end class ByteCounter */
 
-/**
+/*
  * Very simple allocator that counts the number of bytes allocated through it.
- *
- * It's made to demonstrate the STL allocator and only works in this example.
- * A lot of modification is needed to use it in a real application.
  */
 template <class T>
 struct MyAllocator
@@ -132,14 +133,14 @@ struct MyAllocator
         counter = other.counter;
     }
 
-    T * allocate(std::size_t n)
+    T * allocate(size_t n)
     {
-        if (n > std::numeric_limits<std::size_t>::max() / sizeof(T))
+        if (n > numeric_limits<size_t>::max() / sizeof(T))
         {
-            throw std::bad_alloc();
+            throw bad_alloc();
         }
-        const std::size_t bytes = n*sizeof(T);
-        T * p = static_cast<T *>(std::malloc(bytes));
+        const size_t bytes = n*sizeof(T);
+        T * p = static_cast<T *>(malloc(bytes));
         if (p)
         {
             counter.increase(bytes);
@@ -147,21 +148,24 @@ struct MyAllocator
         }
         else
         {
-            throw std::bad_alloc();
+            throw bad_alloc();
         }
     }
 
-    void deallocate(T* p, std::size_t n) noexcept
+    void deallocate(T* p, size_t n) noexcept
     {
-        std::free(p);
+        free(p);
 
-        const std::size_t bytes = n*sizeof(T);
+        const size_t bytes = n*sizeof(T);
         counter.decrease(bytes);
     }
 
     ByteCounter counter;
 
 }; /* end struct MyAllocator */
+
+
+
 
 template <class T, class U>
 bool operator==(const MyAllocator<T> & a, const MyAllocator<U> & b)
@@ -175,39 +179,11 @@ bool operator!=(const MyAllocator<T> & a, const MyAllocator<U> & b)
     return !(a == b);
 }
 
-template <class T>
-std::ostream & operator << (std::ostream & out, const MyAllocator<T> & alloc)
-{
-    out << "allocator: bytes = " << alloc.counter.bytes();
-    out << " allocated = " << alloc.counter.allocated();
-    out << " deallocated = " << alloc.counter.deallocated();
-    return out;
-}
-
-int main(int argc, char ** argv)
-{
-    MyAllocator<size_t> alloc;
-
-    std::vector<size_t, MyAllocator<size_t>> vec1(alloc);
-    std::cout << alloc << std::endl;
-
-    for (size_t it=0; it<1024; ++it)
-    {
-        vec1.push_back(it);
-    }
-    std::cout << alloc << std::endl;
-
-    std::vector<size_t, MyAllocator<size_t>>(alloc).swap(vec1);
-    std::cout << alloc << std::endl;
-
-    std::vector<size_t, MyAllocator<size_t>> vec2(1024, alloc);
-    std::cout << alloc << std::endl;
-
-    std::vector<size_t, MyAllocator<size_t>> vec3(std::move(vec2));
-    std::cout << alloc << std::endl;
-
-    std::vector<size_t, MyAllocator<size_t>>(alloc).swap(vec3);
-    std::cout << alloc << std::endl;
-
-    return 0;
-}
+// template <class T>
+// ostream & operator << (ostream & out, const MyAllocator<T> & alloc)
+// {
+//     out << "allocator: bytes = " << alloc.counter.bytes();
+//     out << " allocated = " << alloc.counter.allocated();
+//     out << " deallocated = " << alloc.counter.deallocated();
+//     return out;
+// }
