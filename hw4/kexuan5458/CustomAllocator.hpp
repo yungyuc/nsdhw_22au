@@ -1,15 +1,3 @@
-#include <pybind11/pybind11.h>
-#include <pybind11/stl.h>
-#include <pybind11/operators.h>
-#include <cstdlib>
-#include <iostream>
-#include <atomic>
-#include <vector>
-#include <new>
-#include <memory>
-#include <numeric>
-#include <limits>
-#include <stdexcept>
 
 using namespace std;
 // based on https://yyc.solvcon.net/en/latest/nsd/07mem/example.html#nsd-mem-example-alloc
