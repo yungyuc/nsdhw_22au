@@ -129,8 +129,8 @@ struct MyAllocator
     // "counter".
     MyAllocator() = default;
 
-    template <class U> constexpr
-    MyAllocator(const MyAllocator<U> & other) noexcept
+    template <class U> 
+    constexpr MyAllocator(const MyAllocator<U> & other) noexcept
     {
         counter = other.counter;
     }

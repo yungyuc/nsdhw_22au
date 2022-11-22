@@ -11,7 +11,6 @@
 #include <numeric>
 #include <mkl.h>
 
-
 #include "CustomAllocator.hpp"
 using namespace std;
 
@@ -35,12 +34,10 @@ public:
     // initialize
     size_t m_nrow = 0;
     size_t m_ncol = 0;
-    double* m_buffer = nullptr;
+    // double* m_buffer = nullptr;
 
     Matrix(size_t nrow, size_t ncol): m_nrow(nrow), m_ncol(ncol), m_buffer(Myalloc)
     {
-        size_t nelement = nrow * ncol;
-        //m_buffer = new double[nelement];
         m_buffer.resize(nrow * ncol);
     }
 
@@ -76,7 +73,7 @@ public:
         return equal(m_buffer.begin(), m_buffer.end(), other.m_buffer.begin());
     }
 
-    vector<double, MyAllocator<double>> m_buffer; 
+    vector<double, MyAllocator<double>> m_buffer;
 
 };
 
