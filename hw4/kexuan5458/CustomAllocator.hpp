@@ -135,14 +135,14 @@ struct MyAllocator
         counter = other.counter;
     }
 
-    T * allocate(size_t n)
+    T *allocate(size_t n)
     {
         if (n > numeric_limits<size_t>::max() / sizeof(T))
         {
             throw bad_alloc();
         }
-        const size_t bytes = n*sizeof(T);
-        T * p = static_cast<T *>(malloc(bytes));
+        const size_t bytes = n * sizeof(T);
+        T *p = static_cast<T *>(malloc(bytes));
         if (p)
         {
             counter.increase(bytes);
@@ -154,11 +154,12 @@ struct MyAllocator
         }
     }
 
-    void deallocate(T* p, size_t n) noexcept
+
+    void deallocate(T *p, size_t n) noexcept
     {
         free(p);
 
-        const size_t bytes = n*sizeof(T);
+        const size_t bytes = n * sizeof(T);
         counter.decrease(bytes);
     }
 
@@ -169,17 +170,17 @@ struct MyAllocator
 
 
 
-template <class T, class U>
-bool operator==(const MyAllocator<T> & a, const MyAllocator<U> & b)
-{
-    return a.counter == b.counter;
-}
+// template <class T, class U>
+// bool operator==(const MyAllocator<T> & a, const MyAllocator<U> & b)
+// {
+//     return a.counter == b.counter;
+// }
 
-template <class T, class U>
-bool operator!=(const MyAllocator<T> & a, const MyAllocator<U> & b)
-{
-    return !(a == b);
-}
+// template <class T, class U>
+// bool operator!=(const MyAllocator<T> & a, const MyAllocator<U> & b)
+// {
+//     return !(a == b);
+// }
 
 // template <class T>
 // ostream & operator << (ostream & out, const MyAllocator<T> & alloc)

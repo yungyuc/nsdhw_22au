@@ -45,26 +45,24 @@ public:
     // {
     //     delete[] m_buffer;
     // }
-
-    void reset_buffer(size_t nrow, size_t ncol)
-    {
-        if(m_buffer)    // if exist
-            delete[] m_buffer;
-        m_buffer = new double[nrow * ncol];
-    }
+    // void reset_buffer(size_t nrow, size_t ncol)
+    // {
+    //     if(m_buffer)    // if exist
+    //         delete[] m_buffer;
+    //     m_buffer = new double[nrow * ncol];
+    // }
 
     size_t nrow() const { return m_nrow; }
     size_t ncol() const { return m_ncol; }
 
     // set data & get data
-    double  operator() (size_t row, size_t col) const
+    double operator()(size_t row, size_t col) const
     {
-        return m_buffer[row*m_ncol + col];
+        return m_buffer[row * m_ncol + col];
     }
-
-    double &operator() (size_t row, size_t col)
+    double &operator()(size_t row, size_t col)
     {
-        return m_buffer[row*m_ncol + col];
+        return m_buffer[row * m_ncol + col];
     }
 
     // compare
