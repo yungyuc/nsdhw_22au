@@ -6,6 +6,9 @@
 #include <vector>
 #include <atomic>
 #include <algorithm>
+#include <iostream>
+#include <iomanip>
+#include <numeric>
 #include <mkl.h>
 
 
@@ -118,11 +121,11 @@ Matrix multiply_tile(const Matrix &mat1, const Matrix &mat2,  size_t tile_size) 
             for (size_t k = 0; k < mat1.ncol(); k += tile_size)
             {
                 size_t k_max = min(k + tile_size, mat1.ncol());
-                for(size_t j2 = j; j2 < j_max; l++)
+                for(size_t j2 = j; j2 < j_max; j2++)
                 {
-                    for(size_t i2 = i; i2 < i_max; m++)
+                    for(size_t i2 = i; i2 < i_max; i2++)
                     {
-                        for(size_t k2 = k; k2 < k_max; n++)
+                        for(size_t k2 = k; k2 < k_max; k2++)
                         {
                             ret(i2, j2) += mat1(i2, k2) * mat2(k2, j2);
                         }

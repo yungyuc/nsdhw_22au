@@ -7,16 +7,18 @@
 #include <vector>
 #include <new>
 #include <memory>
+#include <numeric>
 #include <limits>
+#include <stdexcept>
 
 using namespace std;
 // based on https://yyc.solvcon.net/en/latest/nsd/07mem/example.html#nsd-mem-example-alloc
 
 struct ByteCounterImpl
 {
-    atomic_size_t allocated = 0;
-    atomic_size_t deallocated = 0;
-    atomic_size_t refcount = 0;
+    size_t allocated = 0;
+    size_t deallocated = 0;
+    size_t refcount = 0;
 }; /* end struct ByteCounterImpl */
 
 /**
