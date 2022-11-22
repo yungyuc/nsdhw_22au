@@ -1,3 +1,12 @@
+#include <cstdlib>
+#include <iostream>
+#include <atomic>
+#include <vector>
+#include <new>
+#include <memory>
+#include <numeric>
+#include <limits>
+#include <stdexcept>
 
 using namespace std;
 // based on https://yyc.solvcon.net/en/latest/nsd/07mem/example.html#nsd-mem-example-alloc
