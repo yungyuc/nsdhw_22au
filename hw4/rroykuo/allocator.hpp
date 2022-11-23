@@ -7,9 +7,9 @@
 struct ByteCounterImpl
 {
 
-    std::atomic_size_t allocated = 0;
-    std::atomic_size_t deallocated = 0;
-    std::atomic_size_t refcount = 0;
+    std::size_t allocated = 0;
+    std::size_t deallocated = 0;
+    std::size_t refcount = 0;
 
 }; /* end struct ByteCounterImpl */
 
