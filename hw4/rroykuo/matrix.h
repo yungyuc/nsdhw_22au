@@ -1,11 +1,17 @@
 # include <vector>
 # include <iostream>
+# include "allocator.hpp"
+
+
+static MyAllocator<double> alloc;
+
+
 
 class Matrix {
   public:
     Matrix(size_t input_row_n, size_t input_col_n)
-      : row_n(input_row_n), col_n(input_col_n){
-        this->mat.resize(input_col_n * input_row_n, 0);
+      : row_n(input_row_n), col_n(input_col_n), mat(alloc){
+        this->mat.resize(input_col_n * input_row_n);
       }
 
     Matrix(Matrix const &input_mat){
@@ -20,13 +26,13 @@ class Matrix {
       this->mat = std::move(input_mat.mat);
     }
 
-    Matrix()
-    :row_n(0), col_n(0){}
+    // Matrix()
+    // :row_n(0), col_n(0){}
 
-    ~Matrix(){
-      mat.erase(mat.begin(), mat.end());
-      mat.shrink_to_fit();
-    }
+    // ~Matrix(){
+    //   mat.erase(mat.begin(), mat.end());
+    //   mat.shrink_to_fit();
+    // }
 
     double & operator() (size_t input_row, size_t input_col) {
       return mat[this->col_n * input_row + input_col];
@@ -59,7 +65,20 @@ class Matrix {
     }
 
     bool operator== (const Matrix &mat2) const{
-      return (this->mat == mat2.mat);
+       if (row_n!= mat2.nrow() || col_n != mat2.ncol()){
+             return false;
+         }
+
+         for (size_t i = 0; i < mat2.nrow(); ++i)
+         {
+             for (size_t j = 0; j < mat2.ncol(); ++j)
+             {
+                 if ((*this)(i, j) != mat2(i, j)){
+                     return false;
+                 }
+             }
+         }
+        return true;
     }
 
     const double* data() const{
@@ -68,24 +87,34 @@ class Matrix {
     double* data(){
       return &(this->mat[0]);
     }
-    friend std::ostream& operator<<(std::ostream& os, const Matrix& matrix)
-    {
-        for (size_t i = 0; i < matrix.nrow(); i++) {
-            for (size_t j = 0; j < matrix.ncol(); j++) {
-                os << matrix(i, j) << (j == matrix.ncol() - 1 ? "" : " ");
-            }
+    // friend std::ostream& operator<<(std::ostream& os, const Matrix& matrix)
+    // {
+    //     for (size_t i = 0; i < matrix.nrow(); i++) {
+    //         for (size_t j = 0; j < matrix.ncol(); j++) {
+    //             os << matrix(i, j) << (j == matrix.ncol() - 1 ? "" : " ");
+    //         }
 
-            if (i < matrix.nrow() - 1) os << '\n';
-        }
-
-        return os;
-    }
-
-
+    //         if (i < matrix.nrow() - 1) os << '\n';
+    //     }
+    //     return os;
+    // }
 
   private:
     size_t row_n;
     size_t col_n;
-    std::vector <double> mat;
+    std::vector <double, MyAllocator<double>> mat;
 
 };
+
+size_t bytes(){
+  return alloc.counter.bytes();
+}
+
+size_t allocated(){
+  return alloc.counter.allocated();
+}
+
+size_t deallocated(){
+  return alloc.counter.deallocated();
+}
+

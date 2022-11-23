@@ -93,4 +93,7 @@ PYBIND11_MODULE(_matrix, m){
     m.def("multiply_naive", &multiply_naive, "naive multiplication");
     m.def("multiply_tile", &multiply_tile, "tile multiplication");
     m.def("multiply_mkl", &multiply_mkl, "mkl multiplication");
+    m.def("bytes", &bytes);
+    m.def("allocated", &allocated);
+    m.def("deallocated", &deallocated);
 }

@@ -44,3 +44,15 @@ def test_time():
         f.write(f"multiply_naive: {time_naive:.4f} seconds.\n")
         f.write(f"multiply_tile: {time_tile:.4f} seconds.\n")
         f.write(f"multiply_mkl: {time_mkl:.4f} seconds.\n")
+        
+def test_mem():
+    assert 0 == _matrix.bytes()
+    size = 1000
+    mat1 = _matrix.Matrix(size, size)
+    mat2 = _matrix.Matrix(size, size)
+    for it in range(size):
+        for jt in range(size):
+            mat1[it, jt] = it * size + jt + 1
+            mat2[it, jt] = it * size + jt + 1
+    assert 2*8*size*size == _matrix.bytes()
+    

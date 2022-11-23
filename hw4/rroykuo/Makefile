@@ -12,6 +12,7 @@ all:
 test:
 	$(CXX) $(CFLAGS) $(INCLUDE) _matrix.cpp -o _matrix$(CONFIG) $(PY) $(MKL_LIB) $(MKL_INC)
 	python3 -m pytest
-
+	
+.PHONY: clean
 clean:
 	rm -rf *.so __pycache__ .pytest* *.o obj
