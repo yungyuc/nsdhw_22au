@@ -3,6 +3,8 @@
 #include <memory>
 #include <limits>
 #include <atomic>
+#include <vector>
+#include <iostream>
 
 struct ByteCounterImpl
 {
@@ -124,7 +126,7 @@ struct MyAllocator
     // "counter".
     MyAllocator() = default;
 
-    template <class U> constexpr
+    template <class U>
     MyAllocator(const MyAllocator<U> & other) noexcept
     {
         counter = other.counter;

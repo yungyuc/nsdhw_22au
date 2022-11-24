@@ -14,17 +14,40 @@ class Matrix {
         this->mat.resize(input_col_n * input_row_n);
       }
 
-    Matrix(Matrix const &input_mat){
-      this->row_n = input_mat.nrow();
-      this->col_n = input_mat.ncol();
-      this->mat = input_mat.mat;
+    // Matrix(Matrix const &input_mat){
+    //   this->row_n = input_mat.nrow();
+    //   this->col_n = input_mat.ncol();
+    //   this->mat = input_mat.mat;
+    // }
+
+    // Matrix(Matrix &&input_mat){
+    //   this->row_n = std::move(input_mat.nrow());
+    //   this->col_n = std::move(input_mat.ncol());
+    //   this->mat = std::move(input_mat.mat);
+    // }
+
+    Matrix(Matrix const &input_mat)
+      : row_n(input_mat.row_n), col_n(input_mat.col_n), mat(alloc){
+
+        // input_mat.mat.resize(input_mat.col_n * input_mat.row_n);
+        for (size_t i = 0; i < row_n; ++i)
+        {
+            for (size_t j = 0; j < col_n; ++j)
+            {
+                (*this)(i, j) = input_mat(i, j);
+            }
+        }
+    }
+    Matrix(Matrix &&input_mat)
+        : row_n(input_mat.row_n), col_n(input_mat.col_n), mat(alloc){
+        this->row_n = 0;
+        this->col_n = 0;
+        this->mat.resize(0);
+        std::swap(this->row_n, input_mat.row_n);
+        std::swap(this->col_n, input_mat.col_n);
+        std::swap(this->mat, input_mat.mat);
     }
 
-    Matrix(Matrix &&input_mat){
-      this->row_n = std::move(input_mat.nrow());
-      this->col_n = std::move(input_mat.ncol());
-      this->mat = std::move(input_mat.mat);
-    }
 
     // Matrix()
     // :row_n(0), col_n(0){}
@@ -45,27 +68,32 @@ class Matrix {
     size_t nrow() const {return row_n;}
     size_t ncol() const {return col_n;}
 
-    Matrix & operator= (Matrix const &input_mat){
-      if (this != &input_mat) {
-            this->row_n = input_mat.nrow();
-            this->col_n = input_mat.ncol();
-            this->mat = input_mat.mat;
-        }
+    // Matrix & operator= (Matrix const &input_mat){
+    //   if (this == &input_mat) {
+    //         return *this;
+    //     }
+    //   this->row_n = input_mat.nrow();
+    //   this->col_n = input_mat.ncol();
+    //   this->mat = input_mat.mat;
+    //   return *this;
+    // }
+
+    Matrix & operator= (Matrix &&input_mat){
+      if (this == &input_mat) {
+          return *this;
+      }
+      this->row_n = 0;
+      this->col_n = 0;
+      this->mat.resize(0);
+      std::swap(this->row_n, input_mat.row_n);
+      std::swap(this->col_n, input_mat.col_n);
+      std::swap(this->mat, input_mat.mat);
+
       return *this;
     }
 
-    Matrix & operator= (Matrix &&input_mat){
-      if (this != &input_mat) {
-            this->row_n = input_mat.nrow();
-            this->col_n = input_mat.ncol();
-            this->mat = std::move(input_mat.mat);
-      }
-
-        return *this;
-    }
-
     bool operator== (const Matrix &mat2) const{
-       if (row_n!= mat2.nrow() || col_n != mat2.ncol()){
+       if (this->row_n!= mat2.nrow() || this->col_n != mat2.ncol()){
              return false;
          }
 
@@ -81,12 +109,12 @@ class Matrix {
         return true;
     }
 
-    const double* data() const{
-      return &(this->mat[0]);
-    }
-    double* data(){
-      return &(this->mat[0]);
-    }
+    // const double* data() const{
+    //   return &(this->mat[0]);
+    // }
+    // double* data(){
+    //   return &(this->mat[0]);
+    // }
     // friend std::ostream& operator<<(std::ostream& os, const Matrix& matrix)
     // {
     //     for (size_t i = 0; i < matrix.nrow(); i++) {
@@ -99,9 +127,9 @@ class Matrix {
     //     return os;
     // }
 
-  private:
-    size_t row_n;
-    size_t col_n;
+  
+    size_t row_n = 0;
+    size_t col_n = 0;
     std::vector <double, MyAllocator<double>> mat;
 
 };

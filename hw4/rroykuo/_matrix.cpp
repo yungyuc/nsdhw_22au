@@ -69,7 +69,7 @@ Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2){
 
     Matrix ret(mat1.nrow(), mat2.ncol());
 
-    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, mat1.nrow(), mat2.ncol(), mat1.ncol(), 1, mat1.data(), mat1.ncol(), mat2.data(), mat2.ncol(), 0, ret.data(), ret.ncol());
+    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, mat1.nrow(), mat2.ncol(), mat1.ncol(), 1, mat1.mat.data(), mat1.ncol(), mat2.mat.data(), mat2.ncol(), 0, ret.mat.data(), ret.ncol());
 
     return ret;
 
