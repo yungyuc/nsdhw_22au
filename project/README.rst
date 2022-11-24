@@ -97,6 +97,29 @@ Project List by Account Name
    `Clip your arbitrary polygons <rroykuo/README.rst>`__: https://github.com/rroykuo/Clip-your-arbitrary-polygons
 #. `jasonchen1221 <https://github.com/jasonchen1221>`__ for
    `HB--tree-based-SA-scheme-for-analog-floorplan-design <jasonchen1221/README.md>`__: https://github.com/jasonchen1221/HB--tree-based-SA-scheme-for-analog-floorplan-design>>>>>> 8ade63394a213d53bc0953b1c9cefbba618079ab
+#. `zurzeit <https://github.com/zurzeit>`__ for
+   `SpinBall <zurzeit/README.rst>`__: https://github.com/zurzeit/SpinBall
+#. `royyao1997 <https://github.com/royyao1997>`__ for
+   `Strassen-Algorithm <royyao1997/README.md>`__: https://github.com/royyao1997/Strassen-Algorithm
+#. `Hooje <https://github.com/Hooje>`__ for `Parallel_Decision_Tree <Hooje/README.md>`__ : https://github.com/Hooje/Parallel_Decision_Tree
+#. `wst24365888 <https://github.com/wst24365888>`__ for
+   `Strem VByte <wst24365888/README.md>`__: https://github.com/wst24365888/stream-vbyte
+#. `chiehchiYang <https://github.com/chiehchiYang>`__ for `BEV-ROAD-MAP-Generator <chiehchiYang/README.md>`__ : https://github.com/chiehchiYang/BEV-ROAD-MAP-Generator
+#. `1am9trash <https://github.com/1am9trash>`__ for `Boolean Operations on Polygons <1am9trash/README.md>`__ : https://github.com/1am9trash/Boolean_Operations_on_Polygons
+#. `BensonYang1999 <https://github.com/BensonYang1999>`__ for
+   `Simple Machine Learning Toolkit <BensonYang1999/readme.md>`__: https://github.com/BensonYang1999/simple_ML_toolkit
+#. `kexuan5458 <https://github.com/kexuan5458>`__ for
+   `Self-Driving Car Localization <kexuan5458/README.md>`__: https://github.com/kexuan5458/Self-Driving_Car_Localization
+#. `haashiagh10 <https://github.com/haashiagh10>`__ for
+   `Raman Spectroscopy analyze <haashiagh10/readme.md>`__: https://github.com/haashiagh10/nsdhw_22au/tree/haashiagh10-project/project
+#. `OuTingYun <https://github.com/OuTingYun>`__ for
+   `Gussian bluring for Image  <https://github.com/OuTingYun/nsdhw_22au/blob/OuTingYun-proposal-submission/project/OuTingYun/README.md>`__: https://github.com/OuTingYun/Gussian-Bluring
+#. `dpliao <https://github.com/dpliao>`__ for
+   `Histogram Equalization <dpliao/README.md>`__: https://github.com/dpliao/histogram-equalization
+#. `i-padiolleau <https://github.com/i-padiolleau>`__ for
+   `optimization-for-composite-type-data-structure <i-padiolleau/README.rst>`__: https://github.com/i-padiolleau/optimization-for-composite-type-data-structure
+#. `tmp54 <https://github.com/tmp54>`__ for
+   `r-tree <tmp54/README.md>`__: https://github.com/tmp54/r-tree
 #. `till22G <https://github.com/till22G>`__ for
    `Monte Carlo Integration <till22/README.md>`__: https://github.com/till22G/Project-Monte-Carlo-Integration
    
