@@ -17,7 +17,7 @@ The provided wrapper file counts the number that the Python constructor of
 The check for the call count is to ensure you are using the provided wrapper
 file.  You are **not** asked to understand the mechanism of the checking code.
 
-Note that your code needs to use tiling technique to aueed up the matrix-matrix
+Note that your code needs to use tiling technique to speed up the matrix-matrix
 multiplication without limiting the matrix or tiling size, as you have done in
 homework assignment #3.  You may copy this part of code from your previous
 submission.
