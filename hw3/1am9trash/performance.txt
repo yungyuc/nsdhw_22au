@@ -1,0 +1,9 @@
+Recording Performance for Matrix Multiplication.
+
+Naive: 0.08613183069974184
+MKL: 0.010714046657085419
+Tile with 16 block: 0.07052336726337671
+Tile with 32 block: 0.04527157265692949
+Tile with 54 block: 0.034690829925239086
+Tile with 128 block: 0.03499332722276449
+Tile with 256 block: 0.035888636484742165
