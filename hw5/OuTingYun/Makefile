@@ -16,3 +16,4 @@ all:
 	g++  $(CFLAGS) `/usr/bin/python3-config --includes` `python3 -m pybind11 --includes` ../mod.cpp -o _matrix.so $(MKL) $(INC)
 	rm ../matrix.hpp
 	
+
