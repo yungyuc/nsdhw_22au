@@ -14,7 +14,7 @@ MKLINCLUDE = /usr/include/mkl
 MKLFLAGS = -lblas
 
 all: $(SRC)
-	$(CXX) $(CXXFLAGS) -I$(MKLINCLUDE) -I$(PYINCLUDE) $(PYBDINCLUDE) -I$(NUMPY) $(SRC) -o $(EXE)$(PYCONFIG) $(MKLFLAGS)
+	$(CXX) $(CXXFLAGS) -I$(MKLINCLUDE) -I$(PYINCLUDE) $(PYBDINCLUDE) -I$(NUMPY) $(SRC) -o $(EXE)$(PYCONFIG) $(MKLFLAGS) -I./
 
 test: all
 	python3 -m pytest
