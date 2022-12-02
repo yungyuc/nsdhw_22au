@@ -9,10 +9,6 @@ namespace py = pybind11;
 
 class Matrix
 {
-    friend Matrix multiply_naive(Matrix const &mat1, Matrix const &mat2);
-    friend Matrix multiply_tile(Matrix const &mat1, Matrix const &mat2, 
-size_t const tsize);
-    friend Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2);
     friend bool operator==(Matrix const &mat1, Matrix const &mat2);
 
 public:
@@ -126,20 +122,4 @@ Matrix multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t ts){
 
     return result;
 }
-
-PYBIND11_MODULE(_matrix, m) {
-    m.doc() = "for fun with matrices";
-    m.def("multiply_naive", &multiply_naive);
-    m.def("multiply_mkl", &multiply_mkl);
-    m.def("multiply_tile", &multiply_tile);
-
-    py::class_<Matrix>(m, "Matrix")
-        .def(py::init<size_t, size_t>())
-        .def("__setitem__", [](Matrix &self, std::pair<size_t, size_t> index, double val) { self(index.first, index.second) = val; })
-        .def("__getitem__", [](Matrix &self, std::pair<size_t, size_t> index) { return self(index.first, index.second); })
-        .def("__eq__", &operator==)
-        .def_property("nrow", &Matrix::nrow, nullptr)
-        .def_property("ncol", &Matrix::ncol, nullptr);
-}
-
 
