@@ -1,4 +1,4 @@
-CXX=g++
+CXX=clang++
 CXXFLAGS=-O3 -Wall -m64 -shared -std=c++17 -fPIC
 PYBIND=`python3 -m pybind11 --includes`
 PYCONFIG=`python3-config --extension-suffix`
