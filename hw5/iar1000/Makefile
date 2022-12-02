@@ -1,5 +1,5 @@
-CXX=clang++
-CXXFLAGS=-O3 -Wall -m64 -shared -std=c++11 -fPIC
+CXX=g++
+CXXFLAGS=-O3 -Wall -m64 -shared -std=c++17 -fPIC
 PYBIND=`python3 -m pybind11 --includes`
 PYCONFIG=`python3-config --extension-suffix`
 NUMPYINCLUDE = `python3 -c 'import numpy; print(numpy.get_include())'`

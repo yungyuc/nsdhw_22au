@@ -2,8 +2,6 @@
 #include <iomanip>
 #include <mkl.h>
 
-namespace py = pybind11;
-
 class Matrix
 {
 public:
@@ -43,7 +41,7 @@ public:
     double getitem(std::pair<size_t, size_t> id){
         return (*this)(id.first, id.second);
     }
-    
+
     void setitem(std::pair<size_t, size_t> id, double value){
         (*this)(id.first, id.second) = value;
     }
