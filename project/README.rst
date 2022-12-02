@@ -118,7 +118,7 @@ Project List by Account Name
     `celluar-automata-3d <ian-chiu/README.md>`__:
     https://github.com/ian-chiu/celluar-automata-3d
 19. `ìar1000 <https://github.com/iar1000>`__ for
-    `The Project <iar1000/README.rst>`__:
+    `The Project <iar1000/README.md>`__:
     https://github.com/iar1000/voronoiagram
 20. `jasonchen1221 <https://github.com/jasonchen1221>`__ for
     `HB--tree-based-SA-scheme-for-analog-floorplan-design <jasonchen1221/README.md>`__:
@@ -130,7 +130,7 @@ Project List by Account Name
     `Quantitative Trading System <lipper1110/README.md>`__:
     https://github.com/lipper1110/Quantitative-Trading-System
 23. `rroykuo <https://github.com/rroykuo>`__ for
-    `Clip your arbitrary polygons <rroykuo/README.rst>`__:
+    `Clip your arbitrary polygons <rroykuo/README.md>`__:
     https://github.com/rroykuo/Clip-your-arbitrary-polygons
 24. `royyao1997 <https://github.com/royyao1997>`__ for
     `Strassen-Algorithm <royyao1997/README.md>`__:
@@ -142,7 +142,7 @@ Project List by Account Name
     `Columnar Array <soulrrrrr/README.rst>`__:
     https://github.com/soulrrrrr/ColumnarArray
 27. `till22G <https://github.com/till22G>`__ for
-    `Monte Carlo Integration <till22/README.md>`__:
+    `Monte Carlo Integration <till22G/README.rst>`__:
     https://github.com/till22G/Project-Monte-Carlo-Integration
 28. `tmp54 <https://github.com/tmp54>`__ for
     `r-tree <tmp54/README.md>`__:
