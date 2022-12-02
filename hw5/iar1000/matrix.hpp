@@ -1,16 +1,11 @@
 #include <iostream>
 #include <iomanip>
-#include <pybind11/pybind11.h>
-#include <pybind11/stl.h>
-#include <pybind11/operators.h>
 #include <mkl.h>
 
 namespace py = pybind11;
 
 class Matrix
 {
-    friend bool operator==(Matrix const &mat1, Matrix const &mat2);
-
 public:
 
     Matrix(size_t nrow, size_t ncol) : m_nrow(nrow), m_ncol(ncol) {
@@ -43,6 +38,14 @@ public:
     
     double &operator()(size_t row, size_t col) {
         return m_buffer[index(row, col)];
+    }
+
+    double getitem(std::pair<size_t, size_t> id){
+        return (*this)(id.first, id.second);
+    }
+    
+    void setitem(std::pair<size_t, size_t> id, double value){
+        (*this)(id.first, id.second) = value;
     }
 
     size_t m_nrow = 0;
