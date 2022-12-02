@@ -23,8 +23,7 @@ public:
 
     size_t nrow() const { return m_nrow; }
     size_t ncol() const { return m_ncol; }
-    size_t index(size_t row, size_t col) const { return row * m_ncol + 
-col; }
+    size_t index(size_t row, size_t col) const { return row * m_ncol + col; }
     
 
     void reset_buffer(size_t nrow, size_t ncol) {
@@ -108,19 +107,15 @@ Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2){
     return result;
 }
 
-// reference: 
-https://stackoverflow.com/questions/15829223/loop-tiling-blocking-for-large-dense-matrix-multiplication
+// reference: https://stackoverflow.com/questions/15829223/loop-tiling-blocking-for-large-dense-matrix-multiplication
 Matrix multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t ts){
     Matrix result(mat1.nrow(), mat2.ncol());
     for (size_t i0 = 0; i0 < mat1.nrow(); i0 += ts){
         for (size_t j0 = 0; j0 < mat2.ncol(); j0 += ts){
             for (size_t k0 = 0; k0 < mat2.ncol(); k0 += ts){
-                for (size_t i = i0; i < std::min(i0 + ts, mat1.nrow()); 
-i++){
-                    for (size_t j = j0; j < std::min(j0 + ts, 
-mat2.ncol()); j++){
-                        for (size_t k = k0; k < std::min(ts + k0, 
-mat1.nrow()); k++){
+                for (size_t i = i0; i < std::min(i0 + ts, mat1.nrow()); i++){
+                    for (size_t j = j0; j < std::min(j0 + ts, mat2.ncol()); j++){
+                        for (size_t k = k0; k < std::min(ts + k0, mat1.nrow()); k++){
                             result(i, j) += mat1(i, k) * mat2(k, j);
                         }
                     }
@@ -140,13 +135,11 @@ PYBIND11_MODULE(_matrix, m) {
 
     py::class_<Matrix>(m, "Matrix")
         .def(py::init<size_t, size_t>())
-        .def("__setitem__", [](Matrix &self, std::pair<size_t, size_t> 
-index, double val) { self(index.first, index.second) = val; })
-        .def("__getitem__", [](Matrix &self, std::pair<size_t, size_t> 
-index) { return self(index.first, index.second); })
+        .def("__setitem__", [](Matrix &self, std::pair<size_t, size_t> index, double val) { self(index.first, index.second) = val; })
+        .def("__getitem__", [](Matrix &self, std::pair<size_t, size_t> index) { return self(index.first, index.second); })
         .def("__eq__", &operator==)
         .def_property("nrow", &Matrix::nrow, nullptr)
         .def_property("ncol", &Matrix::ncol, nullptr);
-    }
+}
 
 
