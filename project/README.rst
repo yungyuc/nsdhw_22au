@@ -138,7 +138,7 @@ Tentative Time Table Session 2
       https://github.com/chiehchiYang/BEV-ROAD-MAP-Generator
   * - 15
     - 10:12 - 10:24
-    - `davidzwei <https://github.com/davidzwei>`__ for
+    - `davidzwei <https://github.com/davidzwei>`__
     - `KD-Tree <davidzwei/README.md>`__:
       https://github.com/davidzwei/KD-Tree
   * - 16
@@ -158,12 +158,12 @@ Tentative Time Table Session 2
       https://github.com/haashiagh10/propsal
   * - 19
     - 11:00 - 11:12
-    - `huang-me <https://github.com/huang-me>`__ for
+    - `huang-me <https://github.com/huang-me>`__
     - `TSP with gene algorithm <huang-me/README.md>`__:
       https://github.com/huang-me/parallel_TSP_gene_algo
   * - 20
     - 11:12 - 11:24
-    - `hychiu02 <https://github.com/hychiu02>`__ for
+    - `hychiu02 <https://github.com/hychiu02>`__
     - `AutoEncoder-for-arrhythmia-detection <hychiu02/README.md>`__:
       https://github.com/hychiu02/AutoEncoder-for-arrhythmia-detection
 
