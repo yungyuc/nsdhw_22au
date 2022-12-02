@@ -13,8 +13,7 @@ MKL_LIBS=${MKL_LIB_DIR}/libmkl_def.so \
 			-lblas -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5
 
 all:
-	${CXX} ${CXXFLAGS} -I/usr/include/mkl ${PYBIND} -I{NUMPYINCLUDE} ../_mod.cpp -o 
-_matrix${PYCONFIG} -I/usr/include/python3.8 ${MKL_LIBS}
+	${CXX} ${CXXFLAGS} -I/usr/include/mkl ${PYBIND} -I{NUMPYINCLUDE} ../_mod.cpp -o _matrix${PYCONFIG} -I/usr/include/python3.8 ${MKL_LIBS}
 
 
 test: all
