@@ -2,15 +2,14 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <cassert>
 #include "mkl.h"
 
-using namespace std;
-
-template<typename T>
 class Matrix {
 private:
     size_t m_rows, m_cols;
-    std::vector<T> m_matrix;
+    std::vector<double> m_matrix;
 
 public:
     Matrix()
@@ -62,65 +61,64 @@ public:
         return *this;
     }
 
-    T const& operator()(size_t i, size_t j) const
+    double const& operator()(size_t i, size_t j) const
     {
         return this->m_matrix[i * this->m_cols +j];
     }
 
-    T& operator()(size_t i, size_t j)
+    double& operator()(size_t i, size_t j)
     {
         return this->m_matrix[i * this->m_cols + j];
     }
 
-    const T* data() const
+    const double* data() const
     {
         return &(this->m_matrix[0]);
     }
 
-    T* data()
+    double* data()
     {
         return &(this->m_matrix[0]);
     }
 
-    constexpr bool operator==(const Matrix& rhs) const
+    bool operator==(const Matrix& rhs) const
     {
         return (this->m_matrix == rhs.m_matrix);
     }
 
-    constexpr size_t rows() const
+    constexpr size_t nrow() const
     {
         return this->m_rows;
     }
 
-    constexpr size_t cols() const
+    constexpr size_t ncol() const
     {
         return this->m_cols;
     }
 
-    friend std::ostream& operator<<(std::ostream& os, const Matrix<T>& matrix)
+    friend std::ostream& operator<<(std::ostream& os, const Matrix& matrix)
     {
-        for (size_t i = 0; i < matrix.rows(); i++) {
-            for (size_t j = 0; j < matrix.cols(); j++) {
-                os << matrix(i, j) << (j == matrix.cols() - 1 ? "" : " ");
+        for (size_t i = 0; i < matrix.nrow(); i++) {
+            for (size_t j = 0; j < matrix.ncol(); j++) {
+                os << matrix(i, j) << (j == matrix.ncol() - 1 ? "" : " ");
             }
 
-            if (i < matrix.rows() - 1) os << '\n';
+            if (i < matrix.nrow() - 1) os << '\n';
         }
 
         return os;
     }
 };
 
-template<typename T>
-Matrix<T> multiply_naive(const Matrix<T>& m1, const Matrix<T>& m2)
+inline Matrix multiply_naive(const Matrix& m1, const Matrix& m2)
 {
-    assert(m1.cols() == m2.rows());
+    assert(m1.ncol() == m2.nrow());
 
-    Matrix<T> m3(m1.rows(), m2.cols());
+    Matrix m3(m1.nrow(), m2.ncol());
 
-    size_t rows = m1.rows();
-    size_t cols = m2.cols();
-    size_t inners = m1.cols();
+    size_t rows = m1.nrow();
+    size_t cols = m2.ncol();
+    size_t inners = m1.ncol();
 
     for (size_t row = 0; row < rows; row++) {
         for (size_t col = 0; col < cols; col++) {
@@ -133,20 +131,19 @@ Matrix<T> multiply_naive(const Matrix<T>& m1, const Matrix<T>& m2)
     return m3;
 }
 
-template<typename T>
-Matrix<T> multiply_tile(const Matrix<T>& m1, const Matrix<T>& m2, size_t size)
+inline Matrix multiply_tile(const Matrix& m1, const Matrix& m2, size_t size)
 {
-    assert(m1.cols() == m2.rows());
+    assert(m1.ncol() == m2.nrow());
 
-    Matrix<T> m3(m1.rows(), m2.cols());
+    Matrix m3(m1.nrow(), m2.ncol());
 
-    for (size_t row = 0; row < m1.rows(); row += size) {
-        for (size_t col = 0; col < m2.cols(); col += size) {
-            for (size_t inner = 0; inner < m1.cols(); inner += size) {
+    for (size_t row = 0; row < m1.nrow(); row += size) {
+        for (size_t col = 0; col < m2.ncol(); col += size) {
+            for (size_t inner = 0; inner < m1.ncol(); inner += size) {
                 // tile
-                for (size_t k = inner; k < min(m1.cols(), inner + size); k++) {
-                    for (size_t i = row; i < min(m1.rows(), row + size); i++) {
-                        for (size_t j = col; j < min(m2.cols(), col + size); j++) {
+                for (size_t k = inner; k < std::min(m1.ncol(), inner + size); k++) {
+                    for (size_t i = row; i < std::min(m1.nrow(), row + size); i++) {
+                        for (size_t j = col; j < std::min(m2.ncol(), col + size); j++) {
                             m3(i, j) += m1(i, k) * m2(k, j);
                         }
                     }
@@ -158,14 +155,13 @@ Matrix<T> multiply_tile(const Matrix<T>& m1, const Matrix<T>& m2, size_t size)
     return m3;
 }
 
-template<typename T>
-Matrix<T> multiply_mkl(Matrix<T>& m1, Matrix<T>& m2)
+inline Matrix multiply_mkl(Matrix& m1, Matrix& m2)
 {
-    assert(m1.cols() == m2.rows());
+    assert(m1.ncol() == m2.nrow());
 
-    Matrix<T> m3(m1.rows(), m2.cols());
+    Matrix m3(m1.nrow(), m2.ncol());
 
-    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, m1.rows(), m2.cols(), m1.cols(), 1, m1.data(), m1.cols(), m2.data(), m2.cols(), 0, m3.data(), m3.cols());
+    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, m1.nrow(), m2.ncol(), m1.ncol(), 1, m1.data(), m1.ncol(), m2.data(), m2.ncol(), 0, m3.data(), m3.ncol());
 
     return m3;
 }
