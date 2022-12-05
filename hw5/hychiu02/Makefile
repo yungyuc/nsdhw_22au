@@ -5,9 +5,10 @@ MKLFLAGS      := -lblas
 PYINCLUDE     := /usr/include/python3.8
 PYBINDINCLUDE := `python3 -m pybind11 --includes`
 PYCONFIG      := `python3-config --extension-suffix`
+MATRIXINCLUDE := ./
 
-all:
-	$(CXX) $(CXXFLAGS) -I$(MKLINCLUDE) -I$(PYINCLUDE) ${PYBINDINCLUDE} matrix.cpp mod.cpp -o _matrix${PYCONFIG} $(MKLFLAGS)
+all: ../mod.cpp matrix.cpp
+	$(CXX) $(CXXFLAGS) -I$(MATRIXINCLUDE) -I$(MKLINCLUDE) -I$(PYINCLUDE) ${PYBINDINCLUDE} matrix.cpp ../mod.cpp -o _matrix${PYCONFIG} $(MKLFLAGS)
 
 test: all
 	python3 -m pytest
