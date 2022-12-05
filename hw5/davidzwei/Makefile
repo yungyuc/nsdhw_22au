@@ -11,7 +11,7 @@ all: ../mod.cpp
 	$(CXX) $(CFLAGS) $(INCLUDE) $(NUMPY) -I./ ../mod.cpp -o _matrix$(CONFIG) $(PY) $(MKL_LIB) $(MKL_INC)
 
 test: all
-	$(CXX) $(CFLAGS) $(INCLUDE) ../mod.cpp -o _matrix$(CONFIG) $(PY) $(MKL_LIB) $(MKL_INC)
+	$(CXX) $(CFLAGS) $(INCLUDE) $(NUMPY) -I./ ../mod.cpp -o _matrix$(CONFIG) $(PY) $(MKL_LIB) $(MKL_INC)
 	python3 -m pytest
 
 clean:
