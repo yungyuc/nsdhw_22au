@@ -35,7 +35,9 @@
 #include <atomic>
 #include <iostream>
 
+
 #include "_matrix.hpp"
+
 
 #ifdef __GNUG__
 #  define PYTHON_WRAPPER_VISIBILITY __attribute__((visibility("hidden")))
@@ -215,7 +217,13 @@ WrapMatrix
             // The Python constructor will be counted!
             .def_tagged(py::init<size_t, size_t>())
             .def_property_readonly("nrow", &Matrix::nrow)
+<<<<<<< HEAD
             .def_property_readonly("ncol", &Matrix::ncol)
+=======
+
+            .def_property_readonly("ncol", &Matrix::nrow)
+
+>>>>>>> 827ed48fa0e74cb58ce7b16b3bd9540f9dad1652
             .def("__eq__", [](Matrix const & self, Matrix const & other) { return self == other; })
             .def
             (
@@ -247,3 +255,4 @@ PYBIND11_MODULE(_matrix, mod)
 }
 
 // vim: set ff=unix fenc=utf8 et sw=4 ts=4 sts=4:
+
