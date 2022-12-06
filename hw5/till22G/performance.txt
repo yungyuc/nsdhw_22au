@@ -1,3 +1,0 @@
-Naive approach took : 2.015625 seconds (cpu runtime)
-Tiling approach took : 1.203125 seconds (cpu runtime)
-Tiling takes : 59.69% of the naive approach
