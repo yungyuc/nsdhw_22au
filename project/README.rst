@@ -158,9 +158,9 @@ Time Table Session 2
       https://github.com/haashiagh10/propsal
   * - 19
     - 11:00 - 11:12
-    - `huang-me <https://github.com/huang-me>`__
-    - `TSP with gene algorithm <huang-me/README.md>`__:
-      https://github.com/huang-me/parallel_TSP_gene_algo
+    - `lipper1110 <https://github.com/lipper1110>`__
+    - `Quantitative Trading System <lipper1110/README.md>`__:
+      https://github.com/lipper1110/Quantitative-Trading-System
   * - 20
     - 11:12 - 11:24
     - `hychiu02 <https://github.com/hychiu02>`__
@@ -199,9 +199,9 @@ Time Table Session 3
       https://github.com/BensonYang1999/simple_ML_toolkit
   * - 25
     - 13:48 - 14:00
-    - `lipper1110 <https://github.com/lipper1110>`__
-    - `Quantitative Trading System <lipper1110/README.md>`__:
-      https://github.com/lipper1110/Quantitative-Trading-System
+    - `huang-me <https://github.com/huang-me>`__
+    - `TSP with gene algorithm <huang-me/README.md>`__:
+      https://github.com/huang-me/parallel_TSP_gene_algo
   * - 26
     - 14:00 - 14:12
     - `shih-chuan <https://github.com/shih-chuan>`__
@@ -274,7 +274,7 @@ Project List by Account Name
 14. (Presentation 18) `haashiagh10 <https://github.com/haashiagh10>`__ for
     `Raman Spectroscopy analyze <haashiagh10/README.md>`__:
     https://github.com/haashiagh10/propsal
-15. (Presentation 19) `huang-me <https://github.com/huang-me>`__ for
+15. (Presentation 25) `huang-me <https://github.com/huang-me>`__ for
     `TSP with gene algorithm <huang-me/README.md>`__:
     https://github.com/huang-me/parallel_TSP_gene_algo
 16. (Presentation 20) `hychiu02 <https://github.com/hychiu02>`__ for
@@ -295,7 +295,7 @@ Project List by Account Name
 21. (Presentation 3) `kexuan5458 <https://github.com/kexuan5458>`__ for
     `Self-Driving Car Localization <kexuan5458/README.md>`__:
     https://github.com/kexuan5458/Self-Driving_Car_Localization
-22. (Presentation 25) `lipper1110 <https://github.com/lipper1110>`__ for
+22. (Presentation 19) `lipper1110 <https://github.com/lipper1110>`__ for
     `Quantitative Trading System <lipper1110/README.md>`__:
     https://github.com/lipper1110/Quantitative-Trading-System
 23. (Presentation 2) `rroykuo <https://github.com/rroykuo>`__ for
