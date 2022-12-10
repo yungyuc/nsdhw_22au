@@ -210,7 +210,7 @@ Time Table Session 3
   * - 27
     - 14:12 - 14:24
     - `soulrrrrr <https://github.com/soulrrrrr>`__
-    - `Columnar Array <soulrrrrr/README.rst>`__:
+    - `Contiguous Array <soulrrrrr/README.rst>`__:
       https://github.com/soulrrrrr/ColumnarArray
   * - 28
     - 14:24 - 14:36
@@ -308,7 +308,7 @@ Project List by Account Name
     `Raycast2D <shih-chuan/README.md>`__:
     https://github.com/shih-chuan/Raycast2D
 26. (Presentation 27) `soulrrrrr <https://github.com/soulrrrrr>`__ for
-    `Columnar Array <soulrrrrr/README.rst>`__:
+    `Contiguous Array <soulrrrrr/README.rst>`__:
     https://github.com/soulrrrrr/ColumnarArray
 27. (Presentation 28) `till22G <https://github.com/till22G>`__ for
     `Monte Carlo Integration <till22G/README.rst>`__:
