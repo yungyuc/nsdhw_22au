@@ -67,9 +67,9 @@ Time Table Session 1
       https://github.com/rroykuo/Clip-your-arbitrary-polygons
   * - 3
     - 07:24 - 07:36
-    - `BensonYang1999 <https://github.com/BensonYang1999>`__
-    - `Simple Machine Learning Toolkit <BensonYang1999/readme.md>`__:
-      https://github.com/BensonYang1999/simple_ML_toolkit
+    - `kexuan5458 <https://github.com/kexuan5458>`__
+    - `Self-Driving Car Localization <kexuan5458/README.md>`__:
+      https://github.com/kexuan5458/Self-Driving_Car_Localization
   * - 4
     - 07:36 - 07:48
     - `DerrickPikachu <https://github.com/DerrickPikachu>`__
@@ -194,9 +194,9 @@ Time Table Session 3
       https://github.com/iar1000/voronoiagram
   * - 24
     - 13:36 - 13:48
-    - `kexuan5458 <https://github.com/kexuan5458>`__
-    - `Self-Driving Car Localization <kexuan5458/README.md>`__:
-      https://github.com/kexuan5458/Self-Driving_Car_Localization
+    - `BensonYang1999 <https://github.com/BensonYang1999>`__
+    - `Simple Machine Learning Toolkit <BensonYang1999/readme.md>`__:
+      https://github.com/BensonYang1999/simple_ML_toolkit
   * - 25
     - 13:48 - 14:00
     - `lipper1110 <https://github.com/lipper1110>`__
