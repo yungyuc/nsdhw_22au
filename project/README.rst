@@ -235,7 +235,7 @@ Project List by Account Name
 1. (Presentation 1) `1am9trash <https://github.com/1am9trash>`__ for
    `Boolean Operations on Polygons <1am9trash/README.md>`__:
    https://github.com/1am9trash/Boolean_Operations_on_Polygons
-2. (Presentation 3) `BensonYang1999 <https://github.com/BensonYang1999>`__ for
+2. (Presentation 24) `BensonYang1999 <https://github.com/BensonYang1999>`__ for
    `Simple Machine Learning Toolkit <BensonYang1999/readme.md>`__:
    https://github.com/BensonYang1999/simple_ML_toolkit
 3. (Presentation 4) `DerrickPikachu <https://github.com/DerrickPikachu>`__ for
@@ -292,7 +292,7 @@ Project List by Account Name
 20. (Presentation 16) `jasonchen1221 <https://github.com/jasonchen1221>`__ for
     `HB--tree-based-SA-scheme-for-analog-floorplan-design <jasonchen1221/README.md>`__:
     https://github.com/jasonchen1221/HB--tree-based-SA-scheme-for-analog-floorplan-design
-21. (Presentation 24) `kexuan5458 <https://github.com/kexuan5458>`__ for
+21. (Presentation 3) `kexuan5458 <https://github.com/kexuan5458>`__ for
     `Self-Driving Car Localization <kexuan5458/README.md>`__:
     https://github.com/kexuan5458/Self-Driving_Car_Localization
 22. (Presentation 25) `lipper1110 <https://github.com/lipper1110>`__ for
