@@ -29,11 +29,11 @@ entry too.  You can request my review in the PR.
 Presentation
 ============
 
-.. The presentation schedule is set.  If you want to change time slots, ask for
-   the owner of the other time slot and file a PR tagging him or her and the
-   instructor (@yungyuc) against the branch `master`. The other owner needs to
-   respond to agree the exchange in the PR. The PR subject line should start
-   with ``[presentation]``.
+The presentation schedule is set.  If you want to change the time, ask for the
+owner of the other time slot and file a PR tagging him or her and the
+instructor (@yungyuc) against the branch `master`.  Everyone involed needs to
+respond to agree the exchange in the PR.  The PR subject line should start with
+``[presentation]``.
 
 Each presentation can use at most 12 minutes.  Presenters may decide how to use
 their time.  A possible arrangement is to use 10 minutes in the presentation
@@ -45,8 +45,8 @@ time.  If presenters have difficulty in preparing a computer themselves, they
 may seek help from the instructor, and resolve the issue one week before their
 presentation.
 
-Tentative Time Table Session 1
-++++++++++++++++++++++++++++++
+Time Table Session 1
+++++++++++++++++++++
 
 .. list-table:: 12/26 7:00-9:00
   :header-rows: 1
@@ -106,8 +106,8 @@ Tentative Time Table Session 1
     - `Histogram Equalization <dpliao/README.md>`__:
       https://github.com/dpliao/histogram-equalization
 
-Tentative Time Table Session 2
-++++++++++++++++++++++++++++++
+Time Table Session 2
+++++++++++++++++++++
 
 .. list-table:: 12/26 09:24-11:24
   :header-rows: 1
@@ -167,8 +167,8 @@ Tentative Time Table Session 2
     - `AutoEncoder-for-arrhythmia-detection <hychiu02/README.md>`__:
       https://github.com/hychiu02/AutoEncoder-for-arrhythmia-detection
 
-Tentative Time Table Session 3
-++++++++++++++++++++++++++++++
+Time Table Session 3
+++++++++++++++++++++
 
 .. list-table:: 12/26 13:00-15:00
   :header-rows: 1
