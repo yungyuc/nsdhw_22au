@@ -19,7 +19,7 @@ The hierarchy should be like::
         - README.rst (<- the main proposal file)
         - ... other files for your proposal
 
-**ATTENTION**: Your PR should include an entry in "Porject List by Account
+**ATTENTION**: Your PR should include an entry in "Project List by Account
 Name" in this file.
 
 When submitting your proposal, name the PR as ``<username>-proposal**``, e.g.,
@@ -31,7 +31,7 @@ Presentation
 
 The presentation schedule is set.  If you want to change the time, ask for the
 owner of the other time slot and file a PR tagging him or her and the
-instructor (@yungyuc) against the branch `master`.  Everyone involed needs to
+instructor (@yungyuc) against the branch `master`.  Everyone involved needs to
 respond to agree the exchange in the PR.  The PR subject line should start with
 ``[presentation]``.
 
@@ -232,7 +232,7 @@ Time Table Session 3
 Project List by Account Name
 ++++++++++++++++++++++++++++
 
-1. (Presentaion 1) `1am9trash <https://github.com/1am9trash>`__ for
+1. (Presentation 1) `1am9trash <https://github.com/1am9trash>`__ for
    `Boolean Operations on Polygons <1am9trash/README.md>`__:
    https://github.com/1am9trash/Boolean_Operations_on_Polygons
 2. (Presentation 3) `BensonYang1999 <https://github.com/BensonYang1999>`__ for
