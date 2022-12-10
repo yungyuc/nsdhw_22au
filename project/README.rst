@@ -210,7 +210,7 @@ Time Table Session 3
   * - 27
     - 14:12 - 14:24
     - `soulrrrrr <https://github.com/soulrrrrr>`__
-    - `Columnar Array <soulrrrrr/README.rst>`__:
+    - `Contigious Array <soulrrrrr/README.rst>`__:
       https://github.com/soulrrrrr/ColumnarArray
   * - 28
     - 14:24 - 14:36
