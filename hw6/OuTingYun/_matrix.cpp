@@ -159,6 +159,7 @@ PYBIND11_MODULE(_matrix, m) {
 		// .def(pybind11::self == pybind11::self)	
         .def("__getitem__", &Matrix::getitem)
         .def("__setitem__", &Matrix::setitem)
+        .def("__eq__", [](const Matrix &mat, const Matrix &other) { return mat == other; })
         .def_property_readonly("nrow", &Matrix::nrow)
         .def_property_readonly("ncol", &Matrix::ncol)
 		.def_property("array", &Matrix::array, nullptr);
