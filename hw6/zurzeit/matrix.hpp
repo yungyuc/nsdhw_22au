@@ -77,9 +77,9 @@ PYBIND11_MODULE(_matrix, m) {
         .def_property_readonly("array", [](Matrix &m) -> py::array_t<double>
         {
             return py::array_t<double>(
-                { m.nrow(), m.ncol() },                               // Buffer dimensions
+                { m.nrow(), m.ncol() },                              // Buffer dimensions
                 { sizeof(double) * m.ncol(), sizeof(double) },       // Strides (in bytes) for each index
-                m.get_buffer_pointer(),                                            // Pointer to buffer
+                m.get_buffer_pointer(),                              // Pointer to buffer
                 py::cast(m)
             );
         })
