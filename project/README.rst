@@ -38,7 +38,7 @@ respond to agree the exchange in the PR.  The PR subject line should start with
 Each presentation can use at most 12 minutes.  Presenters may decide how to use
 their time.  A possible arrangement is to use 10 minutes in the presentation
 itself and 2 minutes for questions and discussions.  Presenters are expected to
-prepare their own computer for presentation.
+prepare their own computer for presentation, and present in English.
 
 The time for setting up the computer is included in the allotted presentation
 time.  If presenters have difficulty in preparing a computer themselves, they
