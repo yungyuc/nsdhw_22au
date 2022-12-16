@@ -150,7 +150,7 @@ PYBIND11_MODULE(_matrix, m) {
         .def("__eq__", &Matrix::operator==)
         .def_property("array", &Matrix::array, nullptr)
         .def_property_readonly("nrow", &Matrix::nrow)
-        .def_property_readonly("ncol", &Matrix::ncol)
+        .def_property_readonly("ncol", &Matrix::ncol);
 
     m.def("multiply_naive", &multiply_naive, "multiply 2 matrix naively.");
     m.def("multiply_tile", &multiply_tile, "multiply 2 matrix by tiling the matrices.");
