@@ -1,0 +1,19 @@
+CXX           := g++
+CXXFLAGS      := -O3 -Wall -shared -std=c++17 -fPIC
+MKLINCLUDE    := /usr/include/mkl
+MKLFLAGS      := -lblas
+PYINCLUDE     := /usr/include/python3.8
+PYBINDINCLUDE := `python3 -m pybind11 --includes`
+PYCONFIG      := `python3-config --extension-suffix`
+MATRIXINCLUDE := ./
+
+all: mod.cpp matrix.cpp
+	$(CXX) $(CXXFLAGS) -I$(MATRIXINCLUDE) -I$(MKLINCLUDE) -I$(PYINCLUDE) ${PYBINDINCLUDE} matrix.cpp mod.cpp -o _matrix${PYCONFIG} $(MKLFLAGS)
+
+test: all
+	python3 -m pytest
+
+.PHONY: all, clean
+
+clean:
+	rm -rf *.o *.so .pytest_cache __pycache__
