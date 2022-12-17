@@ -144,12 +144,11 @@ PYBIND11_MODULE(_matrix, m)
             return m.getter(key);
             })
         .def("__eq__", &Matrix::operator==)
-        .def("array", &Matrix::ndArray)
+        .def_property("array", &Matrix::ndArray, nullptr)
         .def_property("nrow", &Matrix::row, nullptr)
         .def_property("ncol", &Matrix::col, nullptr);
 
     m.def("multiply_naive", &multiply_naive);
     m.def("multiply_mkl", &multiply_mkl);
     m.def("multiply_tile", &multiply_tile);
-
 }
