@@ -50,15 +50,11 @@ public:
   // numpy view
   py::array_t<T> ndArray(){
    return py::array_t<T>(
-          py::buffer_info(
-           _data, // dataptr
-           sizeof(T), //itemsize
-           py::format_descriptor<T>::format(),
-           2, // ndim
            std::vector<size_t> {_row, _col }, // shape
-           std::vector<size_t> {_col * sizeof(T), sizeof(T)} // strides
-           )
-      );
+           std::vector<size_t> {_col * sizeof(T), sizeof(T)}, // strides
+           _data,
+            py::cast(this)
+           );
   }
   size_t row()const{return _row;}
   size_t col()const{return _col;}
