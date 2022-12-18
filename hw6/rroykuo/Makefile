@@ -6,9 +6,11 @@ OBJECT = -o _matrix
 MKL_INCLUDE = -I/usr/include/mkl
 MKL_LIBRARY = -L/usr/lib/x86_64-linux-gnu/ -lblas
 
-PYTHON_CONFIG = python3-config --extension-suffix
+PYTHON_CONFIG = `python3-config --extension-suffix`
 PYTHON_INCLUDE = -I/usr/include/python3.8
-PYBIND_INCLUDE = python3 -m pybind11 --includes
+PYBIND_INCLUDE = `python3 -m pybind11 --includes`
+
+
 
 
 all:_matrix.cpp
