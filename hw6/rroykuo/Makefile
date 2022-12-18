@@ -11,12 +11,10 @@ PYTHON_INCLUDE = -I/usr/include/python3.8
 PYBIND_INCLUDE = python3 -m pybind11 --includes
 
 
-
-
 all:_matrix.cpp
- $(CXX) $(CFLAGS) $(PYBIND_INCLUDE) $(COMPILE_SOURCE) $(OBJECT)$(PYTHON_CONFIG) $(PYTHON_INCLUDE) $(MKL_LIBRARY) $(MKL_INCLUDE)
+	$(CXX) $(CFLAGS) $(PYBIND_INCLUDE) $(COMPILE_SOURCE) $(OBJECT)$(PYTHON_CONFIG) $(PYTHON_INCLUDE) $(MKL_LIBRARY) $(MKL_INCLUDE)
 
 
 .PHONY: clean
 clean:
- rm -rf *.so
+	rm -rf *.so
