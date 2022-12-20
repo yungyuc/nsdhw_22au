@@ -92,10 +92,10 @@ public:
     py::array_t<double> array()
     {
         return py::array_t<double>(
-            {nrow(), ncol()},                          // shape
-            {sizeof(double) * ncol(), sizeof(double)}, // C-style contiguous strides for ncol doubles
-            m_buffer,                                  // the data pointer
-            py::cast(this)                             // let handle object reference *this*
+            {nrow(), ncol()},
+            {sizeof(double) * ncol(), sizeof(double)}, 
+            m_buffer,                                 
+            py::cast(this)                             
         );
     }
 
