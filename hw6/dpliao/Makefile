@@ -1,31 +1,16 @@
-EXE = _matrix$(shell python3-config --extension-suffix)
-OBJ_DIR = obj
+CXX = g++
+CFLAGS = -shared -std=c++17 -O3 -Wall -fPIC
+PWD = $(shell pwd)
 
-TEST_FILE = $(wildcard test_*.py)
+LIBS = -I/usr/include/python3.8 -I/usr/include/pybind11 -L/usr/include/mkl/intel64 -I/usr/include/mkl/ -lmkl_rt -lpthread -lm -ldl -lblas -lpython3.8
 
-TRASH = .cache __pycache__ .pytest_cache performance.txt
+_matrix:
+	$(CXX) $(CFLAGS) $(MKL_Flags) `python3 -m pybind11 --includes` mod.cpp -o _matrix`python3-config --extension-suffix` $(LIBS)
 
-SOURCES = $(wildcard *.cpp)
-OBJS = $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(basename $(notdir $(SOURCES)))))
+.PHONY: test clean
 
-CXXFLAGS = -std=c++17 -Wall -O3 -shared -fPIC `python3 -m pybind11 --includes` `python3-config --includes` -Iextern/pybind11/include -I/usr/include/mkl
-
-LIBS = -L/usr/lib/x86_64-linux-gnu/mkl -lblas
-
-all: create_object_directory $(EXE)
-	@echo Compile Success
-
-create_object_directory:
-	mkdir -p $(OBJ_DIR)
-
-$(OBJ_DIR)/%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
-
-$(EXE): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
-
-test: all
-	python3 -m pytest -q $(TEST_FILE)
+test: _matrix
+	python3 -m pytest
 
 clean:
-	rm -rf $(EXE) $(OBJ_DIR) $(TRASH)
+	rm -rf *.so __pycache__ .pytest_cache
