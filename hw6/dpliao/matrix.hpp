@@ -8,158 +8,273 @@
 #include <functional>
 #include <utility>
 
-class Matrix {
-private:
-    size_t m_nrow, m_ncol;
-    std::vector<double> m_buffer;
-
+class Matrix
+{
 public:
-    Matrix()
-        : m_nrow(0), m_ncol(0){}
-
-    Matrix(size_t nrow, size_t ncol)
-        : m_nrow(nrow), m_ncol(ncol)
-    {
-        this->m_buffer.resize(this->m_nrow * this->m_ncol, 0);
-    }
-
-    Matrix(Matrix const& other)
-        : m_nrow(other.m_nrow), m_ncol(other.m_ncol), m_buffer(other.m_buffer){}
-
-    Matrix(Matrix&& other)
-        : m_nrow(other.m_nrow), m_ncol(other.m_ncol), m_buffer(std::move(other.m_buffer)){}
-
+    Matrix(size_t const &row, size_t const &col);
+    Matrix(size_t const &row, size_t const &col, std::vector<double> const &vec);
+    Matrix(Matrix const &mat);
+    Matrix &operator=(Matrix const &mat);
+    Matrix(Matrix &&mat);
+    Matrix &operator=(Matrix &&mat);
     ~Matrix()
     {
-        this->m_buffer.clear();
-        this->m_buffer.shrink_to_fit();
+        vec_.clear();
+        vec_.shrink_to_fit();
     }
 
-    Matrix& operator=(Matrix const& other)
-    {
-        if (this != &other) {
-            this->m_nrow = other.m_nrow;
-            this->m_ncol = other.m_ncol;
-            this->m_buffer = other.m_buffer;
-        }
+    Matrix &operator=(std::vector<double> const &vec);
+    double &operator()(size_t const &i, size_t const &j);
+    double operator()(size_t const &i, size_t const &j) const;
+    bool operator==(Matrix const &mat) const;
+    friend std::ostream &operator<<(std::ostream &os, Matrix mat);
+    friend Matrix multiply_naive(Matrix const &ma, Matrix const &mb);
+    friend Matrix multiply_tile(Matrix const &mat1, Matrix const &mat2, size_t tsize);
+    friend Matrix multiply_mkl(Matrix &ma, Matrix &mb);
 
-        return *this;
-    }
+    size_t nrow() const { return row_; }
+    size_t ncol() const { return col_; }
+    const double *data() const { return &(this->vec_[0]); }
 
-    Matrix& operator=(Matrix&& other)
-    {
-        if (this != &other) {
-            this->m_nrow = other.m_nrow;
-            this->m_ncol = other.m_ncol;
-            this->m_buffer = std::move(other.m_buffer);
-        }
+    double *data() { return &(this->vec_[0]); }
 
-        return *this;
-    }
+    size_t size() const { return row_ * col_; }
+    double *addr() { return &vec_[0]; }
+    double get_element(std::pair<size_t, size_t> index);
+    void set_element(std::pair<size_t, size_t> index, const double &item);
+    std::string get_matrix_str();
 
-    double const& operator()(size_t i, size_t j) const
-    {
-        return this->m_buffer[i * this->m_ncol + j];
-    }
+private:
+    bool bound_check(size_t const &i, size_t const &j);
 
-    double& operator()(size_t i, size_t j)
-    {
-        return this->m_buffer[i * this->m_ncol + j];
-    }
-
-    const double* data() const
-    {
-        return &(this->m_buffer[0]);
-    }
-
-    double* data()
-    {
-        return &(this->m_buffer[0]);
-    }
-
-    bool operator==(const Matrix& other) const
-    {
-        return (this->m_buffer == other.m_buffer);
-    }
-
-    size_t nrow() const
-    {
-        return this->m_nrow;
-    }
-
-    size_t ncol() const
-    {
-        return this->m_ncol;
-    }
-
-    friend std::ostream& operator<<(std::ostream& os, const Matrix& matrix)
-    {
-        for (size_t i = 0; i < matrix.nrow(); i++) {
-            for (size_t j = 0; j < matrix.ncol(); j++) {
-                os << matrix(i, j) << (j == matrix.ncol() - 1 ? "" : " ");
-            }
-
-            if (i < matrix.nrow() - 1) os << '\n';
-        }
-
-        return os;
-    }
+    size_t row_;
+    size_t col_;
+    std::vector<double> vec_;
 };
 
-Matrix multiply_naive(const Matrix& mat1, const Matrix& mat2)
+Matrix multiply_naive(Matrix const &ma, Matrix const &mb);
+Matrix multiply_tile(Matrix const &mat1, Matrix const &mat2, size_t tsize);
+Matrix multiply_mkl(Matrix &ma, Matrix &mb);
+
+Matrix::Matrix(size_t const &row, size_t const &col)
+    : row_(row), col_(col)
 {
-    assert(mat1.ncol() == mat2.nrow());
+    if (!this->vec_.empty())
+    {
+        this->vec_.clear();
+    }
 
-    Matrix mat3(mat1.nrow(), mat2.ncol());
+    this->vec_.resize(row * col);
+}
 
-    size_t nrow = mat1.nrow();
-    size_t ncol = mat2.ncol();
-    size_t nin = mat1.ncol();
+Matrix::Matrix(size_t const &row, size_t const &col, std::vector<double> const &vec)
+    : row_(row), col_(col)
+{
+    if (vec.size() != row * col)
+        throw std::out_of_range("size mismatches");
+    this->vec_ = vec;
+}
 
-    for (size_t row = 0; row < nrow; row++) {
-        for (size_t col = 0; col < ncol; col++) {
-            for (size_t inner = 0; inner < nin; inner++) {
-                mat3(row, col) += mat1(row, inner) * mat2(inner, col);
+// copy constructor
+Matrix::Matrix(Matrix const &mat)
+{
+    this->row_ = mat.row_;
+    this->col_ = mat.col_;
+    this->vec_ = mat.vec_;
+}
+
+// copy assignment
+Matrix &Matrix::operator=(Matrix const &mat)
+{
+    if (this == &mat)
+        return *this;
+
+    this->row_ = mat.row_;
+    this->col_ = mat.col_;
+    this->vec_ = mat.vec_;
+
+    return *this;
+}
+
+// move constructor
+Matrix::Matrix(Matrix &&mat)
+{
+    std::swap(this->row_, mat.row_);
+    std::swap(this->col_, mat.col_);
+    this->vec_ = std::move(mat.vec_);
+}
+
+// move assignment
+Matrix &Matrix::operator=(Matrix &&mat)
+{
+    if (this == &mat)
+        return *this;
+
+    std::swap(this->row_, mat.row_);
+    std::swap(this->col_, mat.col_);
+    this->vec_ = std::move(mat.vec_);
+
+    return *this;
+}
+
+Matrix &Matrix::operator=(std::vector<double> const &vec)
+{
+    this->vec_ = vec;
+    return *this;
+}
+
+double &Matrix::operator()(size_t const &i, size_t const &j)
+{
+    return this->vec_[i * this->col_ + j];
+}
+
+double Matrix::operator()(size_t const &i, size_t const &j) const
+{
+    return this->vec_[i * this->col_ + j];
+}
+
+bool Matrix::operator==(Matrix const &mat) const
+{
+    if (this->col_ != mat.col_ || this->row_ != mat.row_)
+        return false;
+
+    for (size_t i = 0; i < this->size(); i++)
+    {
+        // a floating-point precision issue
+        // if(this->vec_[i] != mat.vec_[i]) return false;
+        if (fabs(this->vec_[i] - mat.vec_[i]) > 0.000001f)
+            return false;
+    }
+
+    return true;
+}
+
+bool Matrix::bound_check(size_t const &i, size_t const &j)
+{
+    return i < this->row_ && i >= 0 && j < this->col_ && j >= 0;
+}
+
+double Matrix::get_element(std::pair<size_t, size_t> index)
+{
+    return (*this)(index.first, index.second);
+}
+
+void Matrix::set_element(std::pair<size_t, size_t> index, const double &item)
+{
+    (*this)(index.first, index.second) = item;
+}
+
+std::string Matrix::get_matrix_str()
+{
+    std::string s;
+    for (size_t i = 0; i < row_; i++)
+    {
+        for (size_t j = 0; j < col_; j++)
+        {
+            s += std::to_string((*this)(i, j)) + ' ';
+        }
+        s += '\n';
+    }
+    return s;
+}
+
+std::ostream &operator<<(std::ostream &os, Matrix mat)
+{
+    for (size_t i = 0; i < mat.row_; i += mat.col_)
+    {
+        for (size_t j = 0; j < mat.col_; j++)
+        {
+            std::cout << mat(i, j) << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    return os;
+}
+
+Matrix multiply_naive(Matrix const &mat1, Matrix const &mat2)
+{
+    if (mat1.ncol() != mat2.nrow())
+    {
+        throw std::out_of_range("mat1 col is different from mat2 row");
+    }
+
+    Matrix ret(mat1.nrow(), mat2.ncol());
+
+    for (size_t i = 0; i < mat1.nrow(); i++)
+    {
+        for (size_t j = 0; j < mat2.ncol(); j++)
+        {
+            double v = 0;
+            for (size_t k = 0; k < mat1.ncol(); k++)
+            {
+                v += mat1(i, k) * mat2(k, j);
             }
+            ret(i, j) = v;
         }
     }
 
-    return mat3;
+    return ret;
 }
 
-
-Matrix multiply_tile(const Matrix& mat1, const Matrix& mat2, size_t size)
+Matrix multiply_tile(Matrix const &mat1, Matrix const &mat2, size_t tsize)
 {
-    assert(mat1.ncol() == mat2.nrow());
+    size_t m1_col = mat1.ncol(), m1_row = mat1.nrow(), m2_row = mat2.nrow(), m2_col = mat2.ncol();
 
-    Matrix mat3(mat1.nrow(), mat2.ncol());
+    if (m1_col != m2_row)
+    {
+        throw std::out_of_range("mat1 col is different from mat2 row");
+    }
 
-    for (size_t row = 0; row < mat1.nrow(); row += size) {
-        for (size_t col = 0; col < mat2.ncol(); col += size) {
-            for (size_t inner = 0; inner < mat1.ncol(); inner += size) {
-                // tile
-                for (size_t k = inner; k < std::min(mat1.ncol(), inner + size); k++) {
-                    for (size_t i = row; i < std::min(mat1.nrow(), row + size); i++) {
-                        for (size_t j = col; j < std::min(mat2.ncol(), col + size); j++) {
-                            mat3(i, j) += mat1(i, k) * mat2(k, j);
+    Matrix ret(m1_row, m2_col);
+    size_t i_size, j_size, k_size;
+    double v = 0;
+
+    for (size_t ti = 0; ti < m1_row; ti += tsize)
+    {
+        i_size = std::min(m1_row, ti + tsize);
+        for (size_t tj = 0; tj < m2_col; tj += tsize)
+        {
+            j_size = std::min(m2_col, tj + tsize);
+            for (size_t tk = 0; tk < m1_col; tk += tsize)
+            {
+                k_size = std::min(m1_col, tk + tsize);
+                for (size_t i = ti; i < i_size; ++i)
+                {
+                    size_t i_col = i * mat1.col_;
+                    for (size_t j = tj; j < j_size; ++j)
+                    {
+                        v = 0;
+                        for (size_t k = tk; k < k_size; ++k)
+                        {
+                            v += mat1.vec_[i_col + k] * mat2.vec_[k * mat2.col_ + j];
                         }
+                        ret.vec_[i_col + j] += v;
                     }
                 }
             }
         }
     }
 
-    return mat3;
+    return ret;
 }
 
-
-Matrix multiply_mkl(Matrix& mat1, Matrix& mat2)
+Matrix multiply_mkl(Matrix &mat1, Matrix &mat2)
 {
-    assert(mat1.ncol() == mat2.nrow());
+    if (mat1.ncol() != mat2.nrow())
+    {
+        throw std::out_of_range("mat1 col is different from mat2 row");
+    }
 
-    Matrix mat3(mat1.nrow(), mat2.ncol());
+    Matrix ret(mat1.nrow(), mat2.ncol());
 
-    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, mat1.nrow(), mat2.ncol(), mat1.ncol(), 1, mat1.data(), mat1.ncol(), mat2.data(), mat2.ncol(), 0, mat3.data(), mat3.ncol());
+    const size_t m = mat1.nrow(), n = mat2.ncol(), k = mat1.ncol();
+    double alpha = 1.0, beta = 0.0;
+    double *A = mat1.addr();
+    double *B = mat2.addr();
+    double *C = ret.addr();
 
-    return mat3;
+    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, m, n, k, alpha, A, k, B, n, beta, C, n);
+
+    return ret;
 }
