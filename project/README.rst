@@ -45,6 +45,9 @@ time.  If presenters have difficulty in preparing a computer themselves, they
 may seek help from the instructor, and resolve the issue one week before their
 presentation.
 
+**NOTE**: The presentation will be held in room **EC324**.  It is not the room
+that we met for the lectures.
+
 Time Table Session 1
 ++++++++++++++++++++
 
