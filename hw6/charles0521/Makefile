@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -O3 -shared -fPIC `python3 -m pybind11 --includes` -I/usr/include/mkl $(shell python3-config --includes) 
+CXXFLAGS = -std=c++17 -Wall -O3 -shared -fPIC `python3 -m pybind11 --includes` -I/usr/include/mkl $(shell python3-config --includes) -I $(shell python -c "import numpy; print(numpy.get_include())")
 source = $(wildcard *.cpp)
 files = $(addprefix $(obj_d)/, $(addsuffix .o, $(basename $(notdir $(source)))))
 exe = _matrix$(shell python3-config --extension-suffix)
