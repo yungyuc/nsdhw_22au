@@ -1,5 +1,5 @@
 ========================
-Columnar Array
+Contiguous Array
 ========================
 
 Basic Information
@@ -10,36 +10,35 @@ https://github.com/soulrrrrr/ColumnarArray
 Problem to Solve
 ================
 
-Columnar Array (or dataframe) is useful in data analysis area. Pandas is a famous library
-that provides dataframe library for Python users. I want to implement my version of it, and I
-hope it helps people dealing with problems that need to use columnar array.
+Contiguous Array is basic for most of scientific calculations. Espicially in machine
+learning area. I want to implement my version of it, and I hope it helps people
+dealing with problems that need to use contigious array and matrix.
 
 Prospective Users
 =================
 
-People originally uses Array of Struct in Python and wants to speed up.
-People wants lighter library for using dataframe.
+People wants lighter library for basic array and matrix operations.
 
 System Architecture
 ===================
 
-A class template :cpp:class:`!ColumnarArray` is holding the arrays of struct
-and the row accessor of it. The arrays of struct inside :cpp:class:`!SimpleArray`
-is :cpp:class:`!Vector`. If it is needed, I will implement the bitmap which
-mentioned in https://arrow.apache.org/docs/format/Columnar.html.
+A class template :cpp:class:`!Array` is the contigious array. There are several methods
+to initialize the array and use them. Each method will be exposed to Python by pybind11
+wrapper.
 
-At the moment I am planning, :cpp:class:`!ColumnarArray` can only deal with 
+At the moment I am planning, :cpp:class:`!Array` can only deal with 
 structs have numeric types only.
 
 API Description
 ===============
 
-:cpp:class:`!ColumnarArray` will have a constructor, user can pass python class
-into the constructor, and it will be the columnar array of the class.
+:cpp:class:`!Array` will have a constructor, user can pass python list
+into the constructor, and it will be the array of the list.
 
-:cpp:class:`!ColumnarArray` will provide *push_back* to add element, *erase* to 
-delete element, and all other things that makes it work like std::vector.
-e.g. size(), empty(), and others in https://en.cppreference.com/w/cpp/container/vector.
+:cpp:class:`!Array` will provide a lot of methods to do things with array.
+Such as *zeros*, *ones*, *arange*, and basic numeric operatons ("+", "-",
+"*", "@"(dot)).
+
 
 Engineering Infrastructure
 ==========================
@@ -71,7 +70,8 @@ Schedule
   little piece of code to understand them well.
 * Week 3 (11/14): Implement columnarArray imfrastructure.
 * Week 4 (11/21): Implement push_back, erase function.
-* Week 5 (11/28): Implement other useful functions mentioned in API description.
+-- changed topic --
+* Week 5 (11/28): Implement Array class and methods.
 * Week 6 (12/5): Implement python interface.
 * Week 7 (12/12): Integrate python tests. (Tests should be done once
   a new feature is added to the test.)
@@ -84,3 +84,4 @@ https://yyc.solvcon.net/en/latest/nsd/schedule/22au_nycu/schedule.html#columnar-
 https://en.cppreference.com/w/cpp/language/templates
 https://github.com/Lunarsong/StructureOfArrays
 https://arrow.apache.org/docs/format/Columnar.html
+https://numpy.org/doc/stable/user/basics.creation.html
